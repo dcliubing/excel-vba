@@ -1268,9 +1268,8 @@ jj = jj + 1
           
        
          ElseIf Sheets("拆分汇总").Cells(jj, 8).Value Like "*热电阻*" Then
-         
-         
-                                        If Sheets("拆分汇总").Cells(jj, 9).Value Like "*ia*" Then
+                  
+          If Sheets("拆分汇总").Cells(jj, 9).Value Like "*ia*" Then
                                         
                                         
                                                 ain = ain + 1
@@ -1280,6 +1279,8 @@ jj = jj + 1
                                                 rtdn = rtdn + 1
          
                                         End If
+         
+         
          
          
          ElseIf Sheets("拆分汇总").Cells(jj, 8).Value Like "*开关阀*" Or Sheets("拆分汇总").Cells(jj, 8).Value Like "*切断阀*" Or Sheets("拆分汇总").Cells(jj, 8).Value Like "*电磁阀*" Then
@@ -1341,7 +1342,7 @@ Sub IO表序号()
         ActiveWindow.View = xlPageBreakPreview
         Sheets(1).Select
        
-        If ActiveSheet.Cells(4, 11).Text = " DCS-I/O 表" Or ActiveSheet.Cells(4, 11).Text = " SIS-I/O 表" Then
+        If ActiveSheet.Cells(4, 11).Text = " DCS-I/O 表" Or ActiveSheet.Cells(4, 11).Text = " SIS-I/O 表" Or ActiveSheet.Cells(4, 11).Text = " GDS-I/O 表" Then
             GoTo nee
             Else
                 MsgBox "确认是否为 I/O 表"
@@ -1386,7 +1387,7 @@ nei:
 pan1:
         If ActiveSheet.Index <> Worksheets.Count Then
             ActiveSheet.Next.Activate
-            If ActiveSheet.Cells(4, 11).Text <> " DCS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " SIS-I/O 表" Then
+            If ActiveSheet.Cells(4, 11).Text <> " DCS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " SIS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " GDS-I/O 表" Then
                 GoTo pan1
             End If
             GoTo nei
@@ -1408,13 +1409,13 @@ nei2:
 pan2:
             If ActiveSheet.Index > 1 Then
                 ActiveSheet.Previous.Activate
-                    If ActiveSheet.Cells(4, 11).Text <> " DCS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " SIS-I/O 表" Then
+                    If ActiveSheet.Cells(4, 11).Text <> " DCS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " SIS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " GDS-I/O 表" Then
                         GoTo pan2
                     End If
                 GoTo nei2
             End If
         End If
-        If ActiveSheet.Cells(4, 11).Text <> " DCS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " SIS-I/O 表" Then
+        If ActiveSheet.Cells(4, 11).Text <> " DCS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " SIS-I/O 表" And ActiveSheet.Cells(4, 11).Text <> " GDS-I/O 表" Then
             ActiveSheet.Cells(a2, fl).Value = ""    '首页页数清空
         End If
         Application.ScreenUpdating = True
@@ -1424,7 +1425,7 @@ Sub 监控表序号()
         ActiveWindow.View = xlPageBreakPreview
         Sheets(1).Select
        
-        If ActiveSheet.Cells(37, 44).Text = "DCS 监控数据表" Or ActiveSheet.Cells(37, 44).Text = "SIS 监控数据表" Then
+        If ActiveSheet.Cells(37, 44).Text = "DCS 监控数据表" Or ActiveSheet.Cells(37, 44).Text = "SIS 监控数据表" Or ActiveSheet.Cells(37, 44).Text = "GDS 监控数据表" Then
             GoTo nee
             Else
                 MsgBox "确认是否为 监控 表"
@@ -1469,7 +1470,7 @@ nei:
 pan1:
         If ActiveSheet.Index <> Worksheets.Count Then
             ActiveSheet.Next.Activate
-            If ActiveSheet.Cells(37, 44).Text <> "DCS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "SIS 监控数据表" Then
+            If ActiveSheet.Cells(37, 44).Text <> "DCS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "SIS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "GDS 监控数据表" Then
                 GoTo pan1
             End If
             GoTo nei
@@ -1491,13 +1492,13 @@ nei2:
 pan2:
             If ActiveSheet.Index > 1 Then
                 ActiveSheet.Previous.Activate
-                    If ActiveSheet.Cells(37, 44).Text <> "DCS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "SIS 监控数据表" Then
+                    If ActiveSheet.Cells(37, 44).Text <> "DCS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "SIS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "GDS 监控数据表" Then
                         GoTo pan2
                     End If
                 GoTo nei2
             End If
         End If
-        If ActiveSheet.Cells(37, 44).Text <> "DCS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "SIS 监控数据表" Then
+        If ActiveSheet.Cells(37, 44).Text <> "DCS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "SIS 监控数据表" And ActiveSheet.Cells(37, 44).Text <> "GDS 监控数据表" Then
             ActiveSheet.Cells(a2, fl).Value = ""    '首页页数清空
         End If
         Application.ScreenUpdating = True
@@ -1883,7 +1884,7 @@ nei5:
                     Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 7).Text
                     ' Workbooks(indel).activesheet.Cells(a2, fl + 10).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 5).Text
                     '   Sheets(1).Cells(a2, fl + 6).Value = Sheets(2).Cells(j9, yl + 2).Text   '待修改
-                    If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*FT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*FXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PHT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PHXT*" Then
+                    If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*FT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*FXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PHT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PHXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*OT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*OXT*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
                         Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         If InStr(Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text, "ia") > 0 Then
@@ -1908,7 +1909,7 @@ nei5:
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
                         Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
-                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*压力开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*液位开关*" Then
+                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*压力开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*液位开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*温度开关*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
                         Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
@@ -1944,9 +1945,9 @@ nei5:
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*磁氧*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
                         Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供220VAC"
-                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*ORP*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                       ' ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*ORP*" Then
+                       ' Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
+                       ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*浊度*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
                         Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供220VAC"
@@ -1999,14 +2000,13 @@ Sub 监控表生成()
         
       iol = 42 '当前表总行数
         
-     
-        
-    '   If Not ActiveSheet.Cells(37, 44).Text Like "*监控数据*" Then
-     '       MsgBox "确认是否为仪表监控表格"
-     '       GoTo endd
-     '  End If
-     '  Rows("7:35").ClearContents '删当前表内容
+       Rows("7:35").ClearContents '删当前表内容
        Rows(iol & ":" & ioh + 1).Delete
+        
+       If Not ActiveSheet.Cells(37, 44).Text Like "*监控数据*" Then
+            MsgBox "确认是否为仪表监控表格"
+            GoTo endd
+       End If
         suu = InputBox("请输入拆分汇总工作簿的名称：")
         On Error GoTo endd
         indel = ActiveWorkbook.Name
@@ -2112,39 +2112,35 @@ nei5:
                                                                 
  
                                           End If
-                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*压力开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*液位开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*温度开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PA*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PXA*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LA*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LXA*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TA*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TXA*" Then
+                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*压力开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*液位开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*温度开关*" Then
                     Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常开接点"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
-                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*开关阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*切断阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*电磁阀*" Then
+                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*开关阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*切断阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*电磁阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*XV*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*XXV*" Then
                     Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "常开接点"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
-                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*阀位开反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*阀位关反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PB*" Then
+                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*阀位开反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*阀位关反馈*" Then
                     Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常开接点"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
-                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*远程启动*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YST*" Then
+                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YST*" Then
                     Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "常开接点"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
-                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*远程停止*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YSD*" Then
+                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YSD*" Then
                     Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "常闭接点"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
-                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*运行反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*故障反馈*" Then
+                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YL*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YA*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*停止反馈*" Then
                     Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常开接点"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
-                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*SEG*" Then
+                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*紧急停车*" Then
                     Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常闭接点"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
-                    
-                    
-                End If
-                
-         ' If InStr(Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Value, "V-") = 0 And Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, 12).Text <> "" And Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, 18).Text = "" Then
-       '   Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "√"
-       '  End If
-                
-                If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*IC*" Then
+                    ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*复位*" Then
+                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常开接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
+                     End If
+                    If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*IC*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "√"
-         End If
-                
+                        
+                End If
                 a2 = a2 + 1
                 j9 = j9 + 1
             Loop Until j7 Mod 29 = 0
@@ -2406,7 +2402,6 @@ Next
     Columns("B:B").Select
     Selection.Columns.AutoFit
 End Sub
-
 Sub 设计阶段()
         Sheets(1).Select
         If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
@@ -4664,3 +4659,5 @@ e = e + 1
 
 Application.ScreenUpdating = True
 End Sub
+
+
