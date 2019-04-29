@@ -3858,13 +3858,12 @@ MsgBox "检查数据表格式"
 End Sub
 
 
-
 Sub 多列拆分()
         '
         ' 宏2 宏
         Dim a, d, b, la, sjy  As String
         Dim arr, arr2 As Variant
-        Dim c, i, j, hang, lie, lie2, nn, sj As Integer
+        Dim c, i, j, hang, lie, lie2, nn, sj, sna, snb As Integer
         
         i = 0
         j = 2
@@ -3872,21 +3871,39 @@ Sub 多列拆分()
         lie = 1
         lie2 = 1
       
-             
-       If ActiveSheet.Name <> "汇总表" Then
-       
-       MsgBox "确认当前表格是汇总表"
-       
-       Exit Sub
-       
-       End If
+      snb = 1
       
+      
+      Do
+      
+      If Sheets(snb).Name = "汇总表" Then
+      
+      Sheets(snb).Select
+      ifhz = 1
+      
+      Exit Do
+      End If
+      
+      
+      snb = snb + 1
+      
+      
+      Loop Until snb > Sheets.Count
+      
+      
+      If ifhz = 0 Then
+      
+      MsgBox "未找到“汇总表”"
+      
+      Exit Sub
+      End If
       
      
+      
 
     
  Sheets("汇总表").Select
-       zhs = ActiveSheet.UsedRange.Rows.Count - 1
+
       
            For sna = Sheets.Count To 1 Step -1
         Debug.Print Sheets(sna).Name
