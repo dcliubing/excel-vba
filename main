@@ -3883,36 +3883,7 @@ Sub 多列拆分()
       
       
      
-      
-           For sna = Sheets.Count To 1 Step -1
-        Debug.Print Sheets(sna).Name
-        If Sheets(sna).Name = "拆分汇总" Then
-        
-        Sheets(sna).Select
-        
-            With Sheets(sna).Tab
-        .Color = 192
-        .TintAndShade = 0
-    End With
-        
-            Sheets(sna).Delete
-              If Sheets(sna).Name = "拆分汇总" Then
-              
-                With Sheets(sna).Tab
-        .ColorIndex = xlNone
-        .TintAndShade = 0
-    End With
-              
-              Exit Sub
-              
-              End If
-              
-              End If
-              
-              
-              
-        
-    Next
+
     
  Sheets("汇总表").Select
        zhs = ActiveSheet.UsedRange.Rows.Count - 1
@@ -4750,256 +4721,419 @@ e = e + 1
 Application.ScreenUpdating = True
 End Sub
 
+Sub 序号生成()
 
-
-Sub 多列拆2分()
-        '
-        ' 宏2 宏
-        Dim a, d, b, la, sjy  As String
-        Dim arr, arr2 As Variant
-        Dim c, i, j, hang, lie, lie2, nn, sj, zhs, sna As Integer
         
-        i = 0
-        j = 2
-        hang = 2
-        lie = 1
-        lie2 = 1
         
-               
-       If ActiveSheet.Name <> "汇总表" Then
+         If ActiveSheet.Cells(1, 9).Text = "仪表数据表" Or ActiveSheet.Cells(1, 4).Text = "仪表数据表" Or ActiveSheet.Cells(1, 8).Text = "仪表数据表" Or ActiveSheet.Cells(4, 11).Text = " DCS-I/O 表" Or ActiveSheet.Cells(4, 11).Text = " SIS-I/O 表" Or ActiveSheet.Cells(4, 11).Text = " GDS-I/O 表" Then
+         Call IO表序号
+         ElseIf ActiveSheet.Cells(37, 44).Text = "DCS 监控数据表" Or ActiveSheet.Cells(37, 44).Text = "SIS 监控数据表" Or ActiveSheet.Cells(37, 44).Text = "GDS 监控数据表" Then
+         Call 监控表序号
+         Else
+         MsgBox "检查表格格式"
+        
+        End If
+        
+        
+End Sub
+Sub 调节阀匹配()
+                    
+                    Dim a, d, b, la, sjy  As String
+                    Dim arr As Variant
+                    Dim c, i, j, hang, lie, lie2, nn, hang2, nu, szh, szl, sj, sna, kh2 As Integer
+                    nu = 0
+                    hang = 2
+                    hang2 = 1
+                    lie = 1
+                    lie2 = 1
+                    
+                    
+                
+                    
+                   If ActiveSheet.Name <> "汇总表" Then
        
        MsgBox "确认当前表格是汇总表"
        
        Exit Sub
        
        End If
-      
-      
-     
-      
-           For sna = Sheets.Count To 1 Step -1
-        Debug.Print Sheets(sna).Name
-        If Sheets(sna).Name = "拆分汇总" Then
-        
-        Sheets(sna).Select
+              
+
+ 
+                    
+            For sna = Sheets.Count To 1 Step -1
+      Debug.Print Sheets(sna).Name
+        If Sheets(sna).Name = "调节阀匹配" Then
         
             With Sheets(sna).Tab
         .Color = 192
         .TintAndShade = 0
     End With
+
         
-            Sheets(sna).Delete
-              If Sheets(sna).Name = "拆分汇总" Then
-              
-                With Sheets(sna).Tab
+         Sheets(sna).Tab.Color = 192
+         
+         
+         
+          Sheets(sna).Delete
+         
+
+
+         
+         
+            If Sheets(sna).Name = "调节阀匹配" Then
+            
+                                                                 With Sheets(sna).Tab
         .ColorIndex = xlNone
         .TintAndShade = 0
     End With
-              
-              Exit Sub
-              
-              End If
-              
-              End If
-              
-              
-              
-        
-    Next
-    
- Sheets("汇总表").Select
-       zhs = ActiveSheet.UsedRange.Rows.Count - 1
-      
-           For sna = Sheets.Count To 1 Step -1
-        Debug.Print Sheets(sna).Name
-        If Sheets(sna).Name = "拆分汇总" Then
-        
-            With Sheets(sna).Tab
-        .Color = 192
-        .TintAndShade = 0
-    End With
-        
-            Sheets(sna).Delete
-              If Sheets(sna).Name = "拆分汇总" Then
-              
-                With Sheets(sna).Tab
-        .ColorIndex = xlNone
-        .TintAndShade = 0
-    End With
-              
-              Exit Sub
-              
-              End If
-              
-              End If
-              
-              
-              
-        
-    Next
-    
-
-    
-    Sheets.Add after:=ActiveSheet
-  
-
-       ActiveSheet.Name = "拆分汇总"
        
+            Exit Sub
+            End If
+        End If
+    Next
+       
+
+
+ Application.ScreenUpdating = False
+    
+           Sheets("汇总表").Select
+                     
+    Sheets("汇总表").Copy Before:=Sheets(2)
+    
+ With Sheets(2).Tab
+        .ColorIndex = xlNone
+        .TintAndShade = 0
+    End With
+    
+    Sheets(2).Name = "调节阀匹配"
+    
+                    '统计阀门数量
+                    sj = Sheets("调节阀匹配").UsedRange.Columns.Count '使用的列数量
+                    Do
+                        sjy = Sheets("调节阀匹配").Cells(hang, 1)
+                        If InStr(sjy, "V-") > 0 Then
+                        nu = nu + 1
+                        End If
+                        hang = hang + 1
+                    Loop Until sjy = "总数量" Or hang > 1000
+                    
+                    
+                    
+                    If nu = 0 Or sj = 0 Then
+                        Exit Sub
+                    End If
+                    
+                    ReDim arr(1 To nu, 1 To sj)
+                    hang = 2
+                    szh = 1
+                    
+                    Do
+                        sjy = Sheets("调节阀匹配").Cells(hang, 1)
+                        If InStr(sjy, "V-") > 0 Then
+                            If szh <= nu Then
+                                For szl = 1 To sj
+                                    arr(szh, szl) = Sheets("调节阀匹配").Cells(hang, szl)
+                                    Range(Cells(hang, 1), Cells(hang, sj)).Select
+                                    With Selection.Interior
+                                    .Pattern = xlSolid
+                                    .PatternColorIndex = xlAutomatic
+                                    .Color = 65535   '标记阀门行颜色
+                                    .TintAndShade = 0
+                                    .PatternTintAndShade = 0
+                                    End With
+                                Next szl
+                            End If
+                            szh = szh + 1
+                        End If
+                        hang = hang + 1
+                    Loop Until sjy = "总数量" Or hang > 1000
+                    
+                    '隔行插入空行
+                    hang = hang - 1
+                    For hang = hang To 2 Step -1
+                        Sheets("调节阀匹配").Rows(hang).Select
+                        Selection.Insert Shift:=xlDown, CopyOrigin:=xlFormatFromLeftOrAbove
+                    Next hang
+                    
+                    hang = 1
+                    szh = 1
+                    Do
+                        sjy = Sheets("调节阀匹配").Cells(hang, 1)
+                        Sheets("调节阀匹配").Activate
+                        If InStr(sjy, "T-") > 0 And nu > 0 Then
+                            a = Split(sjy, "T-")
+                            la = Join(a, "")
+                               GoTo TW
+                            
+                         ElseIf InStr(sjy, "E-") > 0 And nu > 0 Then
+                            a = Split(sjy, "E-")
+                            la = Join(a, "")
+                            
+                            
+TW:
+                            
+                            Do
+                                sa = Split(arr(szh, 1), "V-")
+                                sb = Join(sa, "")
+                                If la = sb Then
+                                    Sheets("调节阀匹配").Cells(hang + 1, 1).Resize(1, sj) = WorksheetFunction.Index(arr, szh, 0)
+                                End If
+                                szh = szh + 1
+                            Loop Until szh > nu
+                        End If
+                        
+                        hang = hang + 1
+                        szh = 1
+                    Loop Until sjy = "总数量" Or hang > 1000
+                    
+                    '删除空行
+                    For kh2 = hang To 2 Step -1
+                        If Application.WorksheetFunction.CountA(Sheets("调节阀匹配").Range(Cells(kh2, 1), Cells(kh2, sj))) = 0 Then
+                            Rows(kh2).Delete
+                        End If
+                    Next kh2
+                    '删除重复行
+                    Dim ii As Long
+                    For ii = Range("A8888").End(xlUp).Row To 2 Step -1
+                        If WorksheetFunction.CountIf(Range("A2:A" & ii), Cells(ii, 1)) > 1 And Range(Cells(ii, 1), Cells(ii, 10)).Interior.Color = 65535 Then
+                            Cells(ii, 1).EntireRow.Delete
+                        End If
+                    Next
+                    Application.ScreenUpdating = True
+                    Set arr = Nothing
+                    End Sub
+Sub 电缆表生成()
+        Dim suu, indel As String
+        If Not ActiveSheet.Cells(37, 44).Text Like "电    缆    表  " Then
+            MsgBox "确认是否为电缆表"
+            GoTo endd
+        End If
+        Application.ScreenUpdating = False
+        
+      Dim ioh, iol As Integer
+        
+     ' ioh = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Count - 1
      
-           sj = Sheets("汇总表").UsedRange.Columns.Count
+     ioh = ActiveSheet.UsedRange.Rows.Count  '改成这样
+     
         
-        'MsgBox la
+      iol = 42 '当前表总行数
+      
+      
         
-        arr = Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "LAST")
-        
-        arr2 = Array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "LAST")
-        
-        'arr = Array("[A-E]")
-        
-        'MsgBox arr(4)\
-        
+       Rows("7:35").ClearContents '删当前表内容
+       Rows(iol & ":" & ioh + 1).Delete
 
-        
 
+    
         
+        suu = InputBox("请输入汇总表工作簿的名称：")
+        On Error GoTo endd
+        indel = ActiveWorkbook.Name
+        On Error GoTo endd
+        Dim j9, j7, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, jx, zs, zs2, lh2, fy As Integer
+        
+ 
+        
+        'Dim att As String
+        Dim arr() As Variant
+        dh = 2
+        j9 = 2
+        a2 = 7
+        fl = 31
+        j7 = 0
+        yl = 1
+        ll = 1
+        jx = 0
+       
+        i = 0
+        zs = 0
+        Workbooks(suu & ".xls").Activate
         Do
-
-        sjy = Sheets("汇总表").Cells(hang, lie)
-       If InStr(sjy, "G-") = 0 Then
-
-        If InStr(sjy, "~") > 0 Then
-        
-        
-        a = Split(sjy, "~")(0)
-        la = Right(sjy, 1)
-        c = Len(a) - 1
-        b = Right(a, 1)
-        d = Left((a), c)
-        
-   
-        
-     
-        
-
-            For i = 0 To UBound(arr)
-            
-                   
-       
-            
-            If arr(i) = b Then
-            
-            b = arr(i + 1)
-            
-            'MsgBox b
-            
-            Sheets("拆分汇总").Cells(j, lie2).Value = d & arr(i)
-            
-            
-            For nn = 2 To sj - 1 Step 1
-            
-             Sheets("拆分汇总").Cells(j, lie2 + nn).Value = Sheets("汇总表").Cells(hang, lie + nn)
-            
-            Next nn
-            
-            j = j + 1
-            
- 
-            
-            ElseIf arr2(i) = b Then
-            
-            b = arr2(i + 1)
-            
-            
-            
-            'MsgBox b
-            
-             Sheets("拆分汇总").Cells(j, lie2).Value = d & arr2(i)
-            
-             For nn = 2 To sj - 1 Step 1
-            
-             Sheets("拆分汇总").Cells(j, lie2 + nn).Value = Sheets("汇总表").Cells(hang, lie + nn)
-            
-            Next nn
-            
-            j = j + 1
- 
-            'MsgBox i
+            zs = zs + 1
+            If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
+                jx = jx + 1
             End If
-            
-            
-            
-            If arr(i) = la Or arr2(i) = la Then
-            
-            Exit For
-            
-            End If
-            
-            
-           
-            Next i
+            j9 = j9 + 1
+        Loop Until Application.WorksheetFunction.CountA(Sheets("拆分汇总").Rows(zs)) = 0
+        j9 = 2
+        zs2 = zs - 3  '汇总表有效数据行数
+        zs2 = zs2 - jx   '汇总表排除PG后有效数据行数
+        j = zs2 \ 29
+        fy = j
+        If zs2 Mod 29 = 0 Then
+            j = j - 1  '需要复制次数
+        End If
+        Workbooks(indel).Activate
+        Do
+            i = i + 1
+            lh = ll + 40
+            lh2 = lh + 1
+            Rows(ll & ":" & lh).Select
+            Selection.Copy
+            Rows(lh2).Select
+            ActiveSheet.Paste
+                Do
+nei5:
+                    If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
+                        j9 = j9 + 1
+                        GoTo nei5
+                    End If
+                    j7 = j7 + 1
+                    Workbooks(indel).ActiveSheet.Cells(a2, fl).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text
+                   ' Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 7).Text
+                    ' Workbooks(indel).activesheet.Cells(a2, fl + 10).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 5).Text
+                    '   Sheets(1).Cells(a2, fl + 6).Value = Sheets(2).Cells(j9, yl + 2).Text   '待修改
+                    
+                    
+                    If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*T-*" Then
+                      If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text Like "*ia*" Then
+                    
+                    Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "ZR-ia-DJYPVP"
                    
-          
-           
-           
-           
-        '  If lie2 < ActiveSheet.UsedRange.Columns.Count Then
-          
-        '  lie2 = lie2 + 1
-          
-       '   GoTo jixu
-          
-        '  End If
                    
-                   
-                   
-       
-            hang = hang + 1
-        
-        
-        
-        Else
-        
-         Sheets("拆分汇总").Cells(j, lie2).Value = sjy
-         
-
-         
-         
-                      For nn = 2 To sj - 1 Step 1
+                    
+                     ElseIf Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text Like "*d*" Then
+                    
+                     Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "ZR-DJYPVP"
                       
-                  '      MsgBox lie
-            
-            Sheets("拆分汇总").Cells(j, lie2 + nn).Value = Sheets("汇总表").Cells(hang, lie + nn)
-            
+                      
+                     Else
+                    
+                     Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "DJYPVP"
+                       
+                    End If
+                     Workbooks(indel).ActiveSheet.Cells(a2, 40).Value = "1*2*1.5"
+                       Workbooks(indel).ActiveSheet.Cells(a2, 56).Value = "DN20"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 59).Value = "10"
+                        
+                        End If
          
-            
-            Next nn
-         
-        j = j + 1
-        hang = hang + 1
-        
-        
-        End If
-        Else
-        
-        hang = hang + 1
-      
-        End If
-        Loop Until Application.WorksheetFunction.CountA(Sheets("汇总表").Rows(hang)) = 0
-        arr = Array("位号", "数量", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "数据表页号", "组外排序（英文）", "组内排序（数字）")
-        
+                    a2 = a2 + 1
+                    j9 = j9 + 1
+                Loop Until j7 Mod 29 = 0
+            a2 = a2 + 12  '相邻IO表上下数据行间隔
+            ll = ll + 41
+        Loop Until i = j + 1
+        For kh = 1 To a2 Step 1
+            If ActiveSheet.Cells(kh, 2) = "总数量" Then
+              ActiveSheet.Rows(kh) = ""
+            End If
+        Next
+        Rows(ll & ":" & ll + 41).Select
+        Selection.Delete
+        Rows(1).Select
+        ActiveSheet.PageSetup.PrintArea = Range(Cells(1, 1), Cells(ll - 1, 34))
+        ActiveWindow.View = xlPageBreakPreview
+        Do
+            Set ActiveSheet.HPageBreaks(fy).Location = Rows((fy * 41) + 1)
+            fy = fy - 1
+        Loop While fy > 0
+        ActiveSheet.PageSetup.PrintArea = "$A$1:$BO$" & ll - 1   '设置打印区域
 
-        Range(Cells(1, 1), Cells(1, 12)) = arr
         
-         Range(Cells(1, 1), Cells(j - 1, 12)).Select
-       Call 格式整理
-        Range(Cells(1, 1), Cells(j - 1, 12)).Select
-        Selection.Columns.AutoFit
-        ' 加粗冻结 宏
-        Range(Cells(1, 1), Cells(1, 12)).Select
-      Call 首行格式
+endd:
+        Application.ScreenUpdating = True
+End Sub
 
-      
-      
-     Application.DisplayAlerts = True
+
+
+Sub 电缆统计()
+
+Dim zria, zrd, djy As Long
+
+Dim i, j, a, b, c As Integer
+
+i = 1
+djy = 0
+zrd = 0
+zria = 0
+
+
+j = 35
+
+'MsgBox ActiveSheet.UsedRange.Rows.Count
+
+
+
+Do
+
+
+If ActiveSheet.Cells(i, 31).Value Like "*ZSO*" Then
+
+If ActiveSheet.Cells(i + 1, 31).Value Like "*ZSC*" Then
+
+ActiveSheet.Range(Cells(i, j), Cells(i + 1, j + 4)).Select
+Call 合并单元格
+
+ActiveSheet.Range(Cells(i, j + 5), Cells(i + 1, j + 8)).Select
+Call 合并单元格
+
+ActiveSheet.Range(Cells(i, j + 21), Cells(i + 1, j + 23)).Select
+Call 合并单元格
+
+ActiveSheet.Range(Cells(i, j + 24), Cells(i + 1, j + 26)).Select
+Call 合并单元格
+
+
+
+
+End If
+
+
+End If
+
+
+
+
+
+
+If ActiveSheet.Cells(i, 44).Value <> "" Then
+If ActiveSheet.Cells(i, j) = "DJYPVP" Then
+
+djy = djy + ActiveSheet.Cells(i, 44).Value
+
+
+
+
+ElseIf ActiveSheet.Cells(i, j) = "ZR-DJYPVP" Then
+
+zrd = zrd + ActiveSheet.Cells(i, 44).Value
+
+ElseIf ActiveSheet.Cells(i, j) = "ZR-ia-DJYPVP" Then
+
+zria = zria + ActiveSheet.Cells(i, 44).Value
+
+End If
+End If
+i = i + 1
+
+
+Loop Until i > ActiveSheet.UsedRange.Rows.Count
+
+
+MsgBox "DJYPVP电缆数量：" & djy & "米" & Chr(13) & "ZR-DJYPVP电缆数量：" & zrd & "米" & Chr(13) & "ZR-ia-DJYPVP电缆数量：" & zria & "米"
+
 
 End Sub
+
+
+
+Sub 合并单元格()
+     Application.DisplayAlerts = False
+
+    With Selection
+        .HorizontalAlignment = xlCenter
+        .VerticalAlignment = xlCenter
+        .WrapText = False
+        .Orientation = 0
+        .AddIndent = False
+        .IndentLevel = 0
+        .ShrinkToFit = False
+        .ReadingOrder = xlContext
+        .MergeCells = True
+    End With
+     Application.DisplayAlerts = True
+End Sub
+
