@@ -3857,7 +3857,6 @@ ifsjb:
 MsgBox "检查数据表格式"
 End Sub
 
-
 Sub 多列拆分()
         '
         ' 宏2 宏
@@ -4757,24 +4756,42 @@ Sub 调节阀匹配()
                     
                     Dim a, d, b, la, sjy  As String
                     Dim arr As Variant
-                    Dim c, i, j, hang, lie, lie2, nn, hang2, nu, szh, szl, sj, sna, kh2 As Integer
+                    Dim c, i, j, hang, lie, lie2, nn, hang2, nu, szh, szl, sj, sna, snb, kh2 As Integer
                     nu = 0
                     hang = 2
                     hang2 = 1
                     lie = 1
                     lie2 = 1
                     
-                    
-                
-                    
-                   If ActiveSheet.Name <> "汇总表" Then
-       
-       MsgBox "确认当前表格是汇总表"
-       
-       Exit Sub
-       
-       End If
-              
+                      
+      snb = 1
+      
+      
+      Do
+      
+      If Sheets(snb).Name = "汇总表" Then
+      
+      Sheets(snb).Select
+      ifhz = 1
+      
+      Exit Do
+      End If
+      
+      
+      snb = snb + 1
+      
+      
+      Loop Until snb > Sheets.Count
+      
+      
+      If ifhz = 0 Then
+      
+      MsgBox "未找到“汇总表”"
+      
+      Exit Sub
+      End If
+      
+     
 
  
                     
@@ -4921,6 +4938,9 @@ TW:
                     Set arr = Nothing
                     End Sub
 Sub 电缆表生成()
+
+Application.ScreenUpdating = False
+
         Dim suu, indel As String
         If Not ActiveSheet.Cells(37, 44).Text Like "电    缆    表  " Then
             MsgBox "确认是否为电缆表"
@@ -4928,7 +4948,7 @@ Sub 电缆表生成()
         End If
         Application.ScreenUpdating = False
         
-      Dim ioh, iol As Integer
+      Dim ioh, iol, ilx, jlx As Integer
         
      ' ioh = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Count - 1
      
@@ -4963,7 +4983,9 @@ Sub 电缆表生成()
         yl = 1
         ll = 1
         jx = 0
-       
+        ilx = 1
+        jlx = 35
+        
         i = 0
         zs = 0
         Workbooks(suu & ".xls").Activate
@@ -5049,6 +5071,39 @@ nei5:
         Loop While fy > 0
         ActiveSheet.PageSetup.PrintArea = "$A$1:$BO$" & ll - 1   '设置打印区域
 
+Do
+        
+        If ActiveSheet.Cells(ilx, 31).Value Like "*ZSO*" Then
+
+If ActiveSheet.Cells(ilx + 1, 31).Value Like "*ZSC*" Then
+
+ActiveSheet.Range(Cells(ilx, jlx), Cells(ilx + 1, jlx + 4)).Select
+Call 合并单元格
+
+ActiveSheet.Range(Cells(ilx, jlx + 5), Cells(ilx + 1, jlx + 8)).Select
+Call 合并单元格
+
+ActiveSheet.Range(Cells(ilx, jlx + 21), Cells(ilx + 1, jlx + 23)).Select
+Call 合并单元格
+
+ActiveSheet.Range(Cells(ilx, jlx + 24), Cells(ilx + 1, jlx + 26)).Select
+Call 合并单元格
+
+
+
+
+End If
+
+
+End If
+
+
+        ilx = ilx + 1
+        
+        Loop Until ilx = ll
+        
+        
+        
         
 endd:
         Application.ScreenUpdating = True
@@ -5057,6 +5112,8 @@ End Sub
 
 
 Sub 电缆统计()
+
+Application.ScreenUpdating = False
 
 Dim zria, zrd, djy As Long
 
@@ -5075,32 +5132,6 @@ j = 35
 
 
 Do
-
-
-If ActiveSheet.Cells(i, 31).Value Like "*ZSO*" Then
-
-If ActiveSheet.Cells(i + 1, 31).Value Like "*ZSC*" Then
-
-ActiveSheet.Range(Cells(i, j), Cells(i + 1, j + 4)).Select
-Call 合并单元格
-
-ActiveSheet.Range(Cells(i, j + 5), Cells(i + 1, j + 8)).Select
-Call 合并单元格
-
-ActiveSheet.Range(Cells(i, j + 21), Cells(i + 1, j + 23)).Select
-Call 合并单元格
-
-ActiveSheet.Range(Cells(i, j + 24), Cells(i + 1, j + 26)).Select
-Call 合并单元格
-
-
-
-
-End If
-
-
-End If
-
 
 
 
@@ -5132,6 +5163,7 @@ Loop Until i > ActiveSheet.UsedRange.Rows.Count
 
 MsgBox "DJYPVP电缆数量：" & djy & "米" & Chr(13) & "ZR-DJYPVP电缆数量：" & zrd & "米" & Chr(13) & "ZR-ia-DJYPVP电缆数量：" & zria & "米"
 
+Application.ScreenUpdating = True
 
 End Sub
 
