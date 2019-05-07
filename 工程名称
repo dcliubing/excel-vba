@@ -1,0 +1,39 @@
+Sub 工程名称()
+Dim lh, a2, fl, fl2, i, sdn As Integer
+Dim gcm As String
+
+On Error GoTo endd
+gcm = InputBox("输入工程名称")
+
+If gcm = "" Then
+
+Exit Sub
+
+End If
+
+        For sdn = 1 To Worksheets.Count
+            If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Or Sheets(sdn).Cells(3, 11).Value Like "*I/O*" Then
+                    a2 = 3
+                    fl = 27
+                  
+                    i = 50    '数据表行数
+                    GoTo doo
+                    
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Then
+                    a2 = 39
+                    fl = 63
+             
+                    i = 39   '监控表行数
+doo:
+                    Do
+                       
+                        Sheets(sdn).Cells(a2, fl).Value = gcm
+                     
+                        
+                        a2 = a2 + i
+                    Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
+            End If
+        Next sdn
+       
+endd:
+End Sub
