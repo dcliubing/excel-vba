@@ -5,11 +5,7 @@ Dim gcm As String
 On Error GoTo endd
 gcm = InputBox("输入工程名称")
 
-If gcm = "" Then
 
-Exit Sub
-
-End If
 
         For sdn = 1 To Worksheets.Count
             If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Or Sheets(sdn).Cells(3, 11).Value Like "*I/O*" Then
@@ -32,6 +28,9 @@ doo:
                         
                         a2 = a2 + i
                     Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
+            Else
+        MsgBox "检查表格格式"
+        Exit Sub
             End If
         Next sdn
        
