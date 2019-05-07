@@ -2,21 +2,21 @@ Sub 序号生成()
 Dim lh, dn, gn, a2, a3, fl, fl2, i, sdn As Integer
 On Error GoTo endd
 dn = InputBox("输入开始页码")
-i = 3
+
 For lh = 1 To 2
         For sdn = 1 To Worksheets.Count
             If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Or Sheets(sdn).Cells(3, 11).Value Like "*I/O*" Then
                     a2 = 6
                     fl = 30
                     fl2 = 33
-                    
+                    i = 50    '数据表行数
                     GoTo doo
                     
-            ElseIf Sheets(sdn).Cells(3, 11).Value Like "*监控表*" Then
-                    a2 = 6
-                    fl = 30
-                    fl2 = 33
-                           
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Then
+                    a2 = 39
+                    fl = 63
+                    fl2 = 66
+                    i = 39   '监控表行数
 doo:
                     Do
                         If lh = 1 Then
@@ -25,7 +25,7 @@ doo:
                         Else
                         Sheets(sdn).Cells(a2, fl2).Value = gn
                         End If
-                        a2 = a2 + 48
+                        a2 = a2 + i
                     Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
             End If
         Next sdn
