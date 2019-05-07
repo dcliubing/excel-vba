@@ -1,6 +1,7 @@
 Sub 序号生成()
 Dim lh, dn, gn, a2, a3, fl, fl2, i, sdn As Integer
-
+On Error GoTo endd
+dn = InputBox("输入开始页码")
 
 For lh = 1 To 2
         For sdn = 1 To Worksheets.Count
@@ -18,8 +19,6 @@ For lh = 1 To 2
                     i = 39   '监控表行数
 doo:
                     Do
-                    On Error GoTo endd
-                    dn = InputBox("输入开始页码")
                         If lh = 1 Then
                         Sheets(sdn).Cells(a2, fl).Value = dn
                         dn = dn + 1
@@ -28,9 +27,8 @@ doo:
                         End If
                         a2 = a2 + i
                     Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
-            Else
-            MsgBox "检查表格格式"
-            Exit Sub
+            else
+            msgbox “检查表格格式”
             End If
         Next sdn
         gn = dn - 1
