@@ -27,8 +27,9 @@ doo:
                         End If
                         a2 = a2 + i
                     Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
-            else
-            msgbox “检查表格格式”
+            Else
+            MsgBox "检查表格格式"
+            Exit Sub
             End If
         Next sdn
         gn = dn - 1
