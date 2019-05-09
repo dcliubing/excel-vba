@@ -21,16 +21,16 @@ Sub 工作簿生成()
                 If sh.Cells(4, 11).Value Like "*压力变送器*" Then
                     Call 压变列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*电磁流量计*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*电磁流量计*" Then
                     Call 电磁列表
                     
                     ElseIf sh.Cells(4, 11).Value Like "*差压变送器*" Then
                     Call 差压液位列表
                     
-                    ElseIf sh.Cells(4, 4).Value Like "*调节阀*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*调节阀*" Then
                     Call 调节阀列表
                     
-                    ElseIf sh.Cells(4, 4).Value Like "*切断阀*" Or sh.Cells(4, 4).Value Like "*开关阀*" Or sh.Cells(4, 9).Value Like "*开关阀*" Or sh.Cells(4, 9).Value Like "*切断阀*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*切断阀*" Or sh.Cells(4, 11).Value Like "*开关阀*" Or sh.Cells(4, 11).Value Like "*开关阀*" Or sh.Cells(4, 11).Value Like "*切断阀*" Then
                     Call 开关阀列表
                     
                     ElseIf sh.Cells(4, 11).Value Like "*热电阻*" Then
@@ -39,25 +39,25 @@ Sub 工作簿生成()
                     ElseIf sh.Cells(4, 11).Value Like "*双金属温度计*" Then
                     Call 双金属温度计列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*转子*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*转子*" Then
                     Call 转子列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*涡街*" Or sh.Cells(4, 9).Value Like "*漩涡*" Or sh.Cells(4, 9).Value Like "*旋涡*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*涡街*" Or sh.Cells(4, 11).Value Like "*漩涡*" Or sh.Cells(4, 11).Value Like "*旋涡*" Then
                     Call 涡街列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*平衡*" Or sh.Cells(4, 9).Value Like "*节流*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*平衡*" Or sh.Cells(4, 11).Value Like "*节流*" Then
                     Call 平衡流量计列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*雷达*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*雷达*" Then
                     Call 雷达列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*音叉*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*音叉*" Then
                     Call 音叉列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*浮球*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*浮球*" Then
                     Call 浮球列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*温度变送器*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*温度变送器*" Then
                     Call 温变列表
                     
                     ElseIf sh.Cells(4, 11).Value Like "*压力表*" And InStr(sh.Cells(4, 11).Value, "隔膜") = 0 Then
@@ -66,28 +66,28 @@ Sub 工作簿生成()
                     ElseIf sh.Cells(4, 11).Value Like "*隔膜压力表*" Then
                     Call 隔膜压力表列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*静压*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*静压*" Then
                     Call 投入式静压列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*pH/ORP*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*pH/ORP*" Then
                     Call pHORP列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*磁氧*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*磁氧*" Then
                     Call 磁氧列表
                     
-                     ElseIf sh.Cells(4, 9).Value Like "*水分*" Then
+                     ElseIf sh.Cells(4, 11).Value Like "*水分*" Then
                      Call 水分列表
                     
-                     ElseIf sh.Cells(4, 9).Value Like "*红外线*" Then
+                     ElseIf sh.Cells(4, 11).Value Like "*红外线*" Then
                      Call 红外线列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*自力式*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*自力式*" Then
                     Call 自力式列表
                     
-                     ElseIf sh.Cells(4, 9).Value Like "*压力开关*" Then
+                     ElseIf sh.Cells(4, 11).Value Like "*压力开关*" Then
                      Call 压力开关列表
                     
-                    ElseIf sh.Cells(4, 9).Value Like "*气体检测*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*气体检测*" Then
                     Call 报警器列表
                     shn = ActiveSheet.Name
                 End If
@@ -202,22 +202,22 @@ Private Sub 转子列表()
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
         Dim arr() As Variant
-        n9 = 9
-        yl = 10 '数据源列
+        n9 = 8
+        yl = 14 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
+        i = 3   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
         dh = 0 '被删除行数
-        num7 = 7
+        num7 = 6
 nei:
-            If n9 > 9 And n9 < 14 Then
-                ElseIf n9 > 14 And n9 < 21 Then
+            If n9 > 8 And n9 < 13 Then
+                ElseIf n9 > 13 And n9 < 20 Then
                 GoTo jixu
-                ElseIf n9 > 25 And n9 < 38 Then
+                ElseIf n9 > 22 And n9 < 35 Then
                 GoTo jixu
-                ElseIf n9 > 38 And n9 < 41 Then
+                ElseIf n9 > 35 And n9 < 38 Then
                 GoTo jixu
                 ElseIf n9 = 43 Then
                 GoTo ee
@@ -242,8 +242,8 @@ jixu:
         i = 1
         fl2 = fl + 1
         fl = fl + 1
-        num7 = 7
-        yl = 10
+        num7 = 6
+        yl = 14
         ll = 0
         a2 = 2
 jia:
@@ -283,28 +283,29 @@ Private Sub 平衡流量计列表()
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2 As Integer
         Dim arr() As Variant
-        num7 = 7
-        n9 = 9
-        yl = 10 '数据源列
+        num7 = 6
+        n9 = 8
+        yl = 14 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
+        i = 3   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
         dh = 0 '被删除行数
 nei:
-            If n9 > 9 And n9 < 15 Then
-                ElseIf n9 > 15 And n9 < 22 Then
+            If n9 > 8 And n9 < 14 Then
                 GoTo jixu
-                ElseIf n9 > 25 And n9 < 29 Then
+                ElseIf n9 > 14 And n9 < 21 Then
                 GoTo jixu
-                ElseIf n9 > 29 And n9 < 32 Then
+                ElseIf n9 > 24 And n9 < 28 Then
                 GoTo jixu
-                ElseIf n9 > 32 And n9 < 35 Then
+                ElseIf n9 > 28 And n9 < 31 Then
                 GoTo jixu
-                ElseIf n9 > 36 And n9 < 40 Then
+                ElseIf n9 > 31 And n9 < 34 Then
                 GoTo jixu
-                ElseIf n9 > 41 And n9 < 44 Then
+                ElseIf n9 > 35 And n9 < 39 Then
+                GoTo jixu
+                ElseIf n9 > 40 And n9 < 43 Then
                 GoTo jixu
                 ElseIf n9 = 47 Then
                 GoTo ee
@@ -313,25 +314,25 @@ nei:
 jixu:
             Do
                 Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-                Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 25).Value = ActiveSheet.Cells(num7, 22).Text
+                Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 25).Value = ActiveSheet.Cells(num7, 30).Text
                 
                 ll = ll + 1
-                yl = yl + 6
+                yl = yl + 7
                 a2 = a2 + 1
                     If ll Mod 3 = 0 Then
                         j9 = j9 + 50
                         i = i + 50
-                        yl = 10
+                        yl = 14
                         num7 = num7 + 50
                     End If
             Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 1
+        i = 3
         fl2 = fl + 1
         fl = fl + 1
-        yl = 10
-        num7 = 7
+        yl = 14
+        num7 = 6
         ll = 0
         a2 = 2
 jia:
@@ -348,7 +349,7 @@ ee:
             Next kh2
         lh = kh - dh   '新表最终行数
         lh2 = lh + 1
-        arr = Array("位号", "数量", "用途", "PID号", "管道编号", "管道材质", "介质", "最大流量", "正常流量", "最小流量", "压力", "温度", "量程", "结构形式", "公称通径", "传感器材质", "取压口形式", "法兰标准及等级", "法兰尺寸及密封面", "输出信号", "工艺连接形式", "测量元件材质", "防爆等级", "仪表类型", "数据表页号")
+        arr = Array("位号", "数量", "用途", "PID号", "管道编号", "管道材质", "介质", "压力", "温度", "最大流量", "正常流量", "最小流量", "量程", "结构形式", "公称通径", "传感器材质", "取压口形式", "法兰标准及等级", "法兰尺寸及密封面", "输出信号", "工艺连接形式", "测量元件材质", "防爆等级", "仪表类型", "数据表页号")
         Range(Cells(2, fl), Cells(lh, fl)) = "平衡流量计"
         Range(Cells(1, 1), Cells(1, fl2 + 1)) = arr
         Range(Cells(1, 1), Cells(lh, fl2 + 1)).Select
@@ -371,29 +372,28 @@ Private Sub 电磁列表()
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
         Dim arr() As Variant
-        num7 = 7
-        n9 = 9
-        yl = 10 '数据源列
+        num7 = 6
+        n9 = 8
+        yl = 14 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
+        i = 3   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
         dh = 0 '被删除行数
 nei:
-        If n9 > 9 And n9 < 14 Then
-            ElseIf n9 > 14 And n9 < 21 Then
+        If n9 > 8 And n9 < 13 Then
+            ElseIf n9 > 13 And n9 < 20 Then
             GoTo jixu
-            ElseIf n9 > 24 And n9 < 33 Then
+            ElseIf n9 > 22 And n9 < 31 Then
             GoTo jixu
-            ElseIf n9 > 34 And n9 < 38 Then
+            ElseIf n9 > 32 And n9 < 36 Then
             GoTo jixu
-            ElseIf n9 = 39 Then
+            ElseIf n9 > 36 And n9 < 38 Then
             GoTo jixu
-            ElseIf n9 = 41 Then
+             ElseIf n9 > 38 And n9 < 41 Then
             GoTo jixu
-            ElseIf n9 = 42 Then
-            GoTo jixu
+            
             ElseIf n9 = 43 Then
             GoTo ee
             Else: GoTo jia
@@ -401,24 +401,24 @@ nei:
 jixu:
         Do
         Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-        Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 26).Value = ActiveSheet.Cells(num7, 22).Text
+        Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 26).Value = ActiveSheet.Cells(num7, 30).Text
         ll = ll + 1
-        yl = yl + 6
+        yl = yl + 7
         a2 = a2 + 1
         If ll Mod 3 = 0 Then
         j9 = j9 + 50
         i = i + 50
-        yl = 10
+        yl = 14
         num7 = num7 + 50
         End If
         Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 1
+        i = 3
         fl2 = fl + 1
         fl = fl + 1
-        num7 = 7
-        yl = 10
+        num7 = 6
+        yl = 14
         ll = 0
         a2 = 2
 jia:
@@ -726,39 +726,40 @@ Private Sub 调节阀列表()
         On Error GoTo endd
         Dim j9, n9, yl, i, a2, fl, kh, kh2, fl2, dh, lh, num7 As Integer
         Dim arr() As Variant
-        n9 = 9
-        yl = 5 '数据源列
+        n9 = 8
+        yl = 15 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
-        num7 = 7
-        num34 = 34
+        i = 3   '数据源非空行
+        num7 = 6
+        num34 = 33
         a2 = 2  '新表行
         fl = 1  '新表列
         emp = 0
         dh = 0 '被删除行数
 nei:
-            If n9 > 9 And n9 < 16 Then
+            If n9 > 8 And n9 < 15 Then
                 GoTo jixu
-                ElseIf n9 > 16 And n9 < 20 Then
+                ElseIf n9 > 15 And n9 < 19 Then
                 GoTo jixu
-                ElseIf n9 = 34 Then
+                  ElseIf n9 = 33 Then
                 GoTo jixu
-                ElseIf n9 = 36 Then
+                ElseIf n9 = 35 Then
                 GoTo jixu
-                ElseIf n9 = 38 Then
+                ElseIf n9 = 39 Then
                 GoTo jixu
+               
                 ElseIf n9 > 42 And n9 < 46 Then
                 GoTo jixu
-                ElseIf n9 = 46 Then
+                ElseIf n9 = 47 Then
                 GoTo ee
                 Else: GoTo jia
             End If
 jixu:
             Do
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 17).Value = ActiveSheet.Cells(num7, 13).Text
-            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 11).Value = ActiveSheet.Cells(num34, 14).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 17).Value = ActiveSheet.Cells(num7, 30).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 11).Value = ActiveSheet.Cells(num34, 30).Text
             a2 = a2 + 1
             j9 = j9 + 50
             i = i + 50
@@ -767,12 +768,12 @@ jixu:
             Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 1
+        i = 3
         fl2 = fl + 1
         fl = fl + 1
-        num7 = 7
-        num34 = 34
-        yl = 5
+        num7 = 6
+        num34 = 33
+        yl = 15
         ll = 0
         a2 = 2
 jia:
@@ -813,25 +814,25 @@ Private Sub 开关阀列表()
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
         Dim arr() As Variant
-        n9 = 9
-        yl = 10 '数据源列
-        num7 = 7
+        n9 = 8
+        yl = 14 '数据源列
+        num7 = 6
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
+        i = 3   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
         fl = 1  '新表列
         dh = 0 '被删除行数
 nei:
-            If n9 > 9 And n9 < 16 Then
+            If n9 > 8 And n9 < 15 Then
                 GoTo jixu
-                ElseIf n9 > 16 And n9 < 20 Then
+                ElseIf n9 > 15 And n9 < 19 Then
                 GoTo jixu
-                ElseIf n9 > 23 And n9 < 28 Then
+                ElseIf n9 > 22 And n9 < 27 Then
                 GoTo jixu
-                ElseIf n9 > 31 And n9 < 34 Then
+                ElseIf n9 > 34 And n9 < 37 Then
                 GoTo jixu
-                ElseIf n9 > 38 And n9 < 41 Then
+                ElseIf n9 > 41 And n9 < 44 Then
                 GoTo jixu
                 ElseIf n9 = 45 Then
                 GoTo ee
@@ -840,24 +841,24 @@ nei:
 jixu:
             Do
                 Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-                Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 19).Value = ActiveSheet.Cells(num7, 22).Text
+                Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 19).Value = ActiveSheet.Cells(num7, 30).Text
                 ll = ll + 1
-                yl = yl + 6
+                yl = yl + 7
                 a2 = a2 + 1
                     If ll Mod 3 = 0 Then
                         j9 = j9 + 50
                         i = i + 50
-                        yl = 10
+                        yl = 14
                         num7 = num7 + 50
                     End If
             Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 1
+        i = 3
         fl2 = fl + 1
         fl = fl + 1
-        num7 = 7
-        yl = 10
+        num7 = 6
+        yl = 14
         ll = 0
         a2 = 2
 jia:
@@ -876,7 +877,7 @@ ee:
             Next kh2
         lh = kh - dh   '新表最终行数
         lh2 = lh + 1
-        arr = Array("位号", "数量", "用途", "PID号", "管道编号", "管道材质", "管道规格", "介质", "压力", "温度", "阀门形式", "公称通径", "阀体材质", "阀芯材质", "法兰标准及等级", "法兰尺寸及密封面", "防爆等级", "仪表类型", "数据表页号")
+        arr = Array("位号", "数量", "用途", "PID号", "管道编号", "管道材质", "管道规格", "介质", "温度", "压力", "阀门形式", "公称通径", "阀体材质", "阀芯材质", "法兰标准及等级", "法兰尺寸及密封面", "防爆等级", "仪表类型", "数据表页号")
         Range(Cells(2, fl), Cells(lh, fl)) = "气动切断阀"
         'Range(Cells(2, fl + 1), Cells(lh, fl + 1)) = sjbyh
         Range(Cells(1, 1), Cells(1, fl2 + 1)) = arr
@@ -1373,7 +1374,7 @@ iozs = ain + aon + din + don + rtdn
           
     MsgBox "AI               点：" & ain & "" & Chr(13) & "RTD            点：" & rtdn & "" & Chr(13) & "AO       阀门点：" & aon1 & "" & Chr(13) & "AO       设备点：" & aon2 & "" & Chr(13) & "DI        现场点：" & din1 & "" & Chr(13) & "DI        设备点：" & din2 & "" & Chr(13) & "DI      辅操台点：" & din3 & "" & Chr(13) & "DO       阀门点：" & don1 & "" & Chr(13) & "DO       设备点：" & don2 & ""
            
-   MsgBox "AI    总数：" & ain & "" & Chr(13) & "AO  总数：" & aon & "" & Chr(13) & "DI    总数：" & din & "" & Chr(13) & "DO  总数：" & don & "" & Chr(13) & "IO   点数总计：" & iozs & ""
+   MsgBox "RTD    总数：" & rtdn & "" & Chr(13) & "AI    总数：" & ain & "" & Chr(13) & "AO  总数：" & aon & "" & Chr(13) & "DI    总数：" & din & "" & Chr(13) & "DO  总数：" & don & "" & Chr(13) & "IO   点数总计：" & iozs & ""
          
            
 End Sub
@@ -2289,324 +2290,228 @@ Next
     Selection.Columns.AutoFit
 End Sub
 Sub 设计阶段()
-        Sheets(1).Select
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            MsgBox "确认是否为首页"
-            '   GoTo endd
-            If ActiveWorkbook.Sheets.Count < 2 Then
-                '   MsgBox ActiveWorkbook.Sheets.Count
-                GoTo endd
-            End If
-                Sheets(2).Select
-                Else
-                Sheets(1).Select
-        End If
-        If ActiveSheet.Cells(1, 9).Text = "仪表数据表" Or ActiveSheet.Cells(1, 4).Text = "仪表数据表" Or ActiveSheet.Cells(1, 8).Text = "仪表数据表" Then
-            GoTo nee
+Dim lh, a2, fl, fl2, i, sdn As Integer
+Dim gcm As String
+
+On Error GoTo endd
+gcm = InputBox("输入设计阶段")
+
+
+
+        For sdn = 1 To Worksheets.Count
+            If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Then
+                    a2 = 6
+                    fl = 26
+                  
+                    i = 50    '数据表行数
+                    GoTo doo
+            ElseIf Sheets(sdn).Cells(3, 11).Value Like "*I/O*" Or Sheets(sdn).Cells(3, 11).Value Like "*材料表*" Then
+                    a2 = 6
+                    fl = 26
+                 
+                    i = 41    '表行数
+                    GoTo doo
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电    缆    表  *" Then
+                    a2 = 39
+                    fl = 59
+             
+                    i = 41   '监控表行数
+doo:
+                    Do
+                       
+                        Sheets(sdn).Cells(a2, fl).Value = gcm
+                     
+                        
+                        a2 = a2 + i
+                    Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
             Else
-            MsgBox "确认是否为数据表表格"
-            GoTo endd
-        End If
-nee:
-        Application.ScreenUpdating = False
-        Dim i, j, k, a2, fl, fy As Integer
-        Dim x, y, z, syi As String
-        a2 = 7
-        x = "调节阀"
-        y = "开关阀"
-        z = InputBox("请输入设计阶段：")
-        syi = "索引"
-        If z = "" Then
-            GoTo endd
-        End If
-            i = 0
-nei:
-        If ActiveSheet.Cells(4, 4).Text = x Then
-            fl = 10
-            ElseIf ActiveSheet.Cells(4, 4).Text = y Then
-            fl = 10
-            ElseIf ActiveSheet.Cells(4, 8).Text = syi Then
-            fl = 18
-            
-            Else: fl = 19
-        End If
-        Do
-            ActiveSheet.Cells(a2, fl).Value = z
-            fy = 1
-            i = i + 1
-            '      Set ActiveSheet.HPageBreaks(fy).Location = Rows(a2 + 44)
-            a2 = a2 + 50
-            fy = fy + 1
-        Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(a2)) = 0
-        a2 = 7
-        fy = 1
-nei2:
-        If ActiveSheet.Index <> Worksheets.Count Then
-            ActiveSheet.Next.Activate
-            If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-                GoTo nei2
+        MsgBox "检查表格格式"
+        Exit Sub
             End If
-                GoTo nei
-        End If
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            ActiveSheet.Cells(a2, fl).Value = ""    '首页页数清空
-        End If
-        MsgBox "共写入" & i & "个    " & z
+        Next sdn
+       
 endd:
-        Application.ScreenUpdating = True
 End Sub
 
 Sub 项目编号()
-        Sheets(1).Select
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            MsgBox "确认是否为首页"
-            '   GoTo endd
-                If ActiveWorkbook.Sheets.Count < 2 Then
-                    '   MsgBox ActiveWorkbook.Sheets.Count
-                    GoTo endd
-                End If
-            Sheets(2).Select
+Dim lh, a2, fl, fl2, i, sdn As Integer
+Dim gcm As String
+
+On Error GoTo endd
+gcm = InputBox("输入项目编号")
+
+
+
+        For sdn = 1 To Worksheets.Count
+            If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Then
+                    a2 = 6
+                    fl = 14
+                  
+                    i = 50    '数据表行数
+                    GoTo doo
+            ElseIf Sheets(sdn).Cells(3, 11).Value Like "*I/O*" Or Sheets(sdn).Cells(3, 11).Value Like "*材料表*" Then
+                    a2 = 6
+                    fl = 14
+                 
+                    i = 41    '表行数
+                    GoTo doo
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电    缆    表  *" Then
+                    a2 = 39
+                    fl = 47
+             
+                    i = 41   '监控表行数
+doo:
+                    Do
+                       
+                        Sheets(sdn).Cells(a2, fl).Value = gcm
+                     
+                        
+                        a2 = a2 + i
+                    Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
             Else
-            Sheets(1).Select
-        End If
-        If ActiveSheet.Cells(1, 9).Text = "仪表数据表" Or ActiveSheet.Cells(1, 4).Text = "仪表数据表" Or ActiveSheet.Cells(1, 8).Text = "仪表数据表" Then
-            GoTo nee
-            Else
-            MsgBox "确认是否为数据表表格"
-            GoTo endd
-        End If
-nee:
-        Application.ScreenUpdating = False
-        Dim i, j, k, a2, fl, fy As Integer
-        Dim x, y, z, syi As String
-        a2 = 7
-        x = "调节阀"
-        y = "开关阀"
-        z = InputBox("请输入项目编号：")
-        syi = "索引"
-        If z = "" Then
-            GoTo endd
-        End If
-        i = 0
-nei:
-        If ActiveSheet.Cells(4, 4).Text = x Then
-            fl = 5
-            ElseIf ActiveSheet.Cells(4, 4).Text = y Then
-            fl = 5
-            ElseIf ActiveSheet.Cells(4, 8).Text = syi Then
-            fl = 10
-            Else: fl = 11
-        End If
-        Do
-            ActiveSheet.Cells(a2, fl).Value = z
-            fy = 1
-            i = i + 1
-            '      Set ActiveSheet.HPageBreaks(fy).Location = Rows(a2 + 44)
-            a2 = a2 + 50
-            fy = fy + 1
-        Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(a2)) = 0
-        a2 = 7
-        fy = 1
-nei2:
-        If ActiveSheet.Index <> Worksheets.Count Then
-            ActiveSheet.Next.Activate
-            If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-                GoTo nei2
+        MsgBox "检查表格格式"
+        Exit Sub
             End If
-            GoTo nei
-        End If
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            ActiveSheet.Cells(a2, fl).Value = ""    '首页页数清空
-        End If
-        MsgBox "共写入" & i & "个    " & z
+        Next sdn
+       
 endd:
-        Application.ScreenUpdating = True
 End Sub
 
 Sub 工程名称()
-        Sheets(1).Select
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            MsgBox "确认是否为首页"
-            '   GoTo endd
-            If ActiveWorkbook.Sheets.Count < 2 Then
-                '   MsgBox ActiveWorkbook.Sheets.Count
-                GoTo endd
+Dim lh, a2, fl, fl2, i, sdn As Integer
+Dim gcm As String
+
+On Error GoTo endd
+gcm = InputBox("输入工程名称")
+
+
+
+        For sdn = 1 To Worksheets.Count
+            If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Then
+                    a2 = 3
+                    fl = 27
+                  
+                    i = 50    '数据表行数
+                    GoTo doo
+                    
+            ElseIf Sheets(sdn).Cells(3, 11).Value Like "*I/O*" Or Sheets(sdn).Cells(3, 11).Value Like "*材料表*" Then
+                    a2 = 3
+                    fl = 27
+                 
+                    i = 41    '表行数
+                    GoTo doo
+                    
+                    
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电    缆    表  *" Then
+                    a2 = 36
+                    fl = 60
+             
+                    i = 41   '监控表行数
+doo:
+                    Do
+                       
+                        Sheets(sdn).Cells(a2, fl).Value = gcm
+                     
+                        
+                        a2 = a2 + i
+                    Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
+            Else
+        MsgBox "检查表格格式"
+        Exit Sub
             End If
-            Sheets(2).Select
-            Else
-            Sheets(1).Select
-        End If
-        If ActiveSheet.Cells(1, 9).Text = "仪表数据表" Or ActiveSheet.Cells(1, 4).Text = "仪表数据表" Or ActiveSheet.Cells(1, 8).Text = "仪表数据表" Then
-            GoTo nee
-            Else
-            MsgBox "确认是否为数据表表格"
-            GoTo endd
-        End If
-nee:
-        Application.ScreenUpdating = False
-        Dim i, j, k, a2, fl, fy As Integer
-        Dim x, y, z, z2, z3 As String
-        a2 = 1
-        x = "调节阀"
-        y = "开关阀"
-        z = InputBox("请输入工程名称：")
-        syi = "索引"
-        If z = "" Then
-            GoTo endd
-        End If
-nei:
-        If ActiveSheet.Cells(4, 4).Text = x Then
-            fl = 11
-            ElseIf ActiveSheet.Cells(4, 4).Text = y Then
-            fl = 11
-            ElseIf ActiveSheet.Cells(4, 8).Text = syi Then
-            fl = 19
-            Else: fl = 20
-        End If
-        Do
-            ActiveSheet.Cells(a2, fl).Value = z
-            fy = 1
-            i = i + 1
-            '      Set ActiveSheet.HPageBreaks(fy).Location = Rows(a2 + 44)
-            a2 = a2 + 50
-            fy = fy + 1
-        Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(a2)) = 0
-        a2 = 1
-        fy = 1
-        If ActiveSheet.Index <> Worksheets.Count Then
-            ActiveSheet.Next.Activate
-            GoTo nei
-        End If
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            ActiveSheet.Cells(a2, fl).Value = ""    '首页页数清空
-        End If
-        MsgBox "共写入" & i & "个    " & z
+        Next sdn
+       
 endd:
-        Application.ScreenUpdating = True
 End Sub
 
 Sub 装置工区()
-        Sheets(1).Select
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            MsgBox "确认是否为首页"
-            '   GoTo endd
-            If ActiveWorkbook.Sheets.Count < 2 Then
-                '   MsgBox ActiveWorkbook.Sheets.Count
-                GoTo endd
+Dim lh, a2, fl, fl2, i, sdn As Integer
+Dim gcm As String
+
+On Error GoTo endd
+gcm = InputBox("输入装置工区")
+
+
+
+        For sdn = 1 To Worksheets.Count
+            If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Then
+                    a2 = 4
+                    fl = 27
+                  
+                    i = 50    '数据表行数
+                    GoTo doo
+            ElseIf Sheets(sdn).Cells(3, 11).Value Like "*I/O*" Or Sheets(sdn).Cells(3, 11).Value Like "*材料表*" Then
+                    a2 = 4
+                    fl = 27
+                 
+                    i = 41    '表行数
+                    GoTo doo
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电    缆    表  *" Then
+                    a2 = 37
+                    fl = 60
+             
+                    i = 41   '监控表行数
+doo:
+                    Do
+                       
+                        Sheets(sdn).Cells(a2, fl).Value = gcm
+                     
+                        
+                        a2 = a2 + i
+                    Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
+            Else
+        MsgBox "检查表格格式"
+        Exit Sub
             End If
-            Sheets(2).Select
-            Else
-            Sheets(1).Select
-        End If
-        If ActiveSheet.Cells(1, 9).Text = "仪表数据表" Or ActiveSheet.Cells(1, 4).Text = "仪表数据表" Or ActiveSheet.Cells(1, 8).Text = "仪表数据表" Then
-            GoTo nee
-            Else
-            MsgBox "确认是否为数据表表格"
-            GoTo endd
-        End If
-nee:
-        Application.ScreenUpdating = False
-        Dim i, j, k, a2, fl, fy As Integer
-        Dim x, y, z, z2, z3, syi As String
-        a2 = 3
-        x = "调节阀"
-        y = "开关阀"
-        z = InputBox("请输入装置工区：")
-        syi = "索引"
-        If z = "" Then
-            GoTo endd
-        End If
-nei:
-        If ActiveSheet.Cells(4, 4).Text = x Then
-            fl = 11
-            ElseIf ActiveSheet.Cells(4, 4).Text = y Then
-            fl = 11
-            ElseIf ActiveSheet.Cells(4, 8).Text = syi Then
-            fl = 19
-            Else: fl = 20
-        End If
-        Do
-            ActiveSheet.Cells(a2, fl).Value = z
-            fy = 1
-            i = i + 1
-            '      Set ActiveSheet.HPageBreaks(fy).Location = Rows(a2 + 44)
-            a2 = a2 + 50
-            fy = fy + 1
-        Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(a2)) = 0
-        a2 = 3
-        fy = 1
-        If ActiveSheet.Index <> Worksheets.Count Then
-            ActiveSheet.Next.Activate
-            GoTo nei
-        End If
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            ActiveSheet.Cells(a2, fl).Value = ""    '首页页数清空
-        End If
-        MsgBox "共写入" & i & "个    " & z
+        Next sdn
+       
 endd:
-        Application.ScreenUpdating = True
 End Sub
 
 Sub 数据表图号()
-        Sheets(1).Select
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            MsgBox "确认是否为首页"
-            '   GoTo endd
-            If ActiveWorkbook.Sheets.Count < 2 Then
-                '   MsgBox ActiveWorkbook.Sheets.Count
-                GoTo endd
+Dim lh, a2, fl, fl2, i, sdn As Integer
+Dim gcm As String
+
+On Error GoTo endd
+gcm = InputBox("输入数据表图号")
+
+
+
+        For sdn = 1 To Worksheets.Count
+            If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Then
+                    a2 = 5
+                    fl = 27
+                  
+                    i = 50    '数据表行数
+                    GoTo doo
+                    
+            ElseIf Sheets(sdn).Cells(3, 11).Value Like "*I/O*" Or Sheets(sdn).Cells(3, 11).Value Like "*材料表*" Then
+                    a2 = 5
+                    fl = 27
+                   
+                    i = 41    '表行数
+                    GoTo doo
+                    
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电    缆    表  *" Then
+                    a2 = 38
+                    fl = 60
+             
+                    i = 41   '监控表行数
+doo:
+                    Do
+                       
+                        Sheets(sdn).Cells(a2, fl).Value = gcm
+                     
+                        
+                        a2 = a2 + i
+                    Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
+            Else
+        MsgBox "检查表格格式"
+        Exit Sub
             End If
-            Sheets(2).Select
-            Else
-            Sheets(1).Select
-        End If
-        If ActiveSheet.Cells(1, 9).Text = "仪表数据表" Or ActiveSheet.Cells(1, 4).Text = "仪表数据表" Or ActiveSheet.Cells(1, 8).Text = "仪表数据表" Then
-            GoTo nee
-            Else
-            MsgBox "确认是否为数据表表格"
-            GoTo endd
-        End If
-nee:
-        Application.ScreenUpdating = False
-        Dim i, j, k, a2, fl, fy As Integer
-        Dim x, y, z, z2, z3, syi As String
-        a2 = 5
-        x = "调节阀"
-        y = "开关阀"
-        z = InputBox("请输入数据表图号：")
-        syi = "索引"
-        If z = "" Then
-            GoTo endd
-        End If
-nei:
-        If ActiveSheet.Cells(4, 4).Text = x Then
-            fl = 11
-            ElseIf ActiveSheet.Cells(4, 4).Text = y Then
-            fl = 11
-            ElseIf ActiveSheet.Cells(4, 8).Text = syi Then
-            fl = 19
-            Else: fl = 20
-        End If
-        Do
-            ActiveSheet.Cells(a2, fl).Value = z
-            fy = 1
-            i = i + 1
-            '      Set ActiveSheet.HPageBreaks(fy).Location = Rows(a2 + 44)
-            a2 = a2 + 50
-            fy = fy + 1
-        Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(a2)) = 0
-        a2 = 5
-        fy = 1
-        If ActiveSheet.Index <> Worksheets.Count Then
-            ActiveSheet.Next.Activate
-            GoTo nei
-        End If
-        If ActiveSheet.Cells(1, 9).Text <> "仪表数据表" And ActiveSheet.Cells(1, 4).Text <> "仪表数据表" And ActiveSheet.Cells(1, 8).Text <> "仪表数据表" Then
-            ActiveSheet.Cells(a2, fl).Value = ""    '首页页数清空
-        End If
-        MsgBox "共写入" & i & "个    " & z
+        Next sdn
+       
 endd:
-        Application.ScreenUpdating = True
 End Sub
 
 Sub 数据表索引生成()
@@ -2808,22 +2713,23 @@ Private Sub 涡街列表()
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
         Dim arr() As Variant
-        num7 = 7
-        n9 = 9
-        yl = 10 '数据源列
+        num7 = 6
+        n9 = 8
+        yl = 14 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
+        i = 3   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
         dh = 0 '被删除行数
 nei:
-        If n9 > 9 And n9 < 14 Then
-            ElseIf n9 > 14 And n9 < 21 Then
+        If n9 > 8 And n9 < 13 Then
             GoTo jixu
-            ElseIf n9 > 26 And n9 < 35 Then
+            ElseIf n9 > 13 And n9 < 20 Then
             GoTo jixu
-            ElseIf n9 > 36 And n9 < 39 Then
+            ElseIf n9 > 24 And n9 < 33 Then
+            GoTo jixu
+            ElseIf n9 > 34 And n9 < 37 Then
             GoTo jixu
             ElseIf n9 = 43 Then
             GoTo ee
@@ -2832,24 +2738,24 @@ nei:
 jixu:
         Do
                 Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-                Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 22).Value = ActiveSheet.Cells(num7, 22).Text
+                Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 22).Value = ActiveSheet.Cells(num7, 30).Text
                 ll = ll + 1
                 yl = yl + 6
                 a2 = a2 + 1
             If ll Mod 3 = 0 Then
                 j9 = j9 + 50
                 i = i + 50
-                yl = 10
+                yl = 14
                 num7 = num7 + 50
             End If
         Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 1
+        i = 3
         fl2 = fl + 1
         fl = fl + 1
-        num7 = 7
-        yl = 10
+        num7 = 6
+        yl = 14
         ll = 0
         a2 = 2
 jia:
@@ -3132,31 +3038,31 @@ Private Sub 投入式静压列表()
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
         Dim arr() As Variant
-        n9 = 9
-        yl = 10 '数据源列
+        n9 = 8
+        yl = 14 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
+        i = 3   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
-        num7 = 7
+        num7 = 6
         dh = 0 '被删除行数
 nei:
-            If n9 > 9 And n9 < 12 Then
+            If n9 > 8 And n9 < 13 Then
                 GoTo jixu
-                ElseIf n9 > 12 And n9 < 15 Then
+                ElseIf n9 > 13 And n9 < 18 Then
                 GoTo jixu
-                ElseIf n9 > 15 And n9 < 20 Then
+               
+                  ElseIf n9 > 21 And n9 < 26 Then
                 GoTo jixu
-                ElseIf n9 > 23 And n9 < 27 Then
+                ElseIf n9 = 29 Then
                 GoTo jixu
-                ElseIf n9 = 28 Then
+               
+                ElseIf n9 > 33 And n9 < 37 Then
                 GoTo jixu
-                ElseIf n9 = 31 Then
-                GoTo jixu
-                ElseIf n9 = 38 Then
-                GoTo jixu
-                ElseIf n9 > 39 And n9 < 44 Then
+              
+            
+                ElseIf n9 > 39 And n9 < 42 Then
                 GoTo jixu
                 ElseIf n9 = 45 Then
                 GoTo ee
@@ -3165,24 +3071,24 @@ nei:
 jixu:
             Do
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 20).Value = ActiveSheet.Cells(num7, 22).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 20).Value = ActiveSheet.Cells(num7, 30).Text
             ll = ll + 1
             yl = yl + 6
             a2 = a2 + 1
                 If ll Mod 3 = 0 Then
                     j9 = j9 + 50
                     i = i + 50
-                    yl = 10
+                    yl = 14
                     num7 = num7 + 50
                 End If
             Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 1
+        i = 3
         fl2 = fl + 1
         fl = fl + 1
-        num7 = 7
-        yl = 10
+        num7 = 6
+        yl = 14
         ll = 0
         a2 = 2
 jia:
@@ -3199,7 +3105,7 @@ ee:
             Next kh2
         lh = kh - dh   '新表最终行数
         lh2 = lh + 1
-        arr = Array("位号", "数量", "用途", "PID号", "管道编号", "介质", "压力", "温度", "密度", "量程", "精度", "输出信号", "测量元件材质", "防爆等级", "杆缆长度", "法兰标准及等级", "法兰尺寸及密封面", "法兰材质", "仪表类型", "数据表页号")
+        arr = Array("位号", "数量", "用途", "PID号", "设备位号", "介质", "压力", "温度", "密度", "量程", "精度", "输出信号", "测量元件材质", "防爆等级", "密封膜片材质", "法兰标准及等级", "法兰尺寸及密封面", "杆缆长度", "仪表类型", "数据表页号")
         Range(Cells(2, fl), Cells(lh, fl)) = "投入式静压液位变送器"
         Range(Cells(1, 1), Cells(1, fl2 + 1)) = arr
         Range(Cells(1, 1), Cells(lh, fl2 + 1)).Select
