@@ -193,6 +193,9 @@ nei2:
         Range(Cells(1, 1), Cells(1, 16)).Select
         Call 首行格式
         Workbooks(newname).Activate   'fan hui shu ju biao
+        
+        Erase arr
+        
 endd:
 End Sub
 Private Sub 转子列表()
@@ -273,7 +276,11 @@ ee:
         Range(Cells(1, 1), Cells(1, fl2 + 1)).Select
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
+        
+        
 endd:
+
+Erase arr
 End Sub
 
 Private Sub 平衡流量计列表()
@@ -363,6 +370,8 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+
+Erase arr
         End Sub
         
 Private Sub 电磁列表()
@@ -449,6 +458,8 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+
+Erase arr
 End Sub
 
 Private Sub 差压液位列表()
@@ -537,6 +548,8 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+
+Erase arr
 End Sub
 
 
@@ -631,6 +644,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate
 endd:
+Erase arr
 End Sub
 
 Private Sub 自力式列表()
@@ -716,6 +730,8 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate
 endd:
+
+Erase arr
 End Sub
 
 Private Sub 调节阀列表()
@@ -805,6 +821,8 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate
 endd:
+
+Erase arr
 End Sub
 
 Private Sub 开关阀列表()
@@ -892,6 +910,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate
 endd:
+Erase arr
 End Sub
 
 Private Sub 压变列表()
@@ -982,6 +1001,8 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate
 endd:
+
+Erase arr
 End Sub
 
 
@@ -1064,6 +1085,9 @@ nei2:
         Call 首行格式
         Workbooks(newname).Activate   'fan hui shu ju biao
 endd:
+
+Erase arr
+
 End Sub
 
 Private Sub 热电阻列表()
@@ -1155,6 +1179,8 @@ nei2:
         Call 首行格式
         Workbooks(newname).Activate   'fan hui shu ju biao
 endd:
+
+Erase arr
 End Sub
 
 Sub 数据表序号()
@@ -1587,6 +1613,8 @@ nx:
         Range(Cells(1, 1), Cells(1, 11)).Select
         Call 首行格式
 endd:
+
+Erase arr
 End Sub
 
 Sub 索引表生成()
@@ -2704,6 +2732,8 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+
+Erase arr
 End Sub
 
 Private Sub 涡街列表()
@@ -2786,6 +2816,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+Erase arr
 End Sub
 
 Private Sub 雷达列表()
@@ -2865,6 +2896,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+Erase arr
 End Sub
 
 Private Sub 音叉列表()
@@ -2948,6 +2980,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+Erase arr
 End Sub
 Private Sub 浮球列表()
         Application.ScreenUpdating = False
@@ -3030,6 +3063,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+Erase arr
 End Sub
 Private Sub 投入式静压列表()
         Application.ScreenUpdating = False
@@ -3120,6 +3154,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate
 endd:
+Erase arr
 End Sub
 
 Private Sub pHORP列表()
@@ -3213,6 +3248,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+Erase arr
 End Sub
 Private Sub 水分列表()
         Application.ScreenUpdating = False
@@ -3297,6 +3333,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+Erase arr
 End Sub
 
 Private Sub 磁氧列表()
@@ -3382,6 +3419,8 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+
+Erase arr
 End Sub
 
 Private Sub 红外线列表()
@@ -3467,6 +3506,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+Erase arr
 End Sub
 
 Private Sub 报警器列表()
@@ -3550,6 +3590,7 @@ ee:
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
+Erase arr
 End Sub
 
 Sub 加页()
@@ -3857,7 +3898,8 @@ Sub 多列拆分()
         Range(Cells(1, 1), Cells(1, 18)).Select
       Call 首行格式
      Application.DisplayAlerts = True
-
+Erase arr
+Erase arr2
 End Sub
 Sub 组内外排序()
 Application.ScreenUpdating = False
@@ -4730,7 +4772,7 @@ TW:
                         End If
                     Next
                     Application.ScreenUpdating = True
-                    Set arr = Nothing
+                    Erase arr
                     End Sub
 Sub 电缆表生成()
 
@@ -5069,4 +5111,42 @@ nei2:
         Call 首行格式
         Workbooks(newname).Activate   'fan hui shu ju biao
 endd:
+End Sub
+
+
+Sub 删除内容()
+Dim pic As Shape
+Dim a, b, c As Integer
+b = ActiveSheet.UsedRange.Rows.Count
+a = ActiveCell.Row
+
+c = MsgBox("确认删除所选行之后所有内容吗？", vbOKCancel)
+
+
+If c = 2 Then
+
+Exit Sub
+
+End If
+
+
+For Each pic In ActiveSheet.Shapes
+
+If pic.Top >= Rows(a).Top Then
+
+pic.Delete
+
+
+End If
+
+Next
+
+If a <= b Then
+
+Rows(a & ":" & b).Select
+Rows(a & ":" & b).Delete
+Else
+Exit Sub
+End If
+
 End Sub
