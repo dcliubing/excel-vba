@@ -562,32 +562,33 @@ Private Sub 压力开关列表()
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
         Dim arr() As Variant
-        n9 = 9
-        yl = 10 '数据源列
+        n9 = 8
+        yl = 14 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
+        i = 3   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
-        num7 = 7
+        num7 = 6
         dh = 0 '被删除行数
 nei:
-            If n9 > 9 And n9 < 12 Then
+            If n9 > 8 And n9 < 13 Then
                 GoTo jixu
-                ElseIf n9 > 12 And n9 < 15 Then
+                ElseIf n9 > 12 And n9 < 16 Then
                 GoTo jixu
-                ElseIf n9 > 15 And n9 < 19 Then
+                ElseIf n9 = 20 Then
                 GoTo jixu
-                ElseIf n9 > 22 And n9 < 25 Then
+                ElseIf n9 = 21 Then
                 GoTo jixu
-                ElseIf n9 > 26 And n9 < 29 Then
+                  ElseIf n9 > 23 And n9 < 26 Then
                 GoTo jixu
-                ElseIf n9 > 32 And n9 < 34 Then
+                ElseIf n9 = 30 Then
                 GoTo jixu
-                ElseIf n9 > 34 And n9 < 36 Then
+                ElseIf n9 = 32 Then
                 GoTo jixu
-                ElseIf n9 > 36 And n9 < 42 Then
+                ElseIf n9 > 33 And n9 < 38 Then
                 GoTo jixu
+               
                 ElseIf n9 = 45 Then
                 GoTo ee
                 Else: GoTo jia
@@ -595,24 +596,24 @@ nei:
 jixu:
             Do
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 20).Value = ActiveSheet.Cells(num7, 22).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 19).Value = ActiveSheet.Cells(num7, 30).Text
             ll = ll + 1
-            yl = yl + 6
+            yl = yl + 7
             a2 = a2 + 1
                 If ll Mod 3 = 0 Then
                     j9 = j9 + 50
                     i = i + 50
-                    yl = 10
+                    yl = 14
                     num7 = num7 + 50
                 End If
             Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 1
+        i = 3
         fl2 = fl + 1
         fl = fl + 1
-        num7 = 7
-        yl = 10
+        num7 = 6
+        yl = 14
         ll = 0
         a2 = 2
 jia:
@@ -629,7 +630,7 @@ ee:
             Next kh2
         lh = kh - dh   '新表最终行数
         lh2 = lh + 1
-        arr = Array("位号", "数量", "用途", "PID号", "管道编号", "介质", "压力", "温度", "测量元件材质", "里程", "工艺接头尺寸", "触点动作形式", "防爆等级", "安装形式", "密封膜片材质", "法兰标准及等级", "法兰尺寸及密封面", "法兰材质", "仪表类型", "数据表页号")
+        arr = Array("位号", "数量", "用途", "PID号", "管道编号", "介质", "压力", "温度", "测量元件材质", "量程", "工艺接头尺寸", "触点动作形式", "防爆等级", "安装形式", "法兰标准及等级", "法兰尺寸及密封面", "法兰材质", "仪表类型", "数据表页号")
         Range(Cells(2, fl), Cells(lh, fl)) = "压力开关"
         Range(Cells(1, 1), Cells(1, fl2 + 1)) = arr
         Range(Cells(1, 1), Cells(lh, fl2 + 1)).Select
@@ -2176,7 +2177,7 @@ If Sheets("拆分汇总").Cells(jj, 12).Value = "" Then
                                                           
                                             ElseIf InStr(Sheets("拆分汇总").Cells(jj, 1).Value, "S-") > 0 Then
                                                           Sheets("拆分汇总").Cells(jj, 2).Value = Split(Sheets("拆分汇总").Cells(jj, 1).Value, "S-")
-                                                          Sheets("拆分汇总").Cells(jj, 2).Value = Join(Split(Sheets("拆分汇总").Cells(jj, 1).Value, "S-"), sj & "-")
+                                                          Sheets("拆分汇总").Cells(jj, 2).Value = Join(Split(Sheets("拆分汇总").Cells(jj, 1).Value, "S-"), "S" & sj & "-")
                                             
                                                          
                                             Else
