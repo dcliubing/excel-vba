@@ -1744,7 +1744,7 @@ Sub IO表生成()
      ' ioh = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Count - 1
      
      ioh = ActiveSheet.UsedRange.Rows.Count  '改成这样
-     
+
         
       iol = 42 '当前表总行数
       
@@ -1776,9 +1776,9 @@ Sub IO表生成()
         Workbooks(suu & ".xls").Activate
         Do
             zs = zs + 1
-            If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
-                jx = jx + 1
-            End If
+         '   If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
+          '      jx = jx + 1
+          '  End If
             j9 = j9 + 1
         Loop Until Application.WorksheetFunction.CountA(Sheets("拆分汇总").Rows(zs)) = 0
         j9 = 2
@@ -1800,10 +1800,10 @@ Sub IO表生成()
             ActiveSheet.Paste
                 Do
 nei5:
-                    If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
-                        j9 = j9 + 1
-                        GoTo nei5
-                    End If
+                '    If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
+                    '    j9 = j9 + 1
+                    '    GoTo nei5
+                '    End If
                     j7 = j7 + 1
                     Workbooks(indel).ActiveSheet.Cells(a2, fl).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text
                     Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 7).Text
@@ -1811,52 +1811,54 @@ nei5:
                     '   Sheets(1).Cells(a2, fl + 6).Value = Sheets(2).Cells(j9, yl + 2).Text   '待修改
                     If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*FT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*FXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PHT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PHXT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*OT*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*OXT*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         If InStr(Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text, "ia") > 0 Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = ""
                         Workbooks(indel).ActiveSheet.Cells(a2, 20).Value = "有"
                         End If
                         If Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*电磁*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = ""
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供24VDC"
+                       ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供24VDC"
                         End If
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*调节阀*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         If InStr(Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text, "ia") > 0 Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 27).Value = "有"
                         End If
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*开关阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*切断阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*电磁阀*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                      '  ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "常开接点"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*阀位开反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*阀位关反馈*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
+                     '   ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*压力开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*液位开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*温度开关*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
-                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备远程启动*" Then
+                     '   ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
+                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*远程启动*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "常开接点"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
-                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备远程停止*" Then
+                    '    ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
+                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*远程停止*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "常闭接点"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
-                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备变频控制*" Then
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
+                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*频率调节*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 27).Value = "有"
-                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备备妥反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备运行反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备故障反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备停止反馈*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
-                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备电流*" Then
+                          ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*频率显示*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 20).Value = "有"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                      '  Workbooks(indel).ActiveSheet.Cells(a2, 27).Value = "有"
+                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*备妥*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*运行信号*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*故障信号*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备停止反馈*" Then
+                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                        ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
+                        ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*电流信号*" Then
+                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
+                      '  Workbooks(indel).ActiveSheet.Cells(a2, 20).Value = "有"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*紧急*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常闭接点"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*复位*" Then
@@ -1865,26 +1867,26 @@ nei5:
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "RTD"
                         If InStr(Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text, "ia") > 0 Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 20).Value = "有"
+                      '  Workbooks(indel).ActiveSheet.Cells(a2, 20).Value = "有"
                         End If
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*磁氧*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供220VAC"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "220VAC"
                        ' ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*ORP*" Then
                        ' Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                       ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
+                       ' ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*浊度*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供220VAC"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "220VAC"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*过碱量*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供220VAC"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "220VAC"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*水分*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供220VAC"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "220VAC"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*红外线*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "外供220VAC"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "220VAC"
                         
                     End If
                     a2 = a2 + 1
@@ -4884,19 +4886,19 @@ arr2(nn) = "备妥信号"
 arr3(nn) = "YEP-"
 ElseIf djn = 5 Then
 arr2(nn) = "电流信号"
-arr3(nn) = "YXX-"
+arr3(nn) = "YI-"
 ElseIf djn = 6 Then
-arr2(nn) = "开车控制"
+arr2(nn) = "远程启动"
 arr3(nn) = "YST-"
 ElseIf djn = 7 Then
-arr2(nn) = "停车控制"
+arr2(nn) = "远程停止"
 arr3(nn) = "YSD-"
 ElseIf djn = 8 Then
 arr2(nn) = "频率显示"
-arr3(nn) = "YXX-"
+arr3(nn) = "YX-"
 ElseIf djn = 9 Then
 arr2(nn) = "频率调节"
-arr3(nn) = "YXX-"
+arr3(nn) = "YXC-"
 
 End If
 
@@ -4974,7 +4976,7 @@ e = e + 1
     
                       
        Sheets("拆分汇总").Cells(sh + gg, 1) = Join(a, arr3(tt))
-       Sheets("拆分汇总").Cells(sh + gg, 3) = arr2(tt)
+       Sheets("拆分汇总").Cells(sh + gg, 8) = arr2(tt)
     '   Sheets("拆分汇总").Cells(sh + 1, 8) = "设备运行反馈"
  tt = tt + 1
        Next f
@@ -4985,8 +4987,10 @@ e = e + 1
                       Next sh
                       
                      
-                      Sheets("拆分汇总").Range(Cells(hang, 1), Cells(hangs + e, 1)).Select
-                      
+                  '    Sheets("拆分汇总").Range(Cells(hang, 1), Cells(hangs + e, 1)).Select
+                       Sheets("拆分汇总").Rows(hangs + e + 1).Select
+                       ActiveWindow.SmallScroll Down:=djxh         '自动上滚
+                       
 Erase arr
 Erase arr2
 Erase arr3
