@@ -4841,19 +4841,28 @@ End If
 
 End Sub
 
+
+
 Sub 电机信号处理()
 Application.ScreenUpdating = False
 Dim hang, senu, hangs, ii, sh, e, f, djxh, djn, gg, tt, nn As Integer
 
+
 If ActiveSheet.Name = "拆分汇总" Then
+If UserForm1.Visible = False Then
 
 
 UserForm1.Show
+End If
 
 Else
 
 MsgBox "不是拆分汇总表格"
+
+
 Exit Sub
+
+
 
 End If
 
@@ -4998,3 +5007,14 @@ Erase arr3
 
 Application.ScreenUpdating = True
 End Sub
+
+Sub 计算器()
+'
+' 宏1 宏
+'
+
+'
+   
+Application.ActivateMicrosoftApp 0
+End Sub
+
