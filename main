@@ -2851,46 +2851,51 @@ Private Sub 雷达列表()
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
         Dim arr() As Variant
-        num7 = 7
-        n9 = 9
-        yl = 10 '数据源列
+        num7 = 6
+        n9 = 8
+        yl = 14 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 1   '数据源非空行
+        i = 3   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
         dh = 0 '被删除行数
 nei:
-        If n9 > 9 And n9 < 14 Then
-            ElseIf n9 > 14 And n9 < 18 Then
+        If n9 > 8 And n9 < 13 Then
+            ElseIf n9 > 13 And n9 < 17 Then
             GoTo jixu
-            ElseIf n9 > 24 And n9 < 30 Then
+            ElseIf n9 > 22 And n9 < 26 Then
             GoTo jixu
-            ElseIf n9 = 44 Then
+            ElseIf n9 > 27 And n9 < 29 Then
+            GoTo jixu
+            ElseIf n9 > 30 And n9 < 36 Then
+               GoTo jixu
+                ElseIf n9 = 40 Then
             GoTo ee
             Else: GoTo jia
         End If
 jixu:
         Do
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 14).Value = ActiveSheet.Cells(num7, 22).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 18).Value = ActiveSheet.Cells(num7, 30).Text
             ll = ll + 1
-            yl = yl + 6
+            yl = yl + 7
             a2 = a2 + 1
             If ll Mod 3 = 0 Then
                 j9 = j9 + 50
                 i = i + 50
-                yl = 10
+                yl = 14
                 num7 = num7 + 50
             End If
         Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 1
-        fl2 = fl + 1
+        i = 3
+       
         fl = fl + 1
-        num7 = 7
-        yl = 10
+        fl2 = fl + 1
+        num7 = 6
+        yl = 14
         ll = 0
         a2 = 2
 jia:
@@ -2907,17 +2912,18 @@ ee:
         Next kh2
         lh = kh - dh   '新表最终行数
         lh2 = lh + 1
-        arr = Array("位号", "数量", "用途", "PID号", "管道编号", "介质", "压力", "温度", "量程", "探头材质", "精度", "输出信号", "仪表类型", "数据表页号")
-        Range(Cells(2, fl), Cells(lh, fl)) = "雷达液(料位)位计"
-        Range(Cells(1, 1), Cells(1, fl2 + 1)) = arr
-        Range(Cells(1, 1), Cells(lh, fl2 + 1)).Select
+        arr = Array("位号", "数量", "用途", "PID号", "设备位号", "介质", "压力", "温度", "量程", "精度", "输出信号", "电源", "元件材质", "防爆等级", "防护等级", "工艺连接尺寸", "仪表类型", "数据表页号")
+       
+        Range(Cells(2, fl), Cells(lh, fl)) = "雷达液(料)位计"
+        Range(Cells(1, 1), Cells(1, fl2)) = arr
+        Range(Cells(1, 1), Cells(lh, fl2)).Select
         Call 格式整理
         '自动列宽
         Selection.Columns.AutoFit
         Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(lh2, 1).Value = "总数量"
         Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(lh2, 2).Value = Application.WorksheetFunction.Sum(Range(Cells(2, 2), Cells(lh, 2)))
         ' 加粗冻结 宏
-        Range(Cells(1, 1), Cells(1, fl2 + 1)).Select
+        Range(Cells(1, 1), Cells(1, fl2)).Select
         Call 首行格式
         Workbooks(newname).Activate '返回数据表文件
 endd:
@@ -3132,7 +3138,7 @@ jixu:
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 20).Value = ActiveSheet.Cells(num7, 30).Text
             ll = ll + 1
-            yl = yl + 6
+            yl = yl + 7
             a2 = a2 + 1
                 If ll Mod 3 = 0 Then
                     j9 = j9 + 50
@@ -3928,13 +3934,15 @@ Erase arr2
 End Sub
 Sub 组内外排序()
 Application.ScreenUpdating = False
+
+
 Dim hang, senu, hangs, ii, sh, e, al, als, n, an, i, f As Integer
 
 
 Dim sjy, a, b, c, d As String
 
 
-If ActiveSheet.Name <> "拆分汇总" Then
+If ActiveSheet.Name <> "拆分汇总" And ActiveSheet.Name <> "电缆排序" Then
 
 
 
@@ -3964,7 +3972,7 @@ If sjy = "" Then
 al = al + 1
 
 
-If al > 1000 Then
+If al > 10000 Then
 
 
 Exit Sub
@@ -3996,7 +4004,7 @@ n = n + 1
     
     End If
 
-   Loop Until al = 500
+   Loop Until al = 5000
    
    
    an = als + n
@@ -4005,7 +4013,7 @@ n = n + 1
    
 
    
-   If al < 500 Then
+   If al < 5000 Then
    
    
    GoTo ss
@@ -4040,18 +4048,28 @@ n = n + 1
    al = an + 1
    
    
-   For i = 1 To 3
+     If ActiveSheet.Name = "电缆排序" Then
+
+          Columns("D:G").Select
+          Selection.EntireColumn.Hidden = True
+                 Columns("I:K").Select
+          Selection.EntireColumn.Hidden = True
+                 Columns("N:R").Select
+          Selection.EntireColumn.Hidden = True
+             Columns("B").Select
+  Selection.EntireColumn.Hidden = True
+  End If
    
    
    GoTo ss
    
-   
-   
-   Next i
-   
-   
 
-Application.ScreenUpdating = True
+
+
+   
+      Application.ScreenUpdating = True
+
+
 End Sub
 
 
@@ -5018,3 +5036,256 @@ Sub 计算器()
 Application.ActivateMicrosoftApp 0
 End Sub
 
+Sub 电缆排序()
+        '
+        ' 宏2 宏
+        Dim a, d, b, la, sjy  As String
+        Dim arr, arr2 As Variant
+        Dim c, i, j, hang, lie, lie2, nn, sj, sna, snb As Integer
+        
+        i = 0
+        j = 2
+        hang = 2
+        lie = 1
+        lie2 = 1
+      
+      snb = 1
+      
+      
+      Do
+      
+      If Sheets(snb).Name = "汇总表" Then
+      
+      Sheets(snb).Select
+      ifhz = 1
+      
+      Exit Do
+      End If
+      
+      
+      snb = snb + 1
+      
+      
+      Loop Until snb > Sheets.Count
+      
+      
+      If ifhz = 0 Then
+      
+      MsgBox "未找到“汇总表”"
+      
+      Exit Sub
+      End If
+      
+     
+      
+
+    
+ Sheets("汇总表").Select
+
+      
+           For sna = Sheets.Count To 1 Step -1
+        Debug.Print Sheets(sna).Name
+        If Sheets(sna).Name = "电缆排序" Then
+        
+            With Sheets(sna).Tab
+        .Color = 192
+        .TintAndShade = 0
+    End With
+        
+            Sheets(sna).Delete
+              If Sheets(sna).Name = "电缆排序" Then
+              
+                With Sheets(sna).Tab
+        .ColorIndex = xlNone
+        .TintAndShade = 0
+    End With
+              
+              Exit Sub
+              
+              End If
+              
+              End If
+              
+              
+              
+        
+    Next
+    
+
+    
+    Sheets.Add after:=ActiveSheet
+  
+
+       ActiveSheet.Name = "电缆排序"
+       
+       
+     
+           sj = Sheets("汇总表").UsedRange.Columns.Count
+        
+        'MsgBox la
+        
+        arr = Array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "LAST")
+        
+        arr2 = Array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "LAST")
+        
+        'arr = Array("[A-E]")
+        
+        'MsgBox arr(4)\
+        
+
+        
+
+        
+        Do
+
+        sjy = Sheets("汇总表").Cells(hang, lie)
+       If InStr(sjy, "G-") = 0 Then
+       
+
+        If InStr(sjy, "~") > 0 Then
+        
+        
+        a = Split(sjy, "~")(0)
+        la = Right(sjy, 1)
+        c = Len(a) - 1
+        b = Right(a, 1)
+        d = Left((a), c)
+        
+   
+        
+     
+        
+
+            For i = 0 To UBound(arr)
+            
+                   
+       
+            
+            If arr(i) = b Then
+            
+            b = arr(i + 1)
+            
+            'MsgBox b
+            
+            Sheets("电缆排序").Cells(j, lie2).Value = d & arr(i)
+            
+            
+            For nn = 2 To sj - 1 Step 1
+            
+             Sheets("电缆排序").Cells(j, lie2 + nn).Value = Sheets("汇总表").Cells(hang, lie + nn)
+            
+            Next nn
+            
+            j = j + 1
+            
+ 
+            
+            ElseIf arr2(i) = b Then
+            
+            b = arr2(i + 1)
+            
+            
+            
+            'MsgBox b
+            
+             Sheets("电缆排序").Cells(j, lie2).Value = d & arr2(i)
+            
+             For nn = 2 To sj - 1 Step 1
+            
+             Sheets("电缆排序").Cells(j, lie2 + nn).Value = Sheets("汇总表").Cells(hang, lie + nn)
+            
+            Next nn
+            
+            j = j + 1
+ 
+            'MsgBox i
+            End If
+            
+            
+            
+            If arr(i) = la Or arr2(i) = la Then
+            
+            Exit For
+            
+            End If
+            
+            
+           
+            Next i
+                   
+          
+           
+           
+           
+        '  If lie2 < ActiveSheet.UsedRange.Columns.Count Then
+          
+        '  lie2 = lie2 + 1
+          
+       '   GoTo jixu
+          
+        '  End If
+                   
+                   
+                   
+       
+            hang = hang + 1
+        
+        
+        
+        Else
+        
+         Sheets("电缆排序").Cells(j, lie2).Value = sjy
+         
+
+         
+         
+                      For nn = 2 To sj - 1 Step 1
+                      
+                  '      MsgBox lie
+            
+            Sheets("电缆排序").Cells(j, lie2 + nn).Value = Sheets("汇总表").Cells(hang, lie + nn)
+            
+         
+            
+            Next nn
+         
+        j = j + 1
+        hang = hang + 1
+        
+        
+        End If
+        Else
+        
+        hang = hang + 1
+      
+        End If
+        'Loop Until sjy = "总数量" Or hang > 1000
+        Loop Until Application.WorksheetFunction.CountA(Sheets("汇总表").Rows(hang)) = 0
+
+        arr = Array("位号", "监控位号", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "数据表页号", "序号", "组外排序（英文）", "组内排序（数字）", "报警（低低）", "报警（低）", "报警（高高）", "报警（高）", "联锁（S）")
+        
+
+        Range(Cells(1, 1), Cells(1, 18)) = arr
+        
+         Range(Cells(1, 1), Cells(j - 1, 18)).Select
+       Call 格式整理
+        Range(Cells(1, 1), Cells(j - 1, 18)).Select
+        Selection.Columns.AutoFit
+        ' 加粗冻结 宏
+        Range(Cells(1, 1), Cells(1, 18)).Select
+      Call 首行格式
+ 
+                  Columns("D:G").Select
+          Selection.EntireColumn.Hidden = True
+                 Columns("I:K").Select
+          Selection.EntireColumn.Hidden = True
+                 Columns("N:R").Select
+          Selection.EntireColumn.Hidden = True
+             Columns("B").Select
+  Selection.EntireColumn.Hidden = True
+     
+     Application.DisplayAlerts = True
+Erase arr
+Erase arr2
+
+End Sub
