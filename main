@@ -2344,7 +2344,7 @@ End Sub
 Sub 数据表索引生成()
         Dim suu, indel As String
         Application.ScreenUpdating = False
-        If Not ActiveSheet.Cells(4, 8).Text Like "*索引*" Then
+        If Not ActiveSheet.Cells(4, 11).Text Like "*索引*" Then
             MsgBox "确认是否为仪表索引表格"
             GoTo endd
         End If
@@ -2358,21 +2358,22 @@ Sub 数据表索引生成()
         
       iol = 50 '当前表总行数
         
-       Rows("10:44").ClearContents '删当前表内容
+       Rows("10:46").ClearContents '删当前表内容
        Rows(iol & ":" & ioh + 1).Delete
 
         suu = InputBox("请输入汇总表工作簿的名称：")
         On Error GoTo endd
         indel = ActiveWorkbook.Name
         On Error GoTo endd
-        Dim j9, j7, n9, yl, i, a2, ll, fl, kh, kh2, dh, lh, zs, zs2, lh2, fl2, nn As Integer
+        Dim j9, j7, n9, yl, i, a2, ll, fl, kh, kh2, dh, lh, zs, zs2, lh2, fl2, fl3, nn As Integer
         'Dim att As String
         Dim arr() As Variant
         dh = 2
         j9 = 2
         a2 = 10
-        fl2 = 1
-        fl = 2
+        fl2 = 2
+        fl3 = 9
+        fl = 4
         j7 = 0
         yl = 1
         nn = 0
@@ -2385,9 +2386,9 @@ Sub 数据表索引生成()
         Loop Until Application.WorksheetFunction.CountA(Sheets("汇总表").Rows(zs)) = 0
         '   Loop Until Workbooks(suu & ".xls").Sheets("汇总表").Cells(zs, 1) = "总数量"
         zs2 = zs - 3
-        j = zs2 \ 70
+        j = zs2 \ 74
         fy = j
-        If zs2 Mod 70 = 0 Then
+        If zs2 Mod 74 = 0 Then
             j = j - 1  '需要复制次数
         End If
         Workbooks(indel).Activate
@@ -2408,23 +2409,26 @@ nei5:
                 nn = nn + 1
                 j7 = j7 + 1
                 Workbooks(indel).ActiveSheet.Cells(a2, fl).Value = Workbooks(suu & ".xls").Sheets("汇总表").Cells(j9, yl).Text
-                Workbooks(indel).ActiveSheet.Cells(a2, fl + 6).Value = Workbooks(suu & ".xls").Sheets("汇总表").Cells(j9, yl + 9).Text
+                Workbooks(indel).ActiveSheet.Cells(a2, fl3).Value = "0"
+                Workbooks(indel).ActiveSheet.Cells(a2, fl + 8).Value = Workbooks(suu & ".xls").Sheets("汇总表").Cells(j9, yl + 9).Text
                 Workbooks(indel).ActiveSheet.Cells(a2, fl2).Value = Workbooks(suu & ".xls").Sheets("汇总表").Cells(j9, yl + 10).Text
                 '   Sheets(1).Cells(a2, fl + 6).Value = Sheets(2).Cells(j9, yl + 2).Text   '待修改
                 a2 = a2 + 1
                 j9 = j9 + 1
-                If nn Mod 35 = 0 Then
-                    a2 = a2 - 35
+                If nn Mod 37 = 0 Then
+                    a2 = a2 - 37
                     ' MsgBox a2
-                    fl = fl + 15
-                    fl2 = fl2 + 13
+                    fl = fl + 17
+                    fl2 = fl2 + 17
+                    fl3 = fl3 + 17
                 End If
-            Loop Until j7 Mod 70 = 0
-            a2 = a2 + 15 + 35 '相邻索引表数据间隔12
+            Loop Until j7 Mod 74 = 0
+            a2 = a2 + 13 + 37 '相邻索引表数据间隔12
             ' MsgBox a2
             ll = ll + 50
-            fl = fl - 30
-            fl2 = fl2 - 26
+            fl = fl - 34
+            fl2 = fl2 - 34
+            fl3 = fl3 - 34
         Loop Until i = j + 1
         '  ActiveSheet.Rows(a2 - 37) = ""   '总数量文字删除
         For kh = 1 To a2 Step 1
@@ -2439,7 +2443,7 @@ nei5:
         Selection.Delete
         Rows(1).Select
         '  ActiveSheet.PageSetup.PrintArea = Range(Cells(1, 1), Cells(ll - 1, 25))
-        ActiveSheet.PageSetup.PrintArea = "$A$1:$Y$" & ll - 1   '设置打印区域
+        ActiveSheet.PageSetup.PrintArea = "$A$1:$AH$" & ll - 1   '设置打印区域
         Do
             Rows((fy * 50) + 1).Select
             ActiveWindow.SelectedSheets.HPageBreaks.Add Before:=ActiveCell
@@ -5070,12 +5074,16 @@ Dim gcm, sjj, tuh, zzgq, xmbh As String
 
 
 
- If ActiveSheet.Cells(3, 11).Value Like "*仪表数据表*" Or ActiveSheet.Cells(4, 11).Value Like "*I/O*" Or ActiveSheet.Cells(4, 11).Value Like "*材料表*" Or ActiveSheet.Cells(37, 44).Value Like "*监控*" Or ActiveSheet.Cells(37, 44).Value Like "*电    缆    表  *" Then
+ If ActiveSheet.Cells(3, 11).Value Like "*仪表数据表*" Or ActiveSheet.Cells(4, 11).Value Like "*I/O*" Or ActiveSheet.Cells(4, 11).Value Like "*材料表*" Or ActiveSheet.Cells(37, 44).Value Like "*监控*" Or ActiveSheet.Cells(37, 44).Value Like "*电    缆    表  *" Or ActiveSheet.Cells(4, 11).Value Like "*索引*" Then
 If UserForm2.Visible = False Then
 
 
-UserForm2.Show
+UserForm2.Show 0
+
+Call 读取
+
 End If
+
 
 Else
 
@@ -5093,7 +5101,7 @@ End If
 endd:
 End Sub
  Sub 表头写入()
-Dim lh, a2, a3, a4, a5, a6, fl, fl2, fl3, fl4, fl5, fl6, fle, i, sdn As Integer
+Dim lh, a2, a3, a4, a5, a6, a7, fl, fl2, fl3, fl4, fl5, fl6, fle, i, sdn As Integer
 Dim gcm, sjj, tuh, zzgq, xmbh As String
 
 
@@ -5101,7 +5109,82 @@ Dim gcm, sjj, tuh, zzgq, xmbh As String
 
 
         For sdn = 1 To Worksheets.Count
-            If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Then
+            If Sheets(sdn).Cells(3, 11).Value Like "*仪表数据表*" Or Sheets(sdn).Cells(4, 11).Value Like "*索引*" Then
+                    a2 = 3
+                    a3 = 4
+                    a4 = 5
+                    a5 = 6
+                    a6 = 6
+                    a7 = 48
+                    fl = 27
+                    fl2 = 27
+                    fl3 = 27
+                    fl4 = 14
+                    fl5 = 26
+                    fl6 = 4
+                    
+                  
+                    i = 50    '数据表行数
+                    GoTo doo
+            ElseIf Sheets(sdn).Cells(4, 11).Value Like "*I/O*" Or Sheets(sdn).Cells(4, 11).Value Like "*材料表*" Then
+                   a2 = 3
+                    a3 = 4
+                    a4 = 5
+                    a5 = 6
+                    a6 = 6
+                    a7 = 39
+                   fl = 27
+                    fl2 = 27
+                    fl3 = 27
+                    fl4 = 14
+                    fl5 = 26
+                    fl6 = 4
+                    i = 41    '表行数
+                    GoTo doo
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电    缆    表  *" Then
+                    a2 = 36
+                    a3 = 37
+                    a4 = 38
+                    a5 = 39
+                    a6 = 39
+                    a7 = 38
+                    fl = 60
+                     fl2 = 60
+                    fl3 = 60
+                    fl4 = 47
+                    fl5 = 59
+                    fl6 = 4
+             
+                    i = 41   '监控表行数
+doo:
+                    Do
+                       
+                        Sheets(sdn).Cells(a2, fl).Value = UserForm2.TextBox4.Value
+                        Sheets(sdn).Cells(a3, fl2).Value = UserForm2.TextBox3.Value
+                        Sheets(sdn).Cells(a4, fl3).Value = UserForm2.TextBox2.Value
+                        Sheets(sdn).Cells(a5, fl4).Value = UserForm2.TextBox1.Value
+                        Sheets(sdn).Cells(a6, fl5).Value = UserForm2.TextBox5.Value
+                      Sheets(sdn).Cells(a7, fl6).Value = UserForm2.TextBox5.Value
+                        
+                        a2 = a2 + i
+                        a3 = a3 + i
+                        a4 = a4 + i
+                        a5 = a5 + i
+                        a6 = a6 + i
+                        a7 = a7 + i
+                    Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
+            Else
+        MsgBox "检查表格格式"
+        Exit Sub
+            End If
+        Next sdn
+       
+endd:
+End Sub
+Private Sub 读取()
+ 
+ 
+  If ActiveSheet.Cells(3, 11).Value Like "*仪表数据表*" Then
                     a2 = 3
                     a3 = 4
                     a4 = 5
@@ -5115,9 +5198,9 @@ Dim gcm, sjj, tuh, zzgq, xmbh As String
                     
                     
                   
-                    i = 50    '数据表行数
-                    GoTo doo
-            ElseIf Sheets(sdn).Cells(4, 11).Value Like "*I/O*" Or Sheets(sdn).Cells(4, 11).Value Like "*材料表*" Then
+                 
+                    
+            ElseIf ActiveSheet.Cells(4, 11).Value Like "*I/O*" Or ActiveSheet.Cells(4, 11).Value Like "*材料表*" Or ActiveSheet.Cells(4, 11).Value Like "*索引*" Then
                    a2 = 3
                     a3 = 4
                     a4 = 5
@@ -5129,9 +5212,8 @@ Dim gcm, sjj, tuh, zzgq, xmbh As String
                     fl4 = 14
                     fl5 = 26
                  
-                    i = 41    '表行数
-                    GoTo doo
-            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电    缆    表  *" Then
+                
+            ElseIf ActiveSheet.Cells(37, 44).Value Like "*监控*" Or ActiveSheet.Cells(37, 44).Value Like "*电    缆    表  *" Then
                     a2 = 36
                     a3 = 37
                     a4 = 38
@@ -5143,31 +5225,17 @@ Dim gcm, sjj, tuh, zzgq, xmbh As String
                     fl3 = 60
                     fl4 = 47
                     fl5 = 59
-                    
-             
-                    i = 41   '监控表行数
-doo:
-                    Do
-                       
-                        Sheets(sdn).Cells(a2, fl).Value = UserForm2.TextBox4.Value
-                        Sheets(sdn).Cells(a3, fl2).Value = UserForm2.TextBox3.Value
-                        Sheets(sdn).Cells(a4, fl3).Value = UserForm2.TextBox2.Value
-                        Sheets(sdn).Cells(a5, fl4).Value = UserForm2.TextBox1.Value
-                        Sheets(sdn).Cells(a6, fl5).Value = UserForm2.TextBox5.Value
-                     
-                        
-                        a2 = a2 + i
-                        a3 = a3 + i
-                        a4 = a4 + i
-                        a5 = a5 + i
-                        a6 = a6 + i
-                   
-                    Loop Until Application.WorksheetFunction.CountA(Sheets(sdn).Rows(a2)) = 0
-            Else
-        MsgBox "检查表格格式"
-        Exit Sub
-            End If
-        Next sdn
-       
-endd:
+
+     
+     End If
+      UserForm2.TextBox4.Value = ActiveSheet.Cells(a2, fl).Text
+  UserForm2.TextBox3.Value = ActiveSheet.Cells(a3, fl2).Text
+   UserForm2.TextBox2.Value = ActiveSheet.Cells(a4, fl3).Text
+    UserForm2.TextBox1.Value = ActiveSheet.Cells(a5, fl4).Text
+     UserForm2.TextBox5.Value = ActiveSheet.Cells(a6, fl5).Text
+' UserForm2.TextBox4.Value = ActiveSheet.Cells(3, 27).Text
+'  UserForm2.TextBox3.Value = ActiveSheet.Cells(4, 27).Text
+ '  UserForm2.TextBox2.Value = ActiveSheet.Cells(5, 27).Text
+'    UserForm2.TextBox1.Value = ActiveSheet.Cells(6, 14).Text
+  '   UserForm2.TextBox5.Value = ActiveSheet.Cells(6, 26).Text
 End Sub
