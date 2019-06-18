@@ -2409,7 +2409,11 @@ nei5:
                 nn = nn + 1
                 j7 = j7 + 1
                 Workbooks(indel).ActiveSheet.Cells(a2, fl).Value = Workbooks(suu & ".xls").Sheets("汇总表").Cells(j9, yl).Text
+                If Workbooks(suu & ".xls").Sheets("汇总表").Cells(j9, yl).Text <> "" Then
+                
                 Workbooks(indel).ActiveSheet.Cells(a2, fl3).Value = "0"
+                
+                End If
                 Workbooks(indel).ActiveSheet.Cells(a2, fl + 8).Value = Workbooks(suu & ".xls").Sheets("汇总表").Cells(j9, yl + 9).Text
                 Workbooks(indel).ActiveSheet.Cells(a2, fl2).Value = Workbooks(suu & ".xls").Sheets("汇总表").Cells(j9, yl + 10).Text
                 '   Sheets(1).Cells(a2, fl + 6).Value = Sheets(2).Cells(j9, yl + 2).Text   '待修改
@@ -3694,17 +3698,17 @@ Sub 多列拆分()
         'Loop Until sjy = "总数量" Or hang > 1000
         Loop Until Application.WorksheetFunction.CountA(Sheets("汇总表").Rows(hang)) = 0
 
-        arr = Array("位号", "监控位号", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "数据表页号", "序号", "组外排序（英文）", "组内排序（数字）", "报警（低低）", "报警（低）", "报警（高高）", "报警（高）", "联锁（S）")
+        arr = Array("位号", "监控位号", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "序号", "组外排序（英文）", "组内排序（数字）", "报警（低低）", "报警（低）", "报警（高高）", "报警（高）", "联锁（S）")
         
 
-        Range(Cells(1, 1), Cells(1, 18)) = arr
+        Range(Cells(1, 1), Cells(1, 19)) = arr
         
-         Range(Cells(1, 1), Cells(j - 1, 18)).Select
+         Range(Cells(1, 1), Cells(j - 1, 19)).Select
        Call 格式整理
-        Range(Cells(1, 1), Cells(j - 1, 18)).Select
+        Range(Cells(1, 1), Cells(j - 1, 19)).Select
         Selection.Columns.AutoFit
         ' 加粗冻结 宏
-        Range(Cells(1, 1), Cells(1, 18)).Select
+        Range(Cells(1, 1), Cells(1, 19)).Select
       Call 首行格式
      Application.DisplayAlerts = True
 Erase arr
