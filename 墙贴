@@ -1,5 +1,90 @@
-Sub 墙贴()
+Dim arr33, arr44 As Variant
+Dim shs As Integer
+
+
+Sub 非空墙贴()
 Application.ScreenUpdating = False
+
+Set arr33 = Nothing
+Dim hang, senu, hangs, ii, sh, e, f As Integer
+
+Dim arr2 As Variant
+
+Dim sjy, a, b, c, d As String
+
+hang = Selection.Row
+
+ii = Selection.Column
+senu = Selection.Rows.Count
+sh = 0
+
+hangs = hang + senu - 1
+
+On Error Resume Next
+
+
+'MsgBox senu
+If LBound(arr44) > UBound(arr44) Then   '判断数组是否为空
+
+On Error GoTo 0
+ReDim arr44(0 To hangs)
+
+
+For hang = hang To hangs
+If ActiveSheet.Cells(hang, ii) <> "" Then
+
+arr44(sh) = ActiveSheet.Cells(hang, ii)
+sh = sh + 1
+
+End If
+
+Next hang
+
+ReDim Preserve arr44(0 To sh)
+'arr44 = Selection.Value
+Else
+
+
+
+
+
+
+ActiveSheet.Cells(hang, ii).Resize(UBound(arr44), 1) = Application.Transpose(arr44)
+
+
+
+
+Set arr44 = Nothing
+End If
+'Range("ab1").Resize(UBound(arr)) = arr
+
+
+
+
+End Sub
+
+Sub 墙贴()
+
+c = MsgBox("是否排除空行？", vbOKCancel)
+
+
+If c = 2 Then
+
+Call 带空墙贴
+Else
+
+Call 非空墙贴
+
+
+End If
+
+End Sub
+
+
+Sub 带空墙贴()
+Application.ScreenUpdating = False
+
+Set arr44 = Nothing
 Dim hang, senu, hangs, ii, sh, e, f As Integer
 
 Dim arr2 As Variant
@@ -18,29 +103,30 @@ On Error Resume Next
 
 
 'MsgBox senu
-If LBound(arr3) > UBound(arr3) Then   '判断数组是否为空
+If LBound(arr33) > UBound(arr33) Then   '判断数组是否为空
 
 
-arr3 = Selection.Value
+arr33 = Selection.Value
 Else
 'ActiveSheet.Range("ab1").Resize(UBound(arr), 1) = Application.Index(arr, , 1)
 'appliction.SendKeys
 
 'Dim stemp As String
 
-'stemp = Join(Application.Index(arr3, , 1))
+'stemp = Join(Application.Index(arr33, , 1))
 'stemp = Trim(stemp)
 'arr2 = Split(stemp)
 
-'arr2 = Split(appliction.Trim(Join(arr3)))
+'arr2 = Split(appliction.Trim(Join(arr33)))
 
 
-ActiveSheet.Cells(hang, ii).Resize(UBound(arr3), 1) = Application.Index(arr3, , 1)
+ActiveSheet.Cells(hang, ii).Resize(UBound(arr33), 1) = Application.Index(arr33, , 1)
 
 
 
 
-Set arr3 = Nothing
+Set arr33 = Nothing
+
 End If
 'Range("ab1").Resize(UBound(arr)) = arr
 
