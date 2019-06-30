@@ -5,7 +5,7 @@ Dim shs As Integer
 Sub 非空墙贴()
 Application.ScreenUpdating = False
 
-Set arr33 = Nothing
+'Set arr33 = Nothing
 Dim hang, senu, hangs, ii, sh, e, f As Integer
 
 Dim arr2 As Variant
@@ -21,8 +21,8 @@ On Error Resume Next
 
 
 'MsgBox senu
-If LBound(arr44) > UBound(arr44) Then   '判断数组是否为空
-
+'If LBound(arr44) > UBound(arr44) Then   '判断数组是否为空
+If (CStr(Join(arr44, ""))) = "" Then
 senu = Selection.Rows.Count
 sh = 0
 
@@ -66,70 +66,67 @@ End If
 
 End Sub
 
-Sub 墙贴()
-
-c = MsgBox("是否排除空行？", vbOKCancel)
 
 
-If c = 2 Then
-
-Call 带空墙贴
-Else
-
-Call 非空墙贴
-
-
-End If
-
-End Sub
 
 
 Sub 带空墙贴()
 Application.ScreenUpdating = False
 
-Set arr44 = Nothing
+'Set arr33 = Nothing
 Dim hang, senu, hangs, ii, sh, e, f As Integer
 
-
+Dim arr2 As Variant
 
 Dim sjy, a, b, c, d As String
 
 hang = Selection.Row
 
 ii = Selection.Column
-senu = Selection.Rows.Count
 
-
-hangs = hang + senu - 1
 
 On Error Resume Next
 
 
 'MsgBox senu
-If LBound(arr33) > UBound(arr33) Then   '判断数组是否为空
+'If LBound(arr33) > UBound(arr33) Then   '判断数组是否为空
+If (CStr(Join(arr33, ""))) = "" Then
+senu = Selection.Rows.Count
+sh = 0
+
+hangs = hang + senu - 1
 
 
-arr33 = Selection.Value
+
+ReDim arr33(0 To hangs)
+
+
+For hang = hang To hangs
+                            
+                            
+                            arr33(sh) = ActiveSheet.Cells(hang, ii)
+                            sh = sh + 1
+                            
+                           
+
+Next hang
+
+
+ReDim Preserve arr33(0 To sh)
+'arr33 = Selection.Value
 Else
-'ActiveSheet.Range("ab1").Resize(UBound(arr), 1) = Application.Index(arr, , 1)
-'appliction.SendKeys
-
-'Dim stemp As String
-
-'stemp = Join(Application.Index(arr33, , 1))
-'stemp = Trim(stemp)
-'arr2 = Split(stemp)
-
-'arr2 = Split(appliction.Trim(Join(arr33)))
 
 
-ActiveSheet.Cells(hang, ii).Resize(UBound(arr33), 1) = Application.Index(arr33, , 1)
+
+
+
+
+ActiveSheet.Cells(hang, ii).Resize(UBound(arr33), 1) = Application.Transpose(arr33)
 
 
 
 
 Set arr33 = Nothing
-
 End If
 'Range("ab1").Resize(UBound(arr)) = arr
 
@@ -137,4 +134,3 @@ End If
 
 
 End Sub
-
