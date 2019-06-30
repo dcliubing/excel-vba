@@ -23,6 +23,16 @@ On Error Resume Next
 'MsgBox senu
 'If LBound(arr44) > UBound(arr44) Then   '判断数组是否为空
 If (CStr(Join(arr44, ""))) = "" Then
+
+If Application.CountA(Selection) = 0 Then
+
+
+MsgBox "未选择任何内容"
+Exit Sub
+
+End If
+
+
 senu = Selection.Rows.Count
 sh = 0
 
@@ -48,8 +58,16 @@ ReDim Preserve arr44(0 To sh)
 Else
 
 
+c = MsgBox("是否确定粘贴", vbOKCancel)
 
 
+
+If c = 2 Then
+Set arr44 = Nothing
+
+Exit Sub
+
+End If
 
 
 ActiveSheet.Cells(hang, ii).Resize(UBound(arr44), 1) = Application.Transpose(arr44)
@@ -91,6 +109,17 @@ On Error Resume Next
 'MsgBox senu
 'If LBound(arr33) > UBound(arr33) Then   '判断数组是否为空
 If (CStr(Join(arr33, ""))) = "" Then
+
+If Application.CountA(Selection) = 0 Then
+
+
+MsgBox "未选择任何内容"
+Exit Sub
+
+End If
+
+
+
 senu = Selection.Rows.Count
 sh = 0
 
@@ -116,7 +145,16 @@ ReDim Preserve arr33(0 To sh)
 'arr33 = Selection.Value
 Else
 
+c = MsgBox("是否确定粘贴", vbOKCancel)
 
+
+
+If c = 2 Then
+Set arr33 = Nothing
+
+Exit Sub
+
+End If
 
 
 
