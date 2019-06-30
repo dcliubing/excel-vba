@@ -15,10 +15,7 @@ Dim sjy, a, b, c, d As String
 hang = Selection.Row
 
 ii = Selection.Column
-senu = Selection.Rows.Count
-sh = 0
 
-hangs = hang + senu - 1
 
 On Error Resume Next
 
@@ -26,7 +23,13 @@ On Error Resume Next
 'MsgBox senu
 If LBound(arr44) > UBound(arr44) Then   '判断数组是否为空
 
-On Error GoTo 0
+senu = Selection.Rows.Count
+sh = 0
+
+hangs = hang + senu - 1
+
+
+
 ReDim arr44(0 To hangs)
 
 
@@ -87,7 +90,7 @@ Application.ScreenUpdating = False
 Set arr44 = Nothing
 Dim hang, senu, hangs, ii, sh, e, f As Integer
 
-Dim arr2 As Variant
+
 
 Dim sjy, a, b, c, d As String
 
@@ -134,3 +137,4 @@ End If
 
 
 End Sub
+
