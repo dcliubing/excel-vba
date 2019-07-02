@@ -1,0 +1,21 @@
+Sub 殷莹鉴()
+Dim Dic, Arr
+Dim i As Integer, r As Integer
+Dim Str As String
+r = 10
+
+                    Set Dic = CreateObject("scripting.dictionary") '创建字典对象
+                    For i = 1 To r '将第一列数据添加到字典的key值中
+                    
+                    
+                If ActiveSheet.Cells(i, 1) <> "" Then
+                    
+                    Dic(CStr(Cells(i, 1))) = ""
+                   End If
+                    
+                    Next
+                    Arr = Dic.keys '返回字典key的数组
+                    Set Dic = Nothing '销毁对象
+                    Str = Join(Arr, ",") '将数组中的内容显示为一字符串
+                  '  MsgBox Str
+End Sub
