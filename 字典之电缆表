@@ -1,0 +1,52 @@
+Sub 殷莹鉴()
+Dim Dic, arr
+Dim i, j, k, m, n, hangs As Integer, r As Integer
+Dim Str, ss, rr As String
+r = 10
+k = 1
+
+                    Set Dic = CreateObject("scripting.dictionary") '创建字典对象
+                    For i = 1 To r '将第一列数据添加到字典的key值中
+                    
+                    
+                If ActiveSheet.Cells(i, 1) <> "" Then
+                    
+                    Dic(CStr(Cells(i, 1))) = ""
+                   End If
+                    
+                    Next
+                    arr = Dic.Keys '返回字典key的数组
+                  '  Set Dic = Nothing '销毁对象
+                   ' Str = Join(Arr, ",") '将数组中的内容显示为一字符串
+                  '  MsgBox Str
+    hangs = 20
+    
+                  
+                  
+           
+                  
+                  For j = 1 To Dic.Count
+                     
+                      For n = 1 To hangs
+                      
+      ss = CStr(Sheets(3).Cells(n, 1).Text)
+      
+            rr = arr(j - 1)
+                      
+                         If ss = rr Then
+                         
+                    '  MsgBox Sheets(3).Cells(n, 1)
+                         
+                         
+                      End If
+                      
+                  Next
+                  
+                  Next
+                  
+                  
+                  
+                  
+                  
+                  
+End Sub
