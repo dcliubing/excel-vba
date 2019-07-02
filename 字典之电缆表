@@ -1,10 +1,10 @@
-Sub 殷莹鉴()
+Sub 电缆分线箱()
 Dim Dic, arr
 Dim i, j, k, m, n, hangs As Integer, r As Integer
 Dim Str, ss, rr As String
-r = 10
+r = 20
 k = 1
-
+m = 1
                     Set Dic = CreateObject("scripting.dictionary") '创建字典对象
                     For i = 1 To r '将第一列数据添加到字典的key值中
                     
@@ -27,25 +27,37 @@ k = 1
                   
                   For j = 1 To Dic.Count
                      
-                      For n = 1 To hangs
-                      
-      ss = CStr(Sheets(3).Cells(n, 1).Text)
-      
-            rr = arr(j - 1)
-                      
-                         If ss = rr Then
-                         
-                    '  MsgBox Sheets(3).Cells(n, 1)
-                         
-                         
-                      End If
-                      
+                            For n = 1 To hangs
+                            
+                                    ss = CStr(Sheets(3).Cells(n, 1).Text)
+                                    
+                                    rr = arr(j - 1)
+                                    
+                                                If ss = rr Then
+                                                
+                                                       
+                                                            
+                                                            Sheets(4).Cells(m, 1) = ss
+                                                            
+                                                            m = m + 1
+                                                
+                                                End If
+                            
+                            
+                            
+                            
+                            Next
+                            
+                            
+                            m = j * 10                     '  每页10行
+                            
+                            
                   Next
                   
-                  Next
                   
-                  
-                  
+                  Dic.RemoveAll
+                  Set Dic = Nothing
+                  Set arr = Nothing
                   
                   
                   
