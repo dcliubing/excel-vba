@@ -1,0 +1,11 @@
+Sub 空行判断兼容假空()
+Dim arr1 As Variant
+arr1 = Application.Transpose(Application.Transpose(Range("A1:G1")))
+ss = Join(arr1, "")
+
+If Trim(ss) = "" Then
+MsgBox "空行"
+
+End If
+
+End Sub
