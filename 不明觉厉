@@ -1,0 +1,2 @@
+arr1 = Application.Transpose(Application.Transpose(Range("A1:G1")))
+ss = Join(arr1, "")
