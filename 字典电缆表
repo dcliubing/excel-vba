@@ -1,0 +1,85 @@
+
+Sub 字典tmp()
+Dim Dic, dic2, dic3, arrd, arrd2
+Dim i5, j, k, m, n, xx, hangs As Integer, r As Integer
+Dim Str, ss, rr, tt As String
+r = 20
+k = 1
+m = 1
+                    Set Dic = CreateObject("scripting.dictionary") '创建字典对象
+                       Set dic2 = CreateObject("scripting.dictionary") '创建字典对象
+          For i5 = 1 To r '将第一列数据添加到字典的key值中
+                    
+              If ActiveSheet.Cells(i5, 1).Value <> "" Then
+                    
+                ActiveSheet.Cells(i5, 1).Value = ActiveSheet.Cells(i5, 2).Value & ActiveSheet.Cells(i5, 3).Value
+                
+                End If
+                    
+                    
+                    
+                If ActiveSheet.Cells(i5, 1) <> "" Then
+                    
+                    Dic(CStr(Cells(i5, 1))) = ""
+                   End If
+                   
+
+                   
+                    
+                    Next
+                    arrd = Dic.Keys '返回字典key的数组
+                    
+                    
+                    
+                  '  Set Dic = Nothing '销毁对象
+                   ' Str = Join(arrd, ",") '将数组中的内容显示为一字符串
+                  '  MsgBox Str
+    hangs = 20
+    
+                  
+                  
+           
+                  
+                  For j = 1 To Dic.Count
+                     
+                            For n = 1 To hangs
+                            
+                                    ss = CStr(Sheets(2).Cells(n, 1).Text)
+                                    tt = CStr(Sheets(2).Cells(n, 10).Text)
+                                    rr = arrd(j - 1)
+                                    
+                                                If ss = rr Then
+                                                
+                                                       
+                                                            
+                                                            Sheets(2).Cells(m, 4).Value = ss
+                                                             Sheets(2).Cells(m, 5).Value = tt
+                                                             ' Sheets(2).Cells(m, 6).Value = rr
+                                                             
+                                                             xx = xx + Sheets(2).Cells(m, 5).Value
+                                                             
+                                                            m = m + 1
+                                                
+                                                End If
+                            
+                            
+                            
+                            
+                            Next
+                            
+                            
+                        '    m = j * 10                     '  每页10行
+                            
+                             Sheets(2).Cells(j, 7).Value = xx
+                             
+                             xx = 0
+                  Next
+                  
+                  
+                '  Dic.RemoveAll
+                '  Set Dic = Nothing
+                 ' Set arrd = Nothing
+                  
+           Range("f1").Resize(UBound(arrd) + 1, 1) = Application.Transpose(arrd)
+                  
+End Sub
