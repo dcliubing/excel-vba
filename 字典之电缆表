@@ -85,9 +85,31 @@ arrd3 = Dic.keys
 
 
  
-i4 = i4
-      MsgBox arrd3(0) & " 的数量是 " & arrd4(0) & "米"
-      
+ Dim iRow As Integer, iCol As Single, MsgStr As String
+
+ For iRow = 0 To UBound(arrd3)
+
+
+ MsgStr = MsgStr & arrd3(iRow) & vbTab
+
+If iRow = 0 Then
+  
+
+  MsgStr = MsgStr & arrd4(iRow) & vbTab & "米" & vbCrLf
+  
+  Else
+  
+   
+ MsgStr = MsgStr & vbTab & arrd4(iRow) & vbTab & "米" & vbCrLf
+
+ End If
+ Next
+
+ MsgBox MsgStr, , "电缆统计"
+
+
+
+
 
 
 End Sub
