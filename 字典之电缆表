@@ -1,64 +1,93 @@
-Sub 电缆分线箱()
-Dim Dic, arr
-Dim i, j, k, m, n, hangs As Integer, r As Integer
-Dim Str, ss, rr As String
+
+
+Sub 电缆统计2019()
+
+
+Dim Dic, dic2, dic3, arrd, arrd2, arrd3, arrd4
+Dim i5, i4, j, k, m, n, xx, hangs, r, nn, ii As Integer
+Dim Str, ss, rr, tt As String
 r = 20
 k = 1
+ii = 0
 m = 1
-                    Set Dic = CreateObject("scripting.dictionary") '创建字典对象
-                    For i = 1 To r '将第一列数据添加到字典的key值中
+nn = 7
+        Set Dic = CreateObject("scripting.dictionary") '创建字典对象
+                       Set dic2 = CreateObject("scripting.dictionary") '创建字典对象
+
+i5 = ActiveSheet.UsedRange.Rows.Count
+
+ReDim arrd(ii)
+ReDim arrd2(ii)
+ReDim arrd4(ii)
+For i4 = 7 To i5
+
+
+If (i4 + 5) Mod 41 = 0 Then
+
+
+i4 = i4 + 12
+
+End If
+
+ReDim Preserve arrd(ii)
+ReDim Preserve arrd2(ii)
+arrd(ii) = ActiveSheet.Cells(i4, 35).Value & ActiveSheet.Cells(i4, 40).Value
+
+
+
+                If arrd(ii) <> "" Then
                     
-                    
-                If ActiveSheet.Cells(i, 1) <> "" Then
-                    
-                    Dic(CStr(Cells(i, 1))) = ""
+                    Dic(CStr(arrd(ii))) = ""
                    End If
-                    
-                    Next
-                    arr = Dic.Keys '返回字典key的数组
-                  '  Set Dic = Nothing '销毁对象
-                   ' Str = Join(Arr, ",") '将数组中的内容显示为一字符串
-                  '  MsgBox Str
-    hangs = 20
-    
-                  
-                  
-           
-                  
-                  For j = 1 To Dic.Count
+                   
+      arrd2(ii) = ActiveSheet.Cells(i4, 44).Value
+
+ii = ii + 1
+
+Next
+
+
+arrd3 = Dic.keys
+
+
+
+   For j = 1 To Dic.Count
                      
-                            For n = 1 To hangs
+                            For n = 0 To ii - 1
                             
-                                    ss = CStr(Sheets(3).Cells(n, 1).Text)
-                                    
-                                    rr = arr(j - 1)
-                                    
-                                                If ss = rr Then
+                                                If arrd(n) = arrd3(j - 1) Then
                                                 
                                                        
-                                                            
-                                                            Sheets(4).Cells(m, 1) = ss
-                                                            
-                                                            m = m + 1
+
+                                                             
+                                                             xx = xx + arrd2(n)
+                                                             
+                                              
                                                 
-                                                End If
+                                                
                             
-                            
+                            End If
                             
                             
                             Next
                             
                             
-                            m = j * 10                     '  每页10行
+                   ReDim Preserve arrd4(j - 1)
                             
-                            
+                        arrd4(j - 1) = xx
+                             
+                             xx = 0
+                             
+                             
+                             
                   Next
-                  
-                  
-                  Dic.RemoveAll
-                  Set Dic = Nothing
-                  Set arr = Nothing
-                  
-                  
-                  
+
+
+
+ 
+i4 = i4
+      MsgBox arrd3(0) & " 的数量是 " & arrd4(0) & "米"
+      
+
+
 End Sub
