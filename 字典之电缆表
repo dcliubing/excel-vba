@@ -89,20 +89,20 @@ arrd3 = Dic.keys
 
  For iRow = 0 To UBound(arrd3)
 
+If Len(arrd3(iRow)) > 8 Then
 
- MsgStr = MsgStr & arrd3(iRow) & vbTab
 
-If iRow = 0 Then
-  
-
-  MsgStr = MsgStr & arrd4(iRow) & vbTab & "米" & vbCrLf
-  
-  Else
-  
+ MsgStr = MsgStr & arrd3(iRow) & vbTab & arrd4(iRow) & vbTab & "米" & vbCrLf
+ 
+ Else
+        
+ 
    
- MsgStr = MsgStr & vbTab & arrd4(iRow) & vbTab & "米" & vbCrLf
-
+ MsgStr = MsgStr & arrd3(iRow) & vbTab & vbTab & arrd4(iRow) & vbTab & "米" & vbCrLf
+ 
+ 
  End If
+
  Next
 
  MsgBox MsgStr, , "电缆统计"
@@ -111,5 +111,5 @@ If iRow = 0 Then
 
 
 
-
 End Sub
+
