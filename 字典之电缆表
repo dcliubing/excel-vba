@@ -2,7 +2,10 @@
 
 Sub 电缆统计2019()
 
-
+        If Not ActiveSheet.Cells(37, 44).Text Like "*电    缆    表  *" Then
+            MsgBox "确认是否为仪表电缆表表格"
+            Exit Sub
+        End If
 Dim Dic, dic2, dic3, arrd, arrd2, arrd3, arrd4
 Dim i5, i4, j, k, m, n, xx, hangs, r, nn, ii As Integer
 Dim Str, ss, rr, tt As String
