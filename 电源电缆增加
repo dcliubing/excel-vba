@@ -1,0 +1,113 @@
+Sub 电源电缆增加()
+                    
+                    Dim a, d, b, la, sjy  As String
+                    Dim arr As Variant
+                    Dim c, i, j, hang, lie, lie2, nn, hang2, nu, szh, szl, sj, sna, snb, kh2 As Integer
+                    nu = 0
+                    hang = 2
+                    hang2 = 1
+                    lie = 1
+                    lie2 = 1
+                    
+                      
+      snb = 1
+      
+      
+      Do
+      
+      If Sheets(snb).Name = "拆分汇总" Then
+      
+      Sheets(snb).Select
+      ifhz = 1
+      
+      Exit Do
+      End If
+      
+      
+      snb = snb + 1
+      
+      
+      Loop Until snb > Sheets.Count
+      
+      
+      If ifhz = 0 Then
+      
+      MsgBox "未找到“拆分汇总”"
+      
+      Exit Sub
+      End If
+      
+     
+  For sna = Sheets.Count To 1 Step -1
+      Debug.Print Sheets(sna).Name
+        If Sheets(sna).Name = "电源电缆增加" Then
+        
+            With Sheets(sna).Tab
+        .Color = 192
+        .TintAndShade = 0
+    End With
+
+        
+         Sheets(sna).Tab.Color = 192
+         
+         
+         
+          Sheets(sna).Delete
+         
+
+
+         
+         
+            If Sheets(sna).Name = "电源电缆增加" Then
+            
+         With Sheets(sna).Tab
+        .ColorIndex = xlNone
+        .TintAndShade = 0
+    End With
+       
+            Exit Sub
+            End If
+        End If
+    Next
+       
+  
+
+
+
+ Application.ScreenUpdating = False
+    
+           Sheets("拆分汇总").Select
+                     
+    Sheets("拆分汇总").Copy Before:=Sheets(2)
+    
+ With Sheets(2).Tab
+        .ColorIndex = xlNone
+        .TintAndShade = 0
+    End With
+    
+    Sheets(2).Name = "电源电缆增加"
+    
+                    sj = Sheets("拆分汇总").UsedRange.Rows.Count '使用的行数量
+                  
+                  For hang = sj To 2 Step -1
+                  
+                  If ActiveSheet.Cells(hang, 10).Value Like "*220*" Then
+                  
+                  
+           '    MsgBox hang
+               Rows(hang + 1).Insert Shift:=xlUp
+               
+               ActiveSheet.Cells(hang + 1, 1).Value = ActiveSheet.Cells(hang, 1).Value & "-P"
+               
+                  
+                  End If
+                  
+                  
+                  Next
+                  
+                  
+                  
+                  
+                    Application.ScreenUpdating = True
+          
+                    End Sub
