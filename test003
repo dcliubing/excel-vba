@@ -1,7 +1,7 @@
 Private Sub 差压液位列表()
         Application.ScreenUpdating = False
         Dim NewName6 As String
-        NewName6 = "差压变送器(液位)"
+        NewName6 = "差压液位"
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         On Error GoTo endd
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
@@ -70,7 +70,7 @@ ee:
         lh = kh - dh   '新表最终行数
         lh2 = lh + 1
         arr = Array("位号", "数量", "用途", "PID号", "设备位号", "介质", "压力", "温度", "量程", "精度", "输出信号", "测量元件材质", "防爆等级", "密封膜片材质", "法兰标准及等级", "法兰尺寸及密封面", "仪表类型", "数据表页号")
-        Range(Cells(2, fl), Cells(lh, fl)) = "差压变送器(液位)"
+        Range(Cells(2, fl), Cells(lh, fl)) = "差压液位变送器"
         Range(Cells(1, 1), Cells(1, fl2 + 1)) = arr
         Range(Cells(1, 1), Cells(lh, fl2 + 1)).Select
         Call 格式整理
