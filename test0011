@@ -24,7 +24,7 @@ Sub 工作簿生成()
                     ElseIf sh.Cells(4, 11).Value Like "*电磁流量计*" Then
                     Call 电磁列表
                     
-                    ElseIf sh.Cells(4, 11).Value Like "*差压变送器(液位)        *" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*差压变送器*" Then
                     Call 差压液位列表
                     
                     ElseIf sh.Cells(4, 11).Value Like "*调节阀*" Then
@@ -45,7 +45,7 @@ Sub 工作簿生成()
                     ElseIf sh.Cells(4, 11).Value Like "*涡街*" Or sh.Cells(4, 11).Value Like "*漩涡*" Or sh.Cells(4, 11).Value Like "*旋涡*" Then
                     Call 涡街列表
                     
-                    ElseIf sh.Cells(4, 11).Value Like "*平衡*" Then
+                    ElseIf sh.Cells(4, 11).Value Like "*平衡*" Or sh.Cells(4, 11).Value Like "*节流*" Then
                     Call 平衡流量计列表
                     
                     ElseIf sh.Cells(4, 11).Value Like "*雷达*" Then
@@ -92,12 +92,6 @@ Sub 工作簿生成()
                     
                     ElseIf sh.Cells(4, 11).Value Like "*外测式液位计*" Then
                     Call 外测式列表
-                    
-                  '  ElseIf sh.Cells(4, 11).Value Like "*节流装置*" Then
-                  '  Call 节流装置列表
-                    
-                  '  ElseIf sh.Cells(4, 11).Value Like "*差压变送器(流量)*" Then
-                  '  Call 节流变送器列表
                     shn = ActiveSheet.Name
                 End If
             Next
@@ -107,7 +101,7 @@ Sub 工作簿生成()
         '工作表排序
        i% = Sheets.Count
        On Error Resume Next
-           For Each tmp In Array("双金属温度计", "热电阻", "温变", "压力表", "隔膜压力表", "压变", "压力开关", "转子", "节流装置", "节流变送器", "平衡流量计", "涡街", "电磁", "差压液位", "外测式液位", "投入式静压", "雷达", "音叉", "浮球", "pHORP", "磁氧", "水分", "红外线", "调节阀", "开关阀", "自力式", "报警器") '工作表名
+           For Each tmp In Array("双金属温度计", "热电阻", "温变", "压力表", "隔膜压力表", "压变", "压力开关", "转子", "平衡流量计", "涡街", "电磁", "差压液位", "外测式液位", "投入式静压", "雷达", "音叉", "浮球", "pHORP", "磁氧", "水分", "红外线", "调节阀", "开关阀", "自力式", "报警器") '工作表名
             t = Sheets(tmp).[a1]
             If Err = Empty Then Sheets(tmp).Move after:=Sheets(i) Else Err.Clear
             Next
@@ -383,8 +377,6 @@ endd:
 Erase arr
         End Sub
         
-
-        
 Private Sub 电磁列表()
         Application.ScreenUpdating = False
         Dim NewName6 As String
@@ -476,7 +468,7 @@ End Sub
 Private Sub 差压液位列表()
         Application.ScreenUpdating = False
         Dim NewName6 As String
-        NewName6 = "差压变送器(液位)"
+        NewName6 = "差压液位"
         Workbooks(newname2 & ".xls").Sheets.Add.Name = NewName6
         On Error GoTo endd
         Dim j9, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, lh2, num7 As Integer
@@ -545,7 +537,7 @@ ee:
         lh = kh - dh   '新表最终行数
         lh2 = lh + 1
         arr = Array("位号", "数量", "用途", "PID号", "设备位号", "介质", "压力", "温度", "量程", "精度", "输出信号", "测量元件材质", "防爆等级", "密封膜片材质", "法兰标准及等级", "法兰尺寸及密封面", "仪表类型", "数据表页号")
-        Range(Cells(2, fl), Cells(lh, fl)) = "差压变送器(液位)"
+        Range(Cells(2, fl), Cells(lh, fl)) = "差压液位变送器"
         Range(Cells(1, 1), Cells(1, fl2 + 1)) = arr
         Range(Cells(1, 1), Cells(lh, fl2 + 1)).Select
         Call 格式整理
@@ -935,7 +927,7 @@ Private Sub 开关阀列表()
         
         Workbooks(newname2 & ".xls").Sheets(NewName6).Activate
     Workbooks(newname2 & ".xls").Sheets(NewName6).Cells.Select
-  Selection.NumberFormatLocal = "@"     '文本格式
+    Selection.NumberFormatLocal = "@"     '文本格式
       Workbooks(newname).Activate
       
       
@@ -1012,58 +1004,17 @@ ee:
         Range(Cells(1, 1), Cells(1, fl2 + 1)) = arr
         Range(Cells(1, 1), Cells(lh, fl2 + 1)).Select
         Call 格式整理
-        
-        
-        
-         '假空排除
-
-
-        Dim arr1 As Variant, jkh As Integer
-        
-        jkh = 0
-  For hang = ActiveSheet.UsedRange.Rows.Count To 1 Step -1
-arr1 = Application.Transpose(Application.Transpose(Range("A" & hang & ":G" & hang)))
-ss = Join(arr1, "")
-
-
-
-If Trim(ss) = "" Then
-
-
-Rows(hang).Delete
-
-jkh = jkh + 1
-
-End If
-
-
-
-Next hang
-
-' 第二列文本格式转换为数字格式
-
-        Columns(2).NumberFormat = "General"
-       Columns(2).Value = Columns(2).Value
-
-
         '自动列宽
         Selection.Columns.AutoFit
-        Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(lh2 - jkh, 1).Value = "总数量"
- 
-        Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(lh2 - jkh, 2).Value = Application.WorksheetFunction.Sum(Range(Cells(2, 2), Cells(lh - jkh, 2)))
+        Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(lh2, 1).Value = "总数量"
+        Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(lh2, 2).Value = Application.WorksheetFunction.Sum(Range(Cells(2, 2), Cells(lh, 2)))
         ' 加粗冻结 宏
         Range(Cells(1, 1), Cells(1, fl2 + 1)).Select
         Call 首行格式
-        
-        
-        
-        
-        
         Workbooks(newname).Activate
 endd:
 Erase arr
 End Sub
-
 
 Private Sub 压变列表()
         Application.ScreenUpdating = False
@@ -1767,25 +1718,6 @@ nx:
         Sheets(1).Activate
         arr = Array("位号", "数量", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "序号")
         Range(Cells(1, 1), Cells(1, 12)) = arr
-        
-         '假空排除
-         For hang = ActiveSheet.UsedRange.Rows.Count To 1 Step -1
-
-         Dim arr1 As Variant
-         arr1 = Application.Transpose(Application.Transpose(Range("A" & hang & ":G" & hang)))
-         ss = Join(arr1, "")
-
-
-
-         If Trim(ss) = "" Then
-
-
-         Rows(hang).Delete
-         End If
-
-
-
-        Next hang
         'Sheets(1).Cells(a3, 1).Value = "总数量"
        ' Sheets(1).Cells(a3, 2).Value = Application.WorksheetFunction.Sum(Range(Cells(2, 2), Cells(a3, 2)))
         Range(Cells(1, 1), Cells(a3 - 1, 12)).Select
@@ -3048,7 +2980,7 @@ Private Sub 温变列表()
         yl = 14 '数据源列
         fl = 1  '新表列
         j9 = n9  '数据源行
-        i = 3   '数据源非空行
+        i = 1   '数据源非空行
         ll = 0  '单个数据表页中包含几列仪表
         a2 = 2  '新表行
         dh = 0 '被删除行数
@@ -3071,7 +3003,7 @@ nei:
 jixu:
         Do
                 Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
-                Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 21).Value = ActiveSheet.Cells(num7, 30).Text
+                Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 19).Value = ActiveSheet.Cells(num7, 22).Text
                 ll = ll + 1
                 yl = yl + 7
                 a2 = a2 + 1
@@ -3084,7 +3016,7 @@ jixu:
         Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0
         j9 = n9
         kh = a2
-        i = 3
+        i = 1
         fl2 = fl + 1
         fl = fl + 1
         num7 = 6
@@ -4155,7 +4087,7 @@ Sub 多列拆分()
         Do
 
         sjy = Sheets("汇总表").Cells(hang, lie)
-       If InStr(sjy, "G-") = 0 Or InStr(sjy, "FE-") = 0 Then
+       If InStr(sjy, "G-") = 0 Then
        
 
         If InStr(sjy, "~") > 0 Then
