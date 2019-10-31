@@ -5879,6 +5879,362 @@ End Sub
 
 
 
+Sub 电缆表生成201911()
+
+
+
+'合并单元格，开关反馈跨页自动下移
+Application.ScreenUpdating = False
+
+        Dim suu, indel As String
+        If Not ActiveSheet.Cells(37, 44).Text Like "电    缆    表  " Then
+            MsgBox "确认是否为电缆表"
+            GoTo endd
+        End If
+    '    Application.ScreenUpdating = False
+        
+      Dim ioh, iol, ilx, jlx As Integer
+        
+     ' ioh = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Count - 1
+     
+     ioh = ActiveSheet.UsedRange.Rows.Count  '改成这样
+     
+        
+      iol = 42 '当前表总行数
+      
+      
+        
+       Rows("7:35").ClearContents '删当前表内容
+       Rows(iol & ":" & ioh + 1).Delete
+
+
+    
+        
+        suu = InputBox("请输入汇总表工作簿的名称：")
+      '  On Error GoTo endd
+        indel = ActiveWorkbook.Name
+      '  On Error GoTo endd
+        Dim j9, j7, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, jx, zs, zs2, lh2, fy, zs22, tz, tzz, jjjj, tmd, tff, kkk As Integer
+        
+ 
+        
+        'Dim att As String
+        Dim arr(), att() As Variant
+        dh = 2
+        j9 = 2
+        a2 = 7
+        fl = 31
+        j7 = 0
+        yl = 1
+        ll = 1
+        jx = 0
+        ilx = 1
+        jlx = 35
+        tz = 0
+        jjjj = 0
+        i = 0
+        zs = 0
+        
+                tff = 0
+        Workbooks(suu & ".xls").Activate
+        Do
+            zs = zs + 1
+           If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
+            jx = jx + 1
+                
+          
+                
+                
+       End If
+            j9 = j9 + 1
+            
+           
+            
+            
+            
+        Loop Until Application.WorksheetFunction.CountA(Sheets("拆分汇总").Rows(zs)) = 0
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        j9 = 2
+        zs2 = zs - 2  '汇总表有效数据行数
+        zs2 = zs2 - jx   '汇总表排除PG后有效数据行数
+        
+      
+        
+    '    For zs2 = zs2 To 1
+        
+        
+        
+        
+        
+        j = zs2 \ 29
+        fy = j
+        If zs2 Mod 29 = 0 Then
+            j = j - 1  '需要复制次数
+        End If
+        
+        zs22 = zs2
+          ReDim att(100)
+        
+                                    For zs22 = 2 To zs22 + 1
+                                    
+                                                                      If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(zs22 + 1, yl).Value Like "*ZSO*" And (zs22 + jjjj) Mod 29 = 0 Then
+                                                                     ' MsgBox zs22
+                                                                   
+                                                               
+                                                                    
+                                                                    
+                                                                 
+                                                                      
+                                                                      zs2 = zs2 + 1
+                                                                      
+                                                                    
+                                                                      
+                                                                      att(tz) = zs22
+                                                                      
+                                                                      tz = tz + 1
+                                                                  
+                                              
+                                                                      tmd = 28
+                                                                      
+                                                                      jjjj = jjjj + 1
+                                                                      
+                                                                      Else
+                                                                      
+                                                                      tmd = 29
+                                                                      
+                                                                      
+                                                                      End If
+                                                                                                                                          
+                                                                      
+                                                               
+                                                                      
+                                    
+                                    Next zs22
+        
+       
+        
+ ReDim Preserve att(tz)
+        
+        
+         j = zs2 \ 29
+        fy = j
+        If zs2 Mod 29 = 0 Then
+            j = j - 1  '需要复制次数
+        End If
+        
+        
+
+        
+        
+        Workbooks(indel).Activate
+        Do
+            i = i + 1
+            lh = ll + 40
+            lh2 = lh + 1
+            Rows(ll & ":" & lh).Select
+            Selection.Copy
+            Rows(lh2).Select
+            ActiveSheet.Paste
+            
+
+     
+            
+           
+            
+       ll = ll + 41
+        Loop Until i = j + 1
+            
+             i = 0
+            
+            Do
+            
+               i = i + 1
+            
+            
+                Do
+                
+                
+                
+nei5:
+                 '   If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
+                  '      j9 = j9 + 1
+                  '      GoTo nei5
+                  '  End If
+                    j7 = j7 + 1
+                    
+                    
+         '           If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSO*" Then
+                    
+          '          a2 = a2 + 1
+                    
+           '         End If
+                    
+              '   For tff = 0 To tz
+                  
+          
+                  
+                    If j9 - 1 = att(tff) Then
+                    
+                    a2 = a2 + 13
+           
+                    
+                    j7 = 1
+                    
+                    
+                   tff = tff + 1
+         
+                    End If
+                    
+          '    Next tff
+                  
+                    
+                    
+                    Workbooks(indel).ActiveSheet.Cells(a2, fl).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text
+                 
+                
+          '  MsgBox Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text
+            
+            
+                    
+                    
+                   ' Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 7).Text
+                    ' Workbooks(indel).activesheet.Cells(a2, fl + 10).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 5).Text
+                    '   Sheets(1).Cells(a2, fl + 6).Value = Sheets(2).Cells(j9, yl + 2).Text   '待修改
+                    
+                 
+                    If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*T-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*V-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*S-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSO-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSC-*" Then
+                      If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text Like "*ia*" Then
+                    
+                    Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "ZR-ia-DJYPVP"
+                   
+                   
+                    
+                     ElseIf Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text Like "*d*" Then
+                    
+                     Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "ZR-DJYPVP"
+                      
+                      
+                     Else
+                     
+                     
+                 
+                    
+                     Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "DJYPVP"
+                     
+             '     MsgBox a2
+                       
+                    End If
+                     Workbooks(indel).ActiveSheet.Cells(a2, 40).Value = "1*2*1.5"
+                       Workbooks(indel).ActiveSheet.Cells(a2, 56).Value = "DN20"
+                        'Workbooks(indel).ActiveSheet.Cells(a2, 59).Value = "10"
+                        
+                        End If
+      
+                    a2 = a2 + 1
+                    j9 = j9 + 1
+                    
+                    
+                Loop Until j7 Mod 29 = 0
+                
+                
+            
+                a2 = a2 + 12
+                
+                
+                
+ Loop Until i = j + 1
+        
+        
+       
+        
+        
+        
+        For kh = 1 To a2 Step 1
+            If ActiveSheet.Cells(kh, 2) = "总数量" Then
+              ActiveSheet.Rows(kh) = ""
+            End If
+        Next
+        Rows(ll & ":" & ll + 41).Select
+        Selection.Delete
+        Rows(1).Select
+        ActiveSheet.PageSetup.PrintArea = Range(Cells(1, 1), Cells(ll - 1, 34))
+        ActiveWindow.View = xlPageBreakPreview
+        
+        ActiveSheet.ResetAllPageBreaks '重置所有水平分页符
+        
+   
+      
+      If fy > 0 Then
+        
+ For fy = 1 To fy
+     
+      Set ActiveSheet.HPageBreaks(fy).Location = Rows((fy * 41) + 1)
+Next
+
+End If
+
+
+
+        ActiveSheet.PageSetup.PrintArea = "$A$1:$BO$" & ll - 1   '设置打印区域
+ 
+Do
+        
+        If ActiveSheet.Cells(ilx, 31).Value Like "*ZSO*" Then
+
+If ActiveSheet.Cells(ilx + 1, 31).Value Like "*ZSC*" Then
+
+
+
+ActiveSheet.Range(Cells(ilx, jlx), Cells(ilx + 1, jlx + 4)).Select
+Call 合并单元格
+
+ActiveSheet.Range(Cells(ilx, jlx + 5), Cells(ilx + 1, jlx + 8)).Select
+Call 合并单元格
+
+ActiveSheet.Cells(ilx, jlx + 5).Value = "2*2*1.5"
+
+ActiveSheet.Range(Cells(ilx, jlx + 21), Cells(ilx + 1, jlx + 23)).Select
+Call 合并单元格
+
+ActiveSheet.Cells(ilx, jlx + 21).Value = "DN25"
+
+ActiveSheet.Range(Cells(ilx, jlx + 24), Cells(ilx + 1, jlx + 26)).Select
+Call 合并单元格
+
+
+
+
+End If
+
+
+End If
+
+
+        ilx = ilx + 1
+        
+        Loop Until ilx = ll
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+endd:
+        Application.ScreenUpdating = True
+End Sub
 Sub 电缆表生成222()
 
 
