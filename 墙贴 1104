@@ -1,4 +1,9 @@
+Dim newname, shn, newname2, activ As String
+ Dim arr33, arr44, arr55, arr66 As Variant
+ Dim senu, toi As Integer
+ Dim arr100(0 To 100)
 
+'全局变量
 
 Sub 带空墙贴2()
 Application.ScreenUpdating = False
