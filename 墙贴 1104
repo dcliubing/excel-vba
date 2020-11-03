@@ -1,0 +1,178 @@
+Sub tee()
+Dim hang, senu, hangs, ii, sh, cc, e, coln, colns, colnss, toj, tojj, toi, f As Integer
+
+
+
+Dim sjy, a, b, c, d As String
+Dim arr3 As Variant
+toj = 0
+toi = 0
+shi = 0
+colns = ActiveCell.MergeArea.Columns.Count
+
+colnss = Selection.Columns.Count
+
+On Error Resume Next
+sh = 0
+
+'ReDim arr55(1)
+
+
+
+a = 1
+'ReDim arr55(1)
+
+If (CStr(Join(arr33, ""))) = "" Then
+
+
+
+If Application.CountA(Selection) = 0 Then
+
+
+MsgBox "未选择任何内容"
+
+
+End If
+
+
+senu = Selection.Rows.Count
+shh = 0
+
+hangs = hang + senu - 1
+
+
+
+ReDim arr33(0 To hangs)
+
+
+For hang = hang To hangs
+                            
+                            
+                            arr33(sh) = ActiveSheet.Cells(hang, ii)
+                            shh = shh + 1
+                            
+                           
+
+Next hang
+
+
+ReDim Preserve arr33(0 To shh)
+
+
+
+
+cc = 0
+arr55 = Selection
+hang = Selection.Row
+
+ii = Selection.Column
+
+'ReDim Preserve arr1(0 To 100)
+
+Dim arr1()
+Do
+
+huan = ActiveSheet.Cells(hang, ii).MergeArea.Columns.Count
+
+
+
+ii = ii + huan
+
+
+
+
+
+ReDim Preserve arr1(toi)
+
+
+
+arr1(toi) = toj + 1
+toj = toj + huan
+toi = toi + 1
+
+
+ Loop Until toj = colnss
+
+
+
+
+On Error Resume Next
+
+
+'MsgBox senu
+'If LBound(arr33) > UBound(arr33) Then   '判断数组是否为空
+
+
+
+
+'arr3 = WorksheetFunction.Index(arr55, 0, arr1(2))
+
+
+'Selection.Columns(1) = arr3
+
+'Selection.Columns(1).Offset(0, 10).Select
+
+Else
+
+
+
+
+c = MsgBox("是否确定粘贴", vbOKCancel)
+
+
+
+If c = 2 Then
+Set arr55 = Nothing
+
+Exit Sub
+
+End If
+
+'MsgBox UBound(arr55, 1)
+
+cc = 1
+
+hang = Selection.Row
+
+ii = Selection.Column
+
+hangs = UBound(arr55, 1)
+
+For toi = toi To 1
+
+huan = ActiveSheet.Cells(hang, ii).MergeArea.Columns.Count
+
+arr3 = WorksheetFunction.Index(arr55, 0, arr1(sh))
+
+For hang = hang To hangs
+
+ActiveSheet.Cells(hang, ii).Value = arr3(shi)
+
+
+shi = shi + 1
+Next hang
+
+sh = sh + 1
+
+
+
+ii = ii + huan
+
+
+
+arr1(toi) = toj + 1
+toj = toj + huan
+toi = toi + 1
+
+
+Next toi
+
+
+Set arr55 = Nothing
+Set arr33 = Nothing
+
+End If
+
+
+a = 1
+End Sub
