@@ -128,15 +128,20 @@ hangchu = hang
 bay = senu
 
 
+If senu = 1 Then
+
+ActiveSheet.Cells(hang, iit).Value = arr3(1)
+
+Else
+
 For senu = senu To 1 Step -1
-
 ActiveSheet.Cells(hang, iit).Value = arr3(shi, 1)
-
-
 shi = shi + 1
 hang = hang + 1
 
 Next senu
+
+End If
 Set arr3 = Nothing
 shi = 1
 hang = hangchu
