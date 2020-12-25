@@ -1,0 +1,33 @@
+Sub 宏1()
+
+
+Dim arr200 As Variant
+
+arr200 = Sheet2.Range("A1:J26").Value
+e = 1
+
+' 宏1 宏
+'d
+d = 9
+b = 2
+c = 1
+For a = 1 To 26 Step 1
+
+If WorksheetFunction.Index(arr200, a, 9) > 0 Then
+arr200(a, 1) = e
+
+Sheet1.Cells(d, b).Value = WorksheetFunction.Index(arr200, a, c)
+Sheet1.Cells(d, b + 2).Value = WorksheetFunction.Index(arr200, a, c + 1)
+Sheet1.Cells(d, b + 5).Value = WorksheetFunction.Index(arr200, a, c + 2)
+
+Sheet1.Cells(d, b + 10).Value = WorksheetFunction.Index(arr200, a, c + 3)
+Sheet1.Cells(d, 23).Value = WorksheetFunction.Index(arr200, a, c + 8)
+d = d + 1
+e = e + 1
+End If
+
+Next a
+
+
+'
+End Sub
