@@ -1,33 +1,29 @@
-Sub 宏1()
+Sub 材料表生成()
 
 
 Dim arr200 As Variant
+arr200 = Sheet2.Range("A1:J96").Value   '材料表库导入数组
+xuhao = 1   '首列序号
+ch = 9  '表格中材料起始行
 
-arr200 = Sheet2.Range("A1:J26").Value
-e = 1
+    For num = 2 To 96 Step 1 '数组中行序号
+    
+        If WorksheetFunction.Index(arr200, num, 9) > 0 Then
+            arr200(num, 1) = xuhao
+            Sheet1.Cells(ch, 2).Value = WorksheetFunction.Index(arr200, num, 1)
+            Sheet1.Cells(ch, 4).Value = WorksheetFunction.Index(arr200, num, 2)
+            Sheet1.Cells(ch, 7).Value = WorksheetFunction.Index(arr200, num, 3)
+            Sheet1.Cells(ch, 12).Value = WorksheetFunction.Index(arr200, num, 4)
+            Sheet1.Cells(ch, 15).Value = WorksheetFunction.Index(arr200, num, 5)
+            Sheet1.Cells(ch, 21).Value = WorksheetFunction.Index(arr200, num, 6)
+            Sheet1.Cells(ch, 23).Value = WorksheetFunction.Index(arr200, num, 7)
+            Sheet1.Cells(ch, 26).Value = WorksheetFunction.Index(arr200, num, 8)
+            Sheet1.Cells(ch, 29).Value = WorksheetFunction.Index(arr200, num, 9)
+            Sheet1.Cells(ch, 32).Value = WorksheetFunction.Index(arr200, num, 10)
+            ch = ch + 1
+            xuhao = xuhao + 1
+        End If
+    
+    Next num
 
-' 宏1 宏
-'d
-d = 9
-b = 2
-c = 1
-For a = 1 To 26 Step 1
-
-If WorksheetFunction.Index(arr200, a, 9) > 0 Then
-arr200(a, 1) = e
-
-Sheet1.Cells(d, b).Value = WorksheetFunction.Index(arr200, a, c)
-Sheet1.Cells(d, b + 2).Value = WorksheetFunction.Index(arr200, a, c + 1)
-Sheet1.Cells(d, b + 5).Value = WorksheetFunction.Index(arr200, a, c + 2)
-
-Sheet1.Cells(d, b + 10).Value = WorksheetFunction.Index(arr200, a, c + 3)
-Sheet1.Cells(d, 23).Value = WorksheetFunction.Index(arr200, a, c + 8)
-d = d + 1
-e = e + 1
-End If
-
-Next a
-
-
-'
 End Sub
