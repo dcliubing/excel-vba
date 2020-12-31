@@ -2059,7 +2059,7 @@ nei5:
                      '   ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*远程启动*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "DI"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "DO"
                     '    ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*远程停止*" Then
