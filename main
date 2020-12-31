@@ -1,5 +1,8 @@
-Dim newname, shn, newname2, activ As String
- Dim arr33, arr44 As Variant
+
+ Dim newname, shn, newname2, activ As String
+ Dim arr33, arr44, arr55, arr66 As Variant
+ Dim senu, toi As Integer
+ Dim arr100(0 To 100)
 
 
 Sub 工作簿生成()
@@ -89,10 +92,19 @@ Sub 工作簿生成()
                      ElseIf sh.Cells(4, 11).Value Like "*压力开关*" Then
                      Call 压力开关列表
                     
-                    ElseIf sh.Cells(4, 11).Value Like "*气体检测*" Then
-                    Call 报警器列表
+                   ' ElseIf sh.Cells(4, 11).Value Like "*气体检测*" Then
+                  '  Call 报警器列表
+                    
+                   
+                    
+                    
                     shn = ActiveSheet.Name
+                    
+                    Else
+                    
+                 
                 End If
+
             Next
             
           
@@ -134,6 +146,7 @@ Private Sub 压力表列表()
         j11 = 38
         j12 = 39
         j13 = 40
+        j16 = 4
 nei:
         Do
             If Application.WorksheetFunction.CountA(ActiveSheet.Rows(j9)) = 0 Then
@@ -146,6 +159,7 @@ nei:
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 11).Value = ActiveSheet.Cells(j11, 15).Text
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 12).Value = ActiveSheet.Cells(j12, 15).Text
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 13).Value = ActiveSheet.Cells(j13, 15).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 15).Value = ActiveSheet.Cells(j16, 11).Text
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 16).Value = ActiveSheet.Cells(num7, 30).Text
             a2 = a2 + 1
 nei2:
@@ -154,6 +168,7 @@ nei2:
         Loop Until tt Mod 15 = 0
         j15 = j15 + 50
         j14 = j14 + 50
+        j16 = j16 + 50
         j13 = j13 + 50
         j12 = j12 + 50
         j11 = j11 + 50
@@ -172,6 +187,7 @@ nei2:
                     j13 = 40
                     j14 = 32
                     j15 = 34
+                    j16 = 4
                     n9 = a2
                     fl = fl + 1
                     i = 3
@@ -185,7 +201,7 @@ nei2:
         Workbooks(newname2 & ".xls").Sheets(NewName6).Activate
         ActiveSheet.Cells(a2, 1) = "总数量"
         arr = Array("位号", "介质", "温度", "压力", "量程", "PID号", "用途", "测量元件形式", "表头直径", "测量元件材质", "螺纹规格", "法兰标准及等级", "法兰尺寸及密封面", "数量", "仪表类型", "数据表页号")
-        Range(Cells(2, 15), Cells(n9 - 1, 15)) = "就地压力表"
+        'Range(Cells(2, 15), Cells(n9 - 1, 15)) = "就地压力表"
         Range(Cells(1, 1), Cells(1, 16)) = arr
         Range(Cells(1, 1), Cells(a2 - 1, 16)).Select
         Call 格式整理
@@ -1167,7 +1183,7 @@ Private Sub 热电阻列表()
          num7 = 6
         
         j10 = 29
-               
+        j101 = 36
         j11 = 37
         j12 = 38
         j13 = 39
@@ -1178,10 +1194,11 @@ nei:
             End If
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 8).Value = ActiveSheet.Cells(j10, 15).Text
-            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 9).Value = ActiveSheet.Cells(j11, 15).Text
-            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 10).Value = ActiveSheet.Cells(j12, 15).Text
-            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 11).Value = ActiveSheet.Cells(j13, 15).Text
-             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 15).Value = ActiveSheet.Cells(num7, 30).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 9).Value = ActiveSheet.Cells(j101, 15).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 10).Value = ActiveSheet.Cells(j11, 15).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 11).Value = ActiveSheet.Cells(j12, 15).Text
+            Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 12).Value = ActiveSheet.Cells(j13, 15).Text
+             Workbooks(newname2 & ".xls").Sheets(NewName6).Cells(a2, 16).Value = ActiveSheet.Cells(num7, 30).Text
             '          Sheets(NewName6).Cells(a2, fl).Value = Sheets(kvname).Cells(j9, yl).Text
             '         Sheets(NewName6).Cells(a2, 8).Value = Sheets(kvname).Cells(j10, 12).Text
             '
@@ -1192,15 +1209,15 @@ nei:
 nei2:
             j9 = j9 + 1
             tt = tt + 1
-        Loop Until tt Mod 14 = 0
+        Loop Until tt Mod 18 = 0
         j13 = j13 + 50
         j12 = j12 + 50
         j11 = j11 + 50
         j10 = j10 + 50
-        
+        j101 = j101 + 50
         num7 = num7 + 50
         
-        j9 = j9 + 36
+        j9 = j9 + 32
         i = i + 50
         If Application.WorksheetFunction.CountA(ActiveSheet.Rows(i)) = 0 Then
             Do
@@ -1208,6 +1225,7 @@ nei2:
                 If yl = 6 Or yl = 9 Or yl = 12 Or yl = 21 Or yl = 25 Then
                     j9 = 11
                     j10 = 31
+                    j101 = 38
                     j11 = 39
                     j12 = 40
                     j13 = 41
@@ -1223,15 +1241,15 @@ nei2:
         End If
         Workbooks(newname2 & ".xls").Sheets(NewName6).Activate
         ActiveSheet.Cells(a2, 1) = "总数量"
-        arr = Array("位号", "介质", "压力", "温度", "保护管材料", "PID号", "用途", "分度号", "螺纹规格", "法兰标准及等级", "法兰尺寸及密封面", "数量", "量程", "仪表类型", "数据表页号")
-        Range(Cells(2, 14), Cells(n9 - 1, 14)) = "热电阻"
-        Range(Cells(1, 1), Cells(1, 15)) = arr
-        Range(Cells(1, 1), Cells(a2 - 1, 15)).Select
+        arr = Array("位号", "介质", "压力", "温度", "保护管材料", "PID号", "用途", "分度号", "安装方式", "螺纹规格", "法兰标准及等级", "法兰尺寸及密封面", "数量", "量程", "仪表类型", "数据表页号")
+        Range(Cells(2, 15), Cells(n9 - 1, 15)) = "热电阻"
+        Range(Cells(1, 1), Cells(1, 16)) = arr
+        Range(Cells(1, 1), Cells(a2 - 1, 16)).Select
         Call 格式整理
         '自动列宽
         Selection.Columns.AutoFit
         ' 加粗冻结 宏
-        Range(Cells(1, 1), Cells(1, 15)).Select
+        Range(Cells(1, 1), Cells(1, 16)).Select
         Call 首行格式
         Workbooks(newname).Activate   'fan hui shu ju biao
 endd:
@@ -1728,9 +1746,28 @@ nei:
                 ElseIf ActiveSheet.Cells(1, kk).Text = "数据表页号" And fl = 11 Then
                 ke = 1
                 yl = kk
-                ElseIf ActiveSheet.Cells(1, kk).Text = "序号" And fl = 12 Then
+                               ElseIf ActiveSheet.Cells(1, kk).Text Like "*法兰标准*" And fl = 12 Then
                 ke = 1
                 yl = kk
+                                ElseIf ActiveSheet.Cells(1, kk).Text Like "*法兰尺寸*" And fl = 13 Then
+                ke = 1
+                yl = kk
+                
+                
+                
+                
+                
+                ElseIf ActiveSheet.Cells(1, kk).Text = "序号" And fl = 14 Then
+                ke = 1
+                yl = kk
+                
+                
+                
+                
+                
+                
+                
+                
             End If
         Loop Until ActiveSheet.Cells(1, kk).Text = ""
             kk = 0
@@ -1755,8 +1792,8 @@ nei:
             Sheets(1).Cells(a2, fl).Value = ActiveSheet.Cells(j9, yl).Text
         End If
         
-            If fl = 12 Then   '生成第11列序号
-                Sheets(1).Cells(a2, 12).Value = a2 - 1
+            If fl = 14 Then   '生成第11列序号
+                Sheets(1).Cells(a2, 14).Value = a2 - 1
             End If
             j9 = j9 + 1
             a2 = a2 + 1
@@ -1773,13 +1810,13 @@ nx:
             a2 = 2
             fl = fl + 1
             j9 = 2
-        If fl < 13 Then
+        If fl < 15 Then
             GoTo nei2
         End If
         Sheets(1).Activate
-        arr = Array("位号", "数量", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "序号")
+        arr = Array("位号", "数量", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "法兰标准", "法兰尺寸", "序号")
         
-        Range(Cells(1, 1), Cells(1, 12)) = arr
+        Range(Cells(1, 1), Cells(1, 14)) = arr
         
         
         
@@ -1787,12 +1824,12 @@ nx:
         
         'Sheets(1).Cells(a3, 1).Value = "总数量"
        ' Sheets(1).Cells(a3, 2).Value = Application.WorksheetFunction.Sum(Range(Cells(2, 2), Cells(a3, 2)))
-        Range(Cells(1, 1), Cells(a3 - 1, 12)).Select
+        Range(Cells(1, 1), Cells(a3 - 1, 14)).Select
         Call 格式整理
-        Range(Cells(1, 1), Cells(a3, 12)).Select
+        Range(Cells(1, 1), Cells(a3, 14)).Select
         Selection.Columns.AutoFit
         ' 加粗冻结 宏
-        Range(Cells(1, 1), Cells(1, 12)).Select
+        Range(Cells(1, 1), Cells(1, 14)).Select
         Call 首行格式
         
         '假空排除
@@ -2011,22 +2048,22 @@ nei5:
                         End If
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*开关阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*切断阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*电磁阀*" Then
                       '  ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
-                        Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "常开接点"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "DI"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*阀位开反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*阀位关反馈*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "DI"
                      '   ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*压力开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*液位开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*温度开关*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "DI"
                      '   ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*远程启动*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "常开接点"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "DI"
                     '    ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*远程停止*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "常闭接点"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 23).Value = "DO"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*频率调节*" Then
@@ -2036,16 +2073,16 @@ nei5:
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                       '  Workbooks(indel).ActiveSheet.Cells(a2, 27).Value = "有"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*备妥*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*运行信号*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*故障信号*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*设备停止反馈*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "DI"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 16).Value = "24VDC"
                         ' Workbooks(indel).ActiveSheet.Cells(a2, 30).Value = "配继电器"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*电流信号*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "4~20mA DC"
                       '  Workbooks(indel).ActiveSheet.Cells(a2, 20).Value = "有"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*紧急*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常闭接点"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "DO"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value Like "*复位*" Then
-                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "常开接点"
+                        Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "DI"
                         ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TE*" Then
                         Workbooks(indel).ActiveSheet.Cells(a2, 12).Value = "RTD"
                         If InStr(Workbooks(suu & ".xls").Sheets("调节阀匹配").Cells(j9, yl + 8).Text, "ia") > 0 Then
@@ -2140,7 +2177,7 @@ Sub 监控表生成()
         Workbooks(suu & ".xls").Activate
         Do
             zs = zs + 1
-            If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*TG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*FG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
+            If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*TG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*FG*" Then
                 jx = jx + 1
             End If
             j9 = j9 + 1
@@ -2164,7 +2201,7 @@ Sub 监控表生成()
             ActiveSheet.Paste
             Do
 nei5:
-                If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*TG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*FG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
+                If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*TG*" Or Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*FG*" Then
                     j9 = j9 + 1
                     GoTo nei5
                 End If
@@ -2176,7 +2213,7 @@ nei5:
                 Workbooks(indel).ActiveSheet.Cells(a2, fl + 23).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 14).Text
                 Workbooks(indel).ActiveSheet.Cells(a2, fl + 25).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 15).Text
                 Workbooks(indel).ActiveSheet.Cells(a2, fl + 27).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 16).Text
-                If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PXI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LXI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TXI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PHI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*OI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*AI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*AXI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*II*" Then
+                If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PXI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*LXI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*TXI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PHI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*OI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*AI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*AXI*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*II*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*PP-*" Then
                     Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "4~20mA DC"
                    
                     'Workbooks(indel).ActiveSheet.Cells(a2, 51).Value = "√"
@@ -2226,28 +2263,28 @@ nei5:
  
                                           End If
                     ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*压力开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*液位开关*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*温度开关*" Then
-                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常开接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "DI"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
                     ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*开关阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*切断阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*电磁阀*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*XV*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*XXV*" Then
-                    Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "常开接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "DI"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
                     ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*阀位开反馈*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*阀位关反馈*" Then
-                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常开接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "DI"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
                     ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YST*" Then
-                    Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "常开接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "DI"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
                     ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YSD*" Then
-                    Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "常闭接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 48).Value = "DO"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
                     ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YL*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*YA*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*停止反馈*" Then
-                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常开接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "DI"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
                     ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*紧急停车*" Then
-                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常闭接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "DO"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
                     ElseIf Workbooks(indel).ActiveSheet.Cells(a2, fl + 4).Value Like "*复位*" Then
-                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "常开接点"
+                    Workbooks(indel).ActiveSheet.Cells(a2, 45).Value = "DI"
                     Workbooks(indel).ActiveSheet.Cells(a2, 60).Value = "√"
                      End If
                     If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*IC*" Then
@@ -2726,6 +2763,121 @@ endd:
 Erase arr
 End Sub
 
+
+Sub 保护管统计()
+        If Not ActiveSheet.Cells(37, 44).Text Like "*电    缆    表  *" Then
+            MsgBox "确认是否为仪表电缆表表格"
+            Exit Sub
+        End If
+
+Dim Dic, dic2, dic3, arrd, arrd2, arrd3, arrd4
+Dim i5, i4, j, k, m, n, xx, hangs, r, nn, ii As Integer
+Dim Str, ss, rr, tt As String
+r = 20
+k = 1
+ii = 0
+m = 1
+nn = 7
+        Set Dic = CreateObject("scripting.dictionary") '创建字典对象
+                       Set dic2 = CreateObject("scripting.dictionary") '创建字典对象
+
+i5 = ActiveSheet.UsedRange.Rows.Count
+
+ReDim arrd(ii)
+ReDim arrd2(ii)
+ReDim arrd4(ii)
+For i4 = 7 To i5
+
+
+If (i4 + 5) Mod 41 = 0 Then
+
+
+i4 = i4 + 12
+
+End If
+
+ReDim Preserve arrd(ii)
+ReDim Preserve arrd2(ii)
+arrd(ii) = ActiveSheet.Cells(i4, 56).Value
+
+
+
+                If arrd(ii) <> "" Then
+                    
+                    Dic(CStr(arrd(ii))) = ""
+                   End If
+                   
+      arrd2(ii) = ActiveSheet.Cells(i4, 59).Value
+
+ii = ii + 1
+
+Next
+
+
+arrd3 = Dic.keys
+
+
+
+   For j = 1 To Dic.Count
+                     
+                            For n = 0 To ii - 1
+                            
+                                                If arrd(n) = arrd3(j - 1) Then
+                                                
+                                                       
+
+                                                             
+                                                             xx = xx + arrd2(n)
+                                                             
+                                              
+                                                
+                                                
+                            
+                            End If
+                            
+                            
+                            Next
+                            
+                            
+                   ReDim Preserve arrd4(j - 1)
+                            
+                        arrd4(j - 1) = xx
+                             
+                             xx = 0
+                             
+                             
+                             
+                  Next
+
+
+
+ 
+ Dim iRow As Integer, iCol As Single, MsgStr As String
+
+ For iRow = 0 To UBound(arrd3)
+
+If Len(arrd3(iRow)) > 8 Then
+
+
+ MsgStr = MsgStr & arrd3(iRow) & vbTab & arrd4(iRow) & vbTab & "米" & vbCrLf
+ 
+ Else
+        
+ 
+   
+ MsgStr = MsgStr & arrd3(iRow) & vbTab & vbTab & arrd4(iRow) & vbTab & "米" & vbCrLf
+ 
+ 
+ End If
+
+ Next
+
+ MsgBox MsgStr, , "保护管统计"
+
+
+
+
+End Sub
 Private Sub 涡街列表()
         Application.ScreenUpdating = False
         Dim NewName6 As String
@@ -3637,6 +3789,9 @@ ActiveSheet.Names.Add "Print_Area", ActiveSheet.Range("A1").Resize(i * (k + 1), 
    j = i
    
    ActiveSheet.ResetAllPageBreaks '重置所有水平分页符
+   
+   
+   
 
 Do
             Rows((i * (k + 1)) + 1).Select
@@ -3650,9 +3805,13 @@ Do
     
     Exit Sub
     
+
+    
 ifsjb:
 
 MsgBox "检查数据表格式"
+
+
 End Sub
 
 Sub 多列拆分()
@@ -4237,7 +4396,7 @@ For lh = 1 To 2
                     i = 41    '表行数
                     GoTo doo
                     
-            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电缆表*" Then
+            ElseIf Sheets(sdn).Cells(37, 44).Value Like "*监控*" Or Sheets(sdn).Cells(37, 44).Value Like "*电缆表*" Or Sheets(sdn).Cells(37, 44).Value Like "*电    缆    表*" Then
                     a2 = 39
                     fl = 63
                     fl2 = 66
@@ -5598,6 +5757,7 @@ Dim arr2 As Variant
 
 Dim sjy, a, b, c, d As String
 
+
 hang = Selection.Row
 
 ii = Selection.Column
@@ -5879,730 +6039,6 @@ End Sub
 
 
 
-Sub 电缆表生成20191102()
-
-
-
-'合并单元格，开关反馈跨页自动下移
-Application.ScreenUpdating = False
-
-        Dim suu, indel As String
-        If Not ActiveSheet.Cells(37, 44).Text Like "电    缆    表  " Then
-            MsgBox "确认是否为电缆表"
-            GoTo endd
-        End If
-    '    Application.ScreenUpdating = False
-        
-      Dim ioh, iol, ilx, jlx As Integer
-        
-     ' ioh = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Count - 1
-     
-     ioh = ActiveSheet.UsedRange.Rows.Count  '改成这样
-     
-        
-      iol = 42 '当前表总行数
-      
-      
-        
-       Rows("7:35").ClearContents '删当前表内容
-       Rows(iol & ":" & ioh + 1).Delete
-
-
-    
-        
-        suu = InputBox("请输入汇总表工作簿的名称：")
-      '  On Error GoTo endd
-        indel = ActiveWorkbook.Name
-      '  On Error GoTo endd
-        Dim j9, j7, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, jx, zs, zs2, lh2, fy, zs22, tz, tzz, jjjj, tmd, tff, kkk As Integer
-        
- 
-        
-        'Dim att As String
-        Dim arr(), att(), app() As Variant
-        dh = 2
-        j9 = 2
-        a2 = 7
-        fl = 31
-        j7 = 0
-        yl = 1
-        ll = 1
-        jx = 0
-        ilx = 1
-        jlx = 35
-        tz = 0
-        jjjj = 0
-        i = 0
-        zs = 0
-        ps = 2
-                tff = 0
-        Workbooks(suu & ".xls").Activate
-        
-           ReDim app(5000)
-        Do
-            
-            
-            
-            
-            
-
-           If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(ps, yl).Text Like "*PP-*" Then
-            jx = jx + 1
-                
-          ps = ps + 1
-                
-                
-       End If
-            j9 = j9 + 1
-            
-            If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(ps, yl).Text <> "" Then
-         app(zs) = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(ps, yl).Text
-            End If
-            zs = zs + 1
-           ps = ps + 1
-            
-            
-            
-        Loop Until Application.WorksheetFunction.CountA(Sheets("拆分汇总").Rows(zs)) = 0
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        j9 = 2
-        zs2 = zs - 2  '汇总表有效数据行数
-        zs2 = zs2 - jx   '汇总表排除PG后有效数据行数
-        
-      
-        
-    '    For zs2 = zs2 To 1
-        
-        
-        
-        
-        
-        j = zs2 \ 29
-        fy = j
-        If zs2 Mod 29 = 0 Then
-            j = j - 1  '需要复制次数
-        End If
-        
-        zs22 = zs2
-          ReDim att(1000)
-        
-                                    For zs22 = 2 To zs22 + 1
-                                    
-                                                                     ' If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(zs22 + 1, yl).Value Like "*ZSO*" And (zs22 + jjjj) Mod 29 = 0 Then
-                                                                     ' MsgBox zs22
-                                                                   
-                                                               
-                                                                     If app(zs22 - 1) Like "*ZSO*" And (zs22 + jjjj) Mod 29 = 0 Then
-                                                                    
-                                                                 
-                                                                      
-                                                                      zs2 = zs2 + 1
-                                                                      
-                                                                    
-                                                                      
-                                                                      att(tz) = zs22
-                                                                      
-                                                                      tz = tz + 1
-                                                                  
-                                              
-                                                                      tmd = 28
-                                                                      
-                                                                      jjjj = jjjj + 1
-                                                                      
-                                                                      Else
-                                                                      
-                                                                      tmd = 29
-                                                                      
-                                                                      
-                                                                      End If
-                                                                                                                                          
-                                                                      
-                                                               
-                                                                      
-                                    
-                                    Next zs22
-        
-       
-        
- ReDim Preserve att(tz)
-        
-        
-         j = zs2 \ 29
-        fy = j
-        If zs2 Mod 29 = 0 Then
-            j = j - 1  '需要复制次数
-        End If
-        
-        
-
-        
-        
-        Workbooks(indel).Activate
-        Do
-            i = i + 1
-            lh = ll + 40
-            lh2 = lh + 1
-            Rows(ll & ":" & lh).Select
-            Selection.Copy
-            Rows(lh2).Select
-            ActiveSheet.Paste
-            
-
-     
-            
-           
-            
-       ll = ll + 41
-        Loop Until i = j + 1
-            
-             i = 0
-            
-            Do
-            
-               i = i + 1
-            
-            
-                Do
-                
-                
-                
-nei5:
-                 '   If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
-                  '      j9 = j9 + 1
-                  '      GoTo nei5
-                  '  End If
-                    j7 = j7 + 1
-                    
-                    
-         '           If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSO*" Then
-                    
-          '          a2 = a2 + 1
-                    
-           '         End If
-                    
-              '   For tff = 0 To tz
-                  
-          
-                  
-                    If j9 - 1 = att(tff) Then
-                    
-                    a2 = a2 + 13
-           
-                    
-                    j7 = 1
-                    
-                    
-                   tff = tff + 1
-         
-                    End If
-                    
-          '    Next tff
-                  
-                    
-                    
-                   ' Workbooks(indel).ActiveSheet.Cells(a2, fl).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text
-                   Workbooks(indel).ActiveSheet.Cells(a2, fl).Value = app(j9 - 2)
-                
-          '  MsgBox Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text
-            
-            
-                    
-                    
-                   ' Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 7).Text
-                    ' Workbooks(indel).activesheet.Cells(a2, fl + 10).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 5).Text
-                    '   Sheets(1).Cells(a2, fl + 6).Value = Sheets(2).Cells(j9, yl + 2).Text   '待修改
-                    
-                 
-                    If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*T-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*V-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*S-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSO-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSC-*" Then
-                      If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text Like "*ia*" Then
-                    
-                    Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "ZR-ia-DJYPVP"
-                   
-                   
-                    
-                     ElseIf Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text Like "*d*" Then
-                    
-                     Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "ZR-DJYPVP"
-                      
-                      
-                     Else
-                     
-                     
-                 
-                    
-                     Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "DJYPVP"
-                     
-             '     MsgBox a2
-                       
-                    End If
-                     Workbooks(indel).ActiveSheet.Cells(a2, 40).Value = "1*2*1.5"
-                       Workbooks(indel).ActiveSheet.Cells(a2, 56).Value = "DN20"
-                        'Workbooks(indel).ActiveSheet.Cells(a2, 59).Value = "10"
-                        
-                        End If
-      
-                    a2 = a2 + 1
-                    j9 = j9 + 1
-                    
-                    
-                Loop Until j7 Mod 29 = 0
-                
-                
-            
-                a2 = a2 + 12
-                
-                
-                
- Loop Until i = j + 1
-        
-        
-       
-        
-        
-        
-        For kh = 1 To a2 Step 1
-            If ActiveSheet.Cells(kh, 2) = "总数量" Then
-              ActiveSheet.Rows(kh) = ""
-            End If
-        Next
-        Rows(ll & ":" & ll + 41).Select
-        Selection.Delete
-        Rows(1).Select
-        ActiveSheet.PageSetup.PrintArea = Range(Cells(1, 1), Cells(ll - 1, 34))
-        ActiveWindow.View = xlPageBreakPreview
-        
-        ActiveSheet.ResetAllPageBreaks '重置所有水平分页符
-        
-   
-      
-      If fy > 0 Then
-        
- For fy = 1 To fy
-     
-      Set ActiveSheet.HPageBreaks(fy).Location = Rows((fy * 41) + 1)
-Next
-
-End If
-
-
-
-        ActiveSheet.PageSetup.PrintArea = "$A$1:$BO$" & ll - 1   '设置打印区域
- 
-Do
-        
-        If ActiveSheet.Cells(ilx, 31).Value Like "*ZSO*" Then
-
-If ActiveSheet.Cells(ilx + 1, 31).Value Like "*ZSC*" Then
-
-
-
-ActiveSheet.Range(Cells(ilx, jlx), Cells(ilx + 1, jlx + 4)).Select
-Call 合并单元格
-
-ActiveSheet.Range(Cells(ilx, jlx + 5), Cells(ilx + 1, jlx + 8)).Select
-Call 合并单元格
-
-ActiveSheet.Cells(ilx, jlx + 5).Value = "2*2*1.5"
-
-ActiveSheet.Range(Cells(ilx, jlx + 21), Cells(ilx + 1, jlx + 23)).Select
-Call 合并单元格
-
-ActiveSheet.Cells(ilx, jlx + 21).Value = "DN25"
-
-ActiveSheet.Range(Cells(ilx, jlx + 24), Cells(ilx + 1, jlx + 26)).Select
-Call 合并单元格
-
-
-
-
-End If
-
-
-End If
-
-
-        ilx = ilx + 1
-        
-        Loop Until ilx = ll
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-endd:
-        Application.ScreenUpdating = True
-End Sub
-
-Sub 电缆表生成201911()
-
-
-
-'合并单元格，开关反馈跨页自动下移
-Application.ScreenUpdating = False
-
-        Dim suu, indel As String
-        If Not ActiveSheet.Cells(37, 44).Text Like "电    缆    表  " Then
-            MsgBox "确认是否为电缆表"
-            GoTo endd
-        End If
-    '    Application.ScreenUpdating = False
-        
-      Dim ioh, iol, ilx, jlx As Integer
-        
-     ' ioh = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Count - 1
-     
-     ioh = ActiveSheet.UsedRange.Rows.Count  '改成这样
-     
-        
-      iol = 42 '当前表总行数
-      
-      
-        
-       Rows("7:35").ClearContents '删当前表内容
-       Rows(iol & ":" & ioh + 1).Delete
-
-
-    
-        
-        suu = InputBox("请输入汇总表工作簿的名称：")
-      '  On Error GoTo endd
-        indel = ActiveWorkbook.Name
-      '  On Error GoTo endd
-        Dim j9, j7, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, jx, zs, zs2, lh2, fy, zs22, tz, tzz, jjjj, tmd, tff, kkk As Integer
-        
- 
-        
-        'Dim att As String
-        Dim arr(), att() As Variant
-        dh = 2
-        j9 = 2
-        a2 = 7
-        fl = 31
-        j7 = 0
-        yl = 1
-        ll = 1
-        jx = 0
-        ilx = 1
-        jlx = 35
-        tz = 0
-        jjjj = 0
-        i = 0
-        zs = 0
-        
-                tff = 0
-        Workbooks(suu & ".xls").Activate
-        Do
-            zs = zs + 1
-           If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
-            jx = jx + 1
-                
-          
-                
-                
-       End If
-            j9 = j9 + 1
-            
-           
-            
-            
-            
-        Loop Until Application.WorksheetFunction.CountA(Sheets("拆分汇总").Rows(zs)) = 0
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        j9 = 2
-        zs2 = zs - 2  '汇总表有效数据行数
-        zs2 = zs2 - jx   '汇总表排除PG后有效数据行数
-        
-      
-        
-    '    For zs2 = zs2 To 1
-        
-        
-        
-        
-        
-        j = zs2 \ 29
-        fy = j
-        If zs2 Mod 29 = 0 Then
-            j = j - 1  '需要复制次数
-        End If
-        
-        zs22 = zs2
-          ReDim att(100)
-        
-                                    For zs22 = 2 To zs22 + 1
-                                    
-                                                                      If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(zs22 + 1, yl).Value Like "*ZSO*" And (zs22 + jjjj) Mod 29 = 0 Then
-                                                                     ' MsgBox zs22
-                                                                   
-                                                               
-                                                                    
-                                                                    
-                                                                 
-                                                                      
-                                                                      zs2 = zs2 + 1
-                                                                      
-                                                                    
-                                                                      
-                                                                      att(tz) = zs22
-                                                                      
-                                                                      tz = tz + 1
-                                                                  
-                                              
-                                                                      tmd = 28
-                                                                      
-                                                                      jjjj = jjjj + 1
-                                                                      
-                                                                      Else
-                                                                      
-                                                                      tmd = 29
-                                                                      
-                                                                      
-                                                                      End If
-                                                                                                                                          
-                                                                      
-                                                               
-                                                                      
-                                    
-                                    Next zs22
-        
-       
-        
- ReDim Preserve att(tz)
-        
-        
-         j = zs2 \ 29
-        fy = j
-        If zs2 Mod 29 = 0 Then
-            j = j - 1  '需要复制次数
-        End If
-        
-        
-
-        
-        
-        Workbooks(indel).Activate
-        Do
-            i = i + 1
-            lh = ll + 40
-            lh2 = lh + 1
-            Rows(ll & ":" & lh).Select
-            Selection.Copy
-            Rows(lh2).Select
-            ActiveSheet.Paste
-            
-
-     
-            
-           
-            
-       ll = ll + 41
-        Loop Until i = j + 1
-            
-             i = 0
-            
-            Do
-            
-               i = i + 1
-            
-            
-                Do
-                
-                
-                
-nei5:
-                 '   If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text Like "*PP-*" Then
-                  '      j9 = j9 + 1
-                  '      GoTo nei5
-                  '  End If
-                    j7 = j7 + 1
-                    
-                    
-         '           If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSO*" Then
-                    
-          '          a2 = a2 + 1
-                    
-           '         End If
-                    
-              '   For tff = 0 To tz
-                  
-          
-                  
-                    If j9 - 1 = att(tff) Then
-                    
-                    a2 = a2 + 13
-           
-                    
-                    j7 = 1
-                    
-                    
-                   tff = tff + 1
-         
-                    End If
-                    
-          '    Next tff
-                  
-                    
-                    
-                    Workbooks(indel).ActiveSheet.Cells(a2, fl).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text
-                 
-                
-          '  MsgBox Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl).Text
-            
-            
-                    
-                    
-                   ' Workbooks(indel).ActiveSheet.Cells(a2, fl + 5).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 7).Text
-                    ' Workbooks(indel).activesheet.Cells(a2, fl + 10).Value = Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 5).Text
-                    '   Sheets(1).Cells(a2, fl + 6).Value = Sheets(2).Cells(j9, yl + 2).Text   '待修改
-                    
-                 
-                    If Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*T-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*V-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*S-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSO-*" Or Workbooks(indel).ActiveSheet.Cells(a2, fl).Value Like "*ZSC-*" Then
-                      If Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text Like "*ia*" Then
-                    
-                    Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "ZR-ia-DJYPVP"
-                   
-                   
-                    
-                     ElseIf Workbooks(suu & ".xls").Sheets("拆分汇总").Cells(j9, yl + 8).Text Like "*d*" Then
-                    
-                     Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "ZR-DJYPVP"
-                      
-                      
-                     Else
-                     
-                     
-                 
-                    
-                     Workbooks(indel).ActiveSheet.Cells(a2, 35).Value = "DJYPVP"
-                     
-             '     MsgBox a2
-                       
-                    End If
-                     Workbooks(indel).ActiveSheet.Cells(a2, 40).Value = "1*2*1.5"
-                       Workbooks(indel).ActiveSheet.Cells(a2, 56).Value = "DN20"
-                        'Workbooks(indel).ActiveSheet.Cells(a2, 59).Value = "10"
-                        
-                        End If
-      
-                    a2 = a2 + 1
-                    j9 = j9 + 1
-                    
-                    
-                Loop Until j7 Mod 29 = 0
-                
-                
-            
-                a2 = a2 + 12
-                
-                
-                
- Loop Until i = j + 1
-        
-        
-       
-        
-        
-        
-        For kh = 1 To a2 Step 1
-            If ActiveSheet.Cells(kh, 2) = "总数量" Then
-              ActiveSheet.Rows(kh) = ""
-            End If
-        Next
-        Rows(ll & ":" & ll + 41).Select
-        Selection.Delete
-        Rows(1).Select
-        ActiveSheet.PageSetup.PrintArea = Range(Cells(1, 1), Cells(ll - 1, 34))
-        ActiveWindow.View = xlPageBreakPreview
-        
-        ActiveSheet.ResetAllPageBreaks '重置所有水平分页符
-        
-   
-      
-      If fy > 0 Then
-        
- For fy = 1 To fy
-     
-      Set ActiveSheet.HPageBreaks(fy).Location = Rows((fy * 41) + 1)
-Next
-
-End If
-
-
-
-        ActiveSheet.PageSetup.PrintArea = "$A$1:$BO$" & ll - 1   '设置打印区域
- 
-Do
-        
-        If ActiveSheet.Cells(ilx, 31).Value Like "*ZSO*" Then
-
-If ActiveSheet.Cells(ilx + 1, 31).Value Like "*ZSC*" Then
-
-
-
-ActiveSheet.Range(Cells(ilx, jlx), Cells(ilx + 1, jlx + 4)).Select
-Call 合并单元格
-
-ActiveSheet.Range(Cells(ilx, jlx + 5), Cells(ilx + 1, jlx + 8)).Select
-Call 合并单元格
-
-ActiveSheet.Cells(ilx, jlx + 5).Value = "2*2*1.5"
-
-ActiveSheet.Range(Cells(ilx, jlx + 21), Cells(ilx + 1, jlx + 23)).Select
-Call 合并单元格
-
-ActiveSheet.Cells(ilx, jlx + 21).Value = "DN25"
-
-ActiveSheet.Range(Cells(ilx, jlx + 24), Cells(ilx + 1, jlx + 26)).Select
-Call 合并单元格
-
-
-
-
-End If
-
-
-End If
-
-
-        ilx = ilx + 1
-        
-        Loop Until ilx = ll
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-endd:
-        Application.ScreenUpdating = True
-End Sub
 Sub 电缆表生成222()
 
 
@@ -7305,3 +6741,350 @@ i4 = i4
 
 End Sub
 
+Sub tee()
+Dim hang, senu, hangs, ii, sh, cc, e, coln, colns, colnss, toj, tojj, toi, f As Integer
+
+
+
+Dim sjy, a, b, c, d As String
+Dim arr3 As Variant
+toj = 0
+toi = 0
+shi = 0
+colns = ActiveCell.MergeArea.Columns.Count
+
+colnss = Selection.Columns.Count
+
+On Error Resume Next
+sh = 0
+
+'ReDim arr55(1)
+
+
+
+a = 1
+'ReDim arr55(1)
+
+If (CStr(Join(arr33, ""))) = "" Then
+
+
+
+If Application.CountA(Selection) = 0 Then
+
+
+MsgBox "未选择任何内容"
+
+
+End If
+
+
+senu = Selection.Rows.Count
+shh = 0
+
+hangs = hang + senu - 1
+
+
+
+ReDim arr33(0 To hangs)
+
+
+For hang = hang To hangs
+                            
+                            
+                            arr33(sh) = ActiveSheet.Cells(hang, ii)
+                            shh = shh + 1
+                            
+                           
+
+Next hang
+
+
+ReDim Preserve arr33(0 To shh)
+
+
+
+
+cc = 0
+arr55 = Selection
+hang = Selection.Row
+
+ii = Selection.Column
+
+'ReDim Preserve arr1(0 To 100)
+
+Dim arr1()
+Do
+
+huan = ActiveSheet.Cells(hang, ii).MergeArea.Columns.Count
+
+
+
+ii = ii + huan
+
+
+
+
+
+ReDim Preserve arr1(toi)
+
+
+
+arr1(toi) = toj + 1
+toj = toj + huan
+toi = toi + 1
+
+
+ Loop Until toj = colnss
+
+
+
+
+On Error Resume Next
+
+
+'MsgBox senu
+'If LBound(arr33) > UBound(arr33) Then   '判断数组是否为空
+
+
+
+
+'arr3 = WorksheetFunction.Index(arr55, 0, arr1(2))
+
+
+'Selection.Columns(1) = arr3
+
+'Selection.Columns(1).Offset(0, 10).Select
+
+Else
+
+
+
+
+c = MsgBox("是否确定粘贴", vbOKCancel)
+
+
+
+If c = 2 Then
+Set arr55 = Nothing
+
+Exit Sub
+
+End If
+
+'MsgBox UBound(arr55, 1)
+
+cc = 1
+
+hang = Selection.Row
+
+ii = Selection.Column
+
+hangs = UBound(arr55, 1)
+
+For toi = toi To 1
+
+huan = ActiveSheet.Cells(hang, ii).MergeArea.Columns.Count
+
+arr3 = WorksheetFunction.Index(arr55, 0, arr1(sh))
+
+For hang = hang To hangs
+
+ActiveSheet.Cells(hang, ii).Value = arr3(shi)
+
+
+shi = shi + 1
+Next hang
+
+sh = sh + 1
+
+
+
+ii = ii + huan
+
+
+
+arr1(toi) = toj + 1
+toj = toj + huan
+toi = toi + 1
+
+
+Next toi
+Set arr55 = Nothing
+Set arr33 = Nothing
+
+End If
+
+
+a = 1
+End Sub
+Sub 多行列墙贴()
+Application.ScreenUpdating = False
+
+'Set arr66 = Nothing
+Dim hang, hangs, colns, colnss, toj, huan, ii, iit, sh, shi, lie, sht, e, f As Integer
+
+Dim arr2 As Variant
+
+Dim sjy, a, b, c, d As String
+
+On Error Resume Next
+hang = Selection.Row
+
+ii = Selection.Column
+iit = Selection.Column
+
+
+colns = ActiveCell.MergeArea.Columns.Count
+
+colnss = Selection.Columns.Count
+sht = 0
+toj = 0
+
+shi = 1
+
+
+
+
+
+
+a = 1
+
+
+
+'MsgBox senu
+'If LBound(arr66) > UBound(arr66) Then   '判断数组是否为空
+If (CStr(Join(arr66, ""))) = "" Then
+
+If Application.CountA(Selection) = 0 Then
+
+
+MsgBox "未选择任何内容"
+Exit Sub
+
+End If
+
+
+toi = 0
+Do
+
+huan = ActiveSheet.Cells(hang, iit).MergeArea.Columns.Count
+
+iit = iit + huan
+
+arr100(toi) = toj + 1
+toj = toj + huan
+toi = toi + 1
+
+
+ Loop Until toj = colnss
+arr55 = Selection
+
+senu = Selection.Rows.Count
+
+
+sh = 0
+
+hangs = hang + senu - 1
+
+
+
+ReDim arr66(0 To hangs)
+
+
+For hang = hang To hangs
+                            
+                            
+                            arr66(sh) = ActiveSheet.Cells(hang, ii)
+                            sh = sh + 1
+                            
+                           
+
+Next hang
+
+
+ReDim Preserve arr66(0 To sh)
+
+
+a = 1
+'arr66 = Selection.Value
+Else
+
+c = MsgBox("是否确定粘贴", vbOKCancel)
+
+
+
+If c = 2 Then
+Set arr66 = Nothing
+
+Exit Sub
+
+End If
+
+hang = Selection.Row
+
+iit = Selection.Column
+
+
+
+
+
+For toi = toi To 1 Step -1
+
+huan = ActiveSheet.Cells(hang, iit).MergeArea.Columns.Count
+
+
+arr3 = WorksheetFunction.Index(arr55, 0, arr100(sht))
+
+
+
+hangchu = hang
+
+bay = senu
+
+
+If senu = 1 Then
+
+ActiveSheet.Cells(hang, iit).Value = arr3(1)
+
+Else
+
+For senu = senu To 1 Step -1
+ActiveSheet.Cells(hang, iit).Value = arr3(shi, 1)
+shi = shi + 1
+hang = hang + 1
+
+Next senu
+
+End If
+Set arr3 = Nothing
+shi = 1
+hang = hangchu
+senu = bay
+
+sht = sht + 1
+
+
+
+iit = iit + huan
+
+
+
+
+Next toi
+
+
+
+
+'ActiveSheet.Cells(hang, ii).Resize(UBound(arr66), 1) = Application.Transpose(arr66)
+
+'Selection.Columns(1) = WorksheetFunction.Index(arr55, 0, 1)
+
+Set arr55 = Nothing
+Set arr66 = Nothing
+End If
+'Range("ab1").Resize(UBound(arr)) = arr
+
+
+
+
+End Sub
