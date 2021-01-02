@@ -5,6 +5,7 @@
  Dim arr100(0 To 100)
 
 
+
 Sub 工作簿生成()
         Application.ScreenUpdating = False
         
@@ -1764,23 +1765,22 @@ nei:
                 ElseIf ActiveSheet.Cells(1, kk).Text = "数据表页号" And fl = 11 Then
                 ke = 1
                 yl = kk
-                               ElseIf ActiveSheet.Cells(1, kk).Text Like "*法兰标准*" And fl = 12 Then
+                ElseIf ActiveSheet.Cells(1, kk).Text Like "*法兰标准*" And fl = 12 Then
                 ke = 1
                 yl = kk
-                                ElseIf ActiveSheet.Cells(1, kk).Text Like "*法兰尺寸*" And fl = 13 Then
+                ElseIf ActiveSheet.Cells(1, kk).Text Like "*法兰尺寸*" And fl = 13 Then
                 ke = 1
                 yl = kk
-                
-                                               ElseIf ActiveSheet.Cells(1, kk).Text Like "*阀位开关*" And fl = 14 Then
+                ElseIf ActiveSheet.Cells(1, kk).Text Like "*阀位开关*" And fl = 14 Then
                 ke = 1
                 yl = kk
-                                ElseIf ActiveSheet.Cells(1, kk).Text Like "*电磁阀*" And fl = 15 Then
+                 ElseIf ActiveSheet.Cells(1, kk).Text Like "*电磁阀*" And fl = 15 Then
                 ke = 1
                 yl = kk
-                
-                
-                
-                ElseIf ActiveSheet.Cells(1, kk).Text = "序号" And fl = 16 Then
+                ElseIf ActiveSheet.Cells(1, kk).Text Like "*介质*" And fl = 16 Then
+                ke = 1
+                yl = kk
+                ElseIf ActiveSheet.Cells(1, kk).Text = "序号" And fl = 17 Then
                 ke = 1
                 yl = kk
                 
@@ -1816,7 +1816,7 @@ nei:
         End If
         
             If fl = 14 Then   '生成第11列序号
-                Sheets(1).Cells(a2, 16).Value = a2 - 1
+                Sheets(1).Cells(a2, 17).Value = a2 - 1
             End If
             j9 = j9 + 1
             a2 = a2 + 1
@@ -1833,13 +1833,13 @@ nx:
             a2 = 2
             fl = fl + 1
             j9 = 2
-        If fl < 17 Then
+        If fl < 18 Then
             GoTo nei2
         End If
         Sheets(1).Activate
-        arr = Array("位号", "数量", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "法兰标准", "法兰尺寸", "阀位开关", "电磁阀", "序号")
+        arr = Array("位号", "数量", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "法兰标准", "法兰尺寸", "阀位开关", "电磁阀", "介质", "序号")
         
-        Range(Cells(1, 1), Cells(1, 16)) = arr
+        Range(Cells(1, 1), Cells(1, 17)) = arr
         
         
         
@@ -1847,12 +1847,12 @@ nx:
         
         'Sheets(1).Cells(a3, 1).Value = "总数量"
        ' Sheets(1).Cells(a3, 2).Value = Application.WorksheetFunction.Sum(Range(Cells(2, 2), Cells(a3, 2)))
-        Range(Cells(1, 1), Cells(a3 - 1, 16)).Select
+        Range(Cells(1, 1), Cells(a3 - 1, 17)).Select
         Call 格式整理
-        Range(Cells(1, 1), Cells(a3, 16)).Select
+        Range(Cells(1, 1), Cells(a3, 17)).Select
         Selection.Columns.AutoFit
         ' 加粗冻结 宏
-        Range(Cells(1, 1), Cells(1, 16)).Select
+        Range(Cells(1, 1), Cells(1, 17)).Select
         Call 首行格式
         
         '假空排除
@@ -4063,17 +4063,17 @@ Sub 多列拆分()
         'Loop Until sjy = "总数量" Or hang > 1000
         Loop Until Application.WorksheetFunction.CountA(Sheets("汇总表").Rows(hang)) = 0
 
-        arr = Array("位号", "监控位号", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "法兰标准", "法兰尺寸", "阀位开关", "电磁阀", "序号", "组外排序（英文）", "组内排序（数字）", "报警（低低）", "报警（低）", "报警（高高）", "报警（高）", "联锁（S）")
+        arr = Array("位号", "监控位号", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "法兰标准", "法兰尺寸", "阀位开关", "电磁阀", "介质", "序号", "组外排序（英文）", "组内排序（数字）", "报警（低低）", "报警（低）", "报警（高高）", "报警（高）", "联锁（S）")
         
 
-        Range(Cells(1, 1), Cells(1, 23)) = arr
+        Range(Cells(1, 1), Cells(1, 24)) = arr
         
-         Range(Cells(1, 1), Cells(j - 1, 23)).Select
+         Range(Cells(1, 1), Cells(j - 1, 24)).Select
        Call 格式整理
-        Range(Cells(1, 1), Cells(j - 1, 23)).Select
+        Range(Cells(1, 1), Cells(j - 1, 24)).Select
         Selection.Columns.AutoFit
         ' 加粗冻结 宏
-        Range(Cells(1, 1), Cells(1, 23)).Select
+        Range(Cells(1, 1), Cells(1, 24)).Select
       Call 首行格式
      Application.DisplayAlerts = True
 Erase arr
@@ -4299,17 +4299,17 @@ Do
     'Loop Until sjy = "总数量" Or hang > 1000
 Loop Until Application.WorksheetFunction.CountA(Sheets("汇总表").Rows(hang)) = 0
 
-        arr = Array("位号", "监控位号", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "法兰标准", "法兰尺寸", "阀位开关", "电磁阀", "序号", "组外排序（英文）", "组内排序（数字）", "报警（低低）", "报警（低）", "报警（高高）", "报警（高）", "联锁（S）")
+        arr = Array("位号", "监控位号", "用途", "温度", "压力", "量程", "PID号", "仪表类型", "防爆等级", "电源", "数据表页号", "法兰标准", "法兰尺寸", "阀位开关", "电磁阀", "介质", "序号", "组外排序（英文）", "组内排序（数字）", "报警（低低）", "报警（低）", "报警（高高）", "报警（高）", "联锁（S）")
         
 
-        Range(Cells(1, 1), Cells(1, 23)) = arr
+        Range(Cells(1, 1), Cells(1, 24)) = arr
         
-         Range(Cells(1, 1), Cells(j - 1, 23)).Select
+         Range(Cells(1, 1), Cells(j - 1, 24)).Select
        Call 格式整理
-        Range(Cells(1, 1), Cells(j - 1, 23)).Select
+        Range(Cells(1, 1), Cells(j - 1, 24)).Select
         Selection.Columns.AutoFit
         ' 加粗冻结 宏
-        Range(Cells(1, 1), Cells(1, 23)).Select
+        Range(Cells(1, 1), Cells(1, 24)).Select
       Call 首行格式
      Application.DisplayAlerts = True
 Erase arr
@@ -6342,4 +6342,80 @@ End If
 
 End Sub
 
+
+Sub 材料表生成()
+        Dim suu, indel As String
+        Application.ScreenUpdating = False
+        
+         Dim ioh, iol As Integer
+
+         
+        Dim arr200 As Variant
+        
+     ' ioh = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Count - 1
+     
+     ioh = ActiveSheet.UsedRange.Rows.Count  '改成这样
+     
+        
+      iol = 42 '当前表总行数
+        
+
+        
+       If Not ActiveSheet.Cells(4, 11).Text Like "*材料表*" Then
+            MsgBox "确认是否为材料表表格"
+            GoTo endd
+       End If
+       
+       arr200 = Sheets(2).Range("A1:J96").Value   '材料表库导入数组
+xuhao = 1   '首列序号
+ch = 9  '表格中材料起始行
+        
+       
+              Rows("9:35").ClearContents '删当前表内容
+       Rows(iol & ":" & ioh + 1).Delete
+        suu = InputBox("请输入汇总工作簿的名称：")
+        'On Error GoTo endd
+        indel = ActiveWorkbook.Name
+      '  On Error GoTo endd
+        Dim j9, j7, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, lh, zs, jx, zs2, lh2, fy As Integer
+        'Dim att As String
+        Dim arr() As Variant
+        dh = 2
+        j9 = 2
+        a2 = 7
+        fl = 2
+        j7 = 0
+        yl = 1
+        jx = 0
+        ll = 1
+        i = 0
+        zs = 0
+        Workbooks(suu & ".xls").Activate '汇总ALL表格激活
+        
+        allrows = ActiveSheet.UsedRange.Rows.Count
+        
+        For allrow = 1 To allrows Step 1
+        
+        If ActiveSheet.Cells(allrow, 8).Value Like "*压力表*" And ActiveSheet.Cells(allrow, 12).Value = "" And ActiveSheet.Cells(allrow, 13).Value = "" Then
+        
+         arr200(1, 9) = arr200(1, 9) + 1
+        
+        
+        End If
+        
+      
+        
+        Next allrow
+        
+        a = 1
+        
+     
+
+        Workbooks(indel).Activate
+ 
+
+        
+endd:
+        Application.ScreenUpdating = True
+End Sub
 
