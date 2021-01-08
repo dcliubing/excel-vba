@@ -1,29 +1,184 @@
+
 Sub 材料表生成()
+        Dim suu, indel As String
+        Application.ScreenUpdating = False
+        
+         Dim ioh, iol As Integer
 
+         
+        Dim arr200 As Variant
+        
+     ' ioh = ActiveSheet.UsedRange.Row + ActiveSheet.UsedRange.Rows.Count - 1
+     
+     ioh = ActiveSheet.UsedRange.Rows.Count  '改成这样
+     
+        
+      iol = 42 '当前表总行数
+        
 
-Dim arr200 As Variant
-arr200 = Sheet2.Range("A1:J96").Value   '材料表库导入数组
+        
+       If Not ActiveSheet.Cells(4, 11).Text Like "*材料表*" Then
+            MsgBox "确认是否为材料表表格"
+            GoTo endd
+       End If
+       
+       arr200 = Sheets(2).Range("A1:M196").Value   '材料表库导入数组
 xuhao = 1   '首列序号
 ch = 9  '表格中材料起始行
+        
+       
+              Rows("9:35").ClearContents '删当前表内容
+       Rows(iol & ":" & ioh + 1).Delete
+        suu = InputBox("请输入汇总工作簿的名称：")
+        'On Error GoTo endd
+        indel = ActiveWorkbook.Name
+      '  On Error GoTo endd
+        Dim j9, j7, n9, yl, i, a2, ll, fl, kh, kh2, fl2, dh, xun, zs, jx, zs2, lh2, fy As Integer
+        'Dim att As String
+        Dim arr() As Variant
+ 
+ 
+ 
+ 
+        Workbooks(suu & ".xls").Activate '汇总ALL表格激活
+        
+        allrows = ActiveSheet.UsedRange.Rows.Count
+        
+        For allrow = 2 To allrows Step 1
+        
+        If ActiveSheet.Cells(allrow, 8).Value Like "*热电阻*" Then
+        
+        arr200(30, 9) = arr200(30, 9) + 1 '防爆挠性管
+                
+        End If
+            
+        
+        
+        
+        If ActiveSheet.Cells(allrow, 8).Value Like "*压力表*" And ActiveSheet.Cells(allrow, 12).Value = "" And ActiveSheet.Cells(allrow, 13).Value = "" Then
+        
+         arr200(67, 9) = arr200(67, 9) + 1 '对焊式压力表接头
+         arr200(38, 9) = arr200(38, 9) + 1 '对焊式直通焊接终端接头
+         
+        ' arr200(47, 9) = arr200(47, 9) + 1 '承插焊闸阀
+        
+            If ActiveSheet.Cells(allrow, 4).Value > 60 And InStr(ActiveSheet.Cells(allrow, 4).Value, "常温") = 0 Then
+            
+                 arr200(63, 9) = arr200(63, 9) + 1 '冷凝圈
+                 
+            End If
+        
+        End If
+        
+        
+        If ActiveSheet.Cells(allrow, 8).Value Like "*变送器*" And ActiveSheet.Cells(allrow, 12).Value = "" And ActiveSheet.Cells(allrow, 13).Value = "" Then
+        
+            arr200(30, 9) = arr200(30, 9) + 1 '防爆挠性管
+            
+              
+                
+               If ActiveSheet.Cells(allrow, 8).Value Like "*差压*" Then
+                
+                xun = 2
+                
+               Else
+               
+                xun = 1
+                
+                End If
 
-    For num = 2 To 96 Step 1 '数组中行序号
+                        Do
+                        
+                        
+                    
+                            If ActiveSheet.Cells(allrow, 17).Value Like "*短安装*" Or ActiveSheet.Cells(allrow, 17).Value Like "*直接安装*" Then
+                            
+                              arr200(51, 9) = arr200(67, 9) + 1 '对焊式直通螺纹终端接头
+                              arr200(38, 9) = arr200(38, 9) + 1 '对焊式直通焊接终端接头
+                              
+                            ElseIf ActiveSheet.Cells(allrow, 17).Value Like "*管安装*" Or ActiveSheet.Cells(allrow, 17).Value Like "*支架*" Then
+                            
+                              arr200(51, 9) = arr200(67, 9) + 1 '对焊式直通螺纹终端接头
+                              arr200(38, 9) = arr200(38, 9) + 1 '对焊式直通焊接终端接头
+                              arr200(46, 9) = arr200(46, 9) + 1 '对焊式球阀
+                              arr200(22, 9) = arr200(22, 9) + 5 '无缝钢管
+                                    If InStr(ActiveSheet.Cells(allrow, 16).Value, "气") = 0 Then
+                                    
+                                        arr200(46, 9) = arr200(46, 9) + 1 '对焊式球阀
+                                    
+                                        If InStr(ActiveSheet.Cells(allrow, 16).Value, "蒸汽") > 0 Then
+                                            
+                                            arr200(55, 9) = arr200(55, 9) + 1 '对焊式冷凝容器
+                                        
+                                        End If
+                                    
+                                    End If
+                             
+                            
+                            End If
+                            
+                            xun = xun - 1
+                            
+                            
+                            Loop Until xun = 0
+                            
+                                    
+                                    
+                 
+              
+        End If
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        Next allrow
+
+     
+
+        Workbooks(indel).Activate
+ 
+
+ch = 9  '表格中材料起始行
+
+    For num = 1 To 196 Step 1 '数组中行序号
     
-        If WorksheetFunction.Index(arr200, num, 9) > 0 Then
-            arr200(num, 1) = xuhao
-            Sheet1.Cells(ch, 2).Value = WorksheetFunction.Index(arr200, num, 1)
-            Sheet1.Cells(ch, 4).Value = WorksheetFunction.Index(arr200, num, 2)
-            Sheet1.Cells(ch, 7).Value = WorksheetFunction.Index(arr200, num, 3)
-            Sheet1.Cells(ch, 12).Value = WorksheetFunction.Index(arr200, num, 4)
-            Sheet1.Cells(ch, 15).Value = WorksheetFunction.Index(arr200, num, 5)
-            Sheet1.Cells(ch, 21).Value = WorksheetFunction.Index(arr200, num, 6)
-            Sheet1.Cells(ch, 23).Value = WorksheetFunction.Index(arr200, num, 7)
-            Sheet1.Cells(ch, 26).Value = WorksheetFunction.Index(arr200, num, 8)
-            Sheet1.Cells(ch, 29).Value = WorksheetFunction.Index(arr200, num, 9)
-            Sheet1.Cells(ch, 32).Value = WorksheetFunction.Index(arr200, num, 10)
+        If arr200(num, 9) > 0 Then
+          
+   ActiveSheet.Cells(ch, 2).Value = WorksheetFunction.Index(arr200, num, 1)
+   ActiveSheet.Cells(ch, 4).Value = WorksheetFunction.Index(arr200, num, 2)
+   ActiveSheet.Cells(ch, 7).Value = WorksheetFunction.Index(arr200, num, 3)
+   ActiveSheet.Cells(ch, 12).Value = WorksheetFunction.Index(arr200, num, 4)
+   ActiveSheet.Cells(ch, 15).Value = WorksheetFunction.Index(arr200, num, 5)
+   ActiveSheet.Cells(ch, 21).Value = WorksheetFunction.Index(arr200, num, 6)
+   ActiveSheet.Cells(ch, 23).Value = WorksheetFunction.Index(arr200, num, 7)
+   ActiveSheet.Cells(ch, 26).Value = WorksheetFunction.Index(arr200, num, 8)
+   ActiveSheet.Cells(ch, 29).Value = WorksheetFunction.Index(arr200, num, 9)
+   ActiveSheet.Cells(ch, 32).Value = WorksheetFunction.Index(arr200, num, 10)
             ch = ch + 1
-            xuhao = xuhao + 1
+        
         End If
     
     Next num
 
+
+
+
+
+
+
+
+        
+endd:
+        Application.ScreenUpdating = True
 End Sub
