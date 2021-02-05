@@ -31,7 +31,7 @@ i = i + 1
 
 
 
-        Rows(1 & ":" & k).Select
+        Rows((i - 1) * k + 1 & ":" & i * k).Select '复制最近一页
 
     Selection.Copy
 
