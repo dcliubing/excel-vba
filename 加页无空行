@@ -1,0 +1,72 @@
+Sub 加页()
+
+Dim i, j, k, z As Integer
+
+i = 0
+z = ActiveSheet.UsedRange.Columns.Count '已用列数，不包括表格前空列
+
+k = 0
+'MsgBox z
+
+Do
+
+k = k + 1
+
+
+
+If k > 10000 Then '如果格式错误缩短检索时间
+GoTo ifsjb
+End If
+Loop Until ActiveSheet.Cells(k, 1) Like "*REV*"
+
+
+
+
+Do
+
+i = i + 1
+
+
+ Loop Until Application.WorksheetFunction.CountA(ActiveSheet.Rows(i * k + 1)) = 0
+
+
+
+        Rows(1 & ":" & k).Select
+
+    Selection.Copy
+
+   Rows(i * k + 1).Select
+
+  ActiveSheet.Paste
+   
+ActiveSheet.Names.Add "Print_Area", ActiveSheet.Range("A1").Resize((i + 1) * k, z)  '动态打印区域
+   
+  ' MsgBox z
+   
+   j = i
+   
+   ActiveSheet.ResetAllPageBreaks '重置所有水平分页符
+   
+   
+   
+
+Do
+            Rows((i * k + 1)).Select
+           ActiveWindow.SelectedSheets.HPageBreaks.Add Before:=ActiveCell
+
+          i = i - 1
+    Loop While i > 0
+ 
+ 
+    Rows((j + 1) * k).Select
+    
+    Exit Sub
+    
+
+    
+ifsjb:
+
+MsgBox "检查数据表格式"
+
+
+End Sub
