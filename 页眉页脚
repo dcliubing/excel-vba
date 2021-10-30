@@ -1,0 +1,73 @@
+
+
+Sub 页眉页脚()
+On Error Resume Next
+UserForm3.Show 0
+
+
+    With ActiveSheet.PageSetup
+    UserForm3.TextBox10.Value = .LeftHeader
+    UserForm3.TextBox11.Value = .CenterHeader
+   ' UserForm3.TextBox12.Value = Application.WorksheetFunction.Clean(.RightHeader)
+    UserForm3.TextBox12.Value = .RightHeader
+    UserForm3.TextBox13.Value = .LeftFooter
+    UserForm3.TextBox14.Value = .CenterFooter
+    UserForm3.TextBox15.Value = .RightFooter
+End With
+
+End Sub
+Sub 页眉页脚读取()
+On Error Resume Next
+
+
+
+ With ActiveSheet.PageSetup
+    UserForm3.TextBox10.Value = .LeftHeader
+    UserForm3.TextBox11.Value = .CenterHeader
+    UserForm3.TextBox12.Value = .RightHeader
+    UserForm3.TextBox13.Value = .LeftFooter
+    UserForm3.TextBox14.Value = .CenterFooter
+    UserForm3.TextBox15.Value = .RightFooter
+End With
+
+End Sub
+Sub 页眉页脚写入()
+On Error Resume Next
+       
+       Dim regx As Object
+Set regx = CreateObject("VBScript.Regexp")
+       
+       
+Dim sr
+        If UserForm3.Controls("checkbox" & 1) = True Then
+            n = 1
+            Else
+            n = 2
+        End If
+For i = n To ActiveWorkbook.Sheets.Count
+    With Sheets(i).PageSetup
+        .LeftHeader = UserForm3.TextBox10.Value
+        .CenterHeader = UserForm3.TextBox11.Value
+      ' If InStr(.RightHeader, Chr(10)) > 0 Then
+        
+        
+.RightHeader = UserForm3.TextBox12.Value
+        
+        
+     
+        
+        If InStr(.RightHeader, REV) > 0 Then
+        
+       att = Replace(UserForm3.TextBox12.Value, "REV", "@REV")
+       clatt = Application.WorksheetFunction.Clean(att)
+       fen = Split(clatt, "@")
+        .RightHeader = fen(0) & Chr(13) & fen(1)
+         UserForm3.TextBox12.Value = .RightHeader
+        End If
+        .LeftFooter = UserForm3.TextBox13.Value
+        .CenterFooter = UserForm3.TextBox14.Value
+        .RightFooter = UserForm3.TextBox15.Value
+    End With
+Next i
+
+End Sub
