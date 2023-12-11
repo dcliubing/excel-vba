@@ -1,0 +1,70 @@
+Sub CopyDataToSelectedCell333()
+    Dim startCell As Range
+    Dim endCell As Range
+    Dim startSheetIndex As Integer
+    Dim dataArray() As Variant
+    Dim selectedCell As Range
+    Dim i As Integer
+        Dim ws As Worksheet
+    
+On Error Resume Next
+
+Application.DisplayAlerts = False ' 关闭警告消息框
+  Set currentSheet = ActiveSheet
+ For Each sh In Worksheets    '数组
+sh.Select
+If sh.Visible = 0 Then
+
+
+
+sh.Visible = 1
+sh.Delete
+End If
+
+Next
+ Application.DisplayAlerts = True ' 恢复警告消息框
+
+
+  currentSheet.Activate
+    ' 选择第一个单元格
+    On Error Resume Next
+    Set startCell = Application.InputBox("请选择要复制数据的起始单元格:", Type:=8)
+    On Error GoTo 0
+    
+    If startCell Is Nothing Then
+        Exit Sub
+    End If
+    
+    ' 选择第二个单元格
+    On Error Resume Next
+    Set endCell = Application.InputBox("请选择要粘贴数据的起始单元格:", Type:=8)
+    On Error GoTo 0
+    
+    If endCell Is Nothing Then
+        Exit Sub
+    End If
+    
+    ' 输入要开始的工作表编号
+    startSheetIndex = InputBox("请输入要开始的工作表编号:", "工作表编号", 1)
+    
+    If startSheetIndex < 1 Or startSheetIndex > Sheets.Count Then
+        MsgBox "无效的工作表编号!"
+        Exit Sub
+    End If
+    
+    ' 将数据存储到数组中
+    ReDim dataArray(1 To Sheets(Sheets.Count).UsedRange.Rows.Count)
+    
+    For i = startSheetIndex To Sheets.Count
+        dataArray(i - startSheetIndex + 1) = Sheets(i).Cells(startCell.Row, startCell.Column).value
+    Next i
+    
+    ' 写入数据到目标单元格列
+    Set selectedCell = endCell
+    For i = LBound(dataArray) To UBound(dataArray)
+        selectedCell.value = dataArray(i)
+        Set selectedCell = selectedCell.Offset(1, 0)
+    Next i
+    
+ 
+End Sub
