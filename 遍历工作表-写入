@@ -1,0 +1,30 @@
+Sub CopyValueToOtherSheets()
+    Dim currentCell As Range
+    Dim startSheetIndex As Integer
+    Dim sheetCount As Integer
+    Dim i As Integer
+    Dim valueToCopy As Variant
+On Error Resume Next
+    ' 获取当前选中的单元格
+    Set currentCell = Application.ActiveCell
+    valueToCopy = currentCell.Value
+
+    ' 获取工作表总数
+    sheetCount = Sheets.Count
+
+    ' 输入要开始的工作表编号
+    startSheetIndex = Application.InputBox("请输入要开始的工作表编号:", "工作表编号", 1)
+
+    ' 检查输入是否有效
+    If startSheetIndex < 1 Or startSheetIndex > sheetCount Then
+        MsgBox "无效的工作表编号!"
+        Exit Sub
+    End If
+
+    ' 循环从指定的工作表开始写入数值
+    For i = startSheetIndex To sheetCount
+        Sheets(i).Cells(currentCell.Row, currentCell.Column).Value = valueToCopy
+    Next i
+
+    MsgBox "数值已复制到所有指定工作表的相同单元格中。"
+End Sub
